@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace Mirror
 {
@@ -10,9 +13,16 @@ namespace Mirror
     {
         public Transform leftRacketSpawn;
         public Transform rightRacketSpawn;
-        public Transform leftCheeseSpawn;
-        public Transform rightCheeseSpawn;
-        GameObject cheese;
+    
+        private static List<Transform> spawnPoints = new List<Transform>();
+
+        public static void AddSpawnPoint(Transform transform)
+        {
+            spawnPoints.Add(transform);
+            spawnPoints = spawnPoints.OrderBy(x => x.GetSiblingIndex()).ToList();
+        }
+        public static void RemoveSpawnPoint(Transform transform) => spawnPoints.Remove(transform);
+
 
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
@@ -24,22 +34,44 @@ namespace Mirror
             // spawn ball if two players
             if (numPlayers == 2)
             {
-                for(int i = 0; i < 2; i++)
+                // Agregar Trampas
+                for (int i = 0; i < 2; i++)
                 {
-                    if(i == 0)
-                        cheese = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Queso"), leftCheeseSpawn.position, start.rotation);
-                    else
-                        cheese = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Queso"), rightCheeseSpawn.position, start.rotation);
-                    NetworkServer.Spawn(cheese);
+                    int itemIndex = Random.Range(0, (spawnPoints.Count - 1));
+                    Transform spawnPoint = spawnPoints.ElementAtOrDefault(itemIndex);
+
+                    if (spawnPoint == null)
+                    {
+                        Debug.LogError($"Missing spawn point for trap {i}");
+                        return;
+                    }
+                    GameObject cheeseInstance = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Trampa"), spawnPoints[itemIndex].position, spawnPoints[itemIndex].rotation);
+                    NetworkServer.Spawn(cheeseInstance, conn);
+                    RemoveSpawnPoint(spawnPoint);
+
+                }
+
+                // Agregar Quesos
+                for (int i = 0; i < 4; i++)
+                {
+                    int itemIndex = Random.Range(0, (spawnPoints.Count - 1));
+                    Transform spawnPoint = spawnPoints.ElementAtOrDefault(itemIndex);
+
+                    if (spawnPoint == null)
+                    {
+                        Debug.LogError($"Missing spawn point for cheese {i}");
+                        return;
+                    }
+                    GameObject cheeseInstance = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Queso"), spawnPoints[itemIndex].position, spawnPoints[itemIndex].rotation);
+                    NetworkServer.Spawn(cheeseInstance, conn);
+
                 }
             }
         }
 
+
         public override void OnServerDisconnect(NetworkConnection conn)
         {
-            // destroy ball
-            if (cheese != null)
-                NetworkServer.Destroy(cheese);
 
             // call base functionality (actually destroys the player)
             base.OnServerDisconnect(conn);
