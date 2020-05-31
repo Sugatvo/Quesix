@@ -1,25 +1,43 @@
 ﻿using UnityEngine;
+using Mirror;
 
-namespace Mirror
+public class Cheese : NetworkBehaviour
 {
+    public bool available = true;
+    public Spawner spawner = null;
+    uint points;
 
-    public class Cheese : NetworkBehaviour
+    // Only call this on server
+    [ServerCallback]
+    void OnCollisionEnter2D(Collision2D col)
     {
-        // only call this on server
-        [ServerCallback]
-        void OnCollisionEnter2D(Collision2D col)
+        if (col.gameObject.CompareTag("Player"))
         {
-            // Note: 'col' holds the collision information. If the
-            // Ball collided with a racket, then:
-            //   col.gameObject is the racket
-            //   col.transform.position is the racket's position
-            //   col.collider is the racket's collider
+            ClaimPrize(col.gameObject);
+        }
+    }
 
-            // did we hit a racket? then we need to calculate the hit factor
-            if (col.transform.GetComponent<Player>())
-            {
-                NetworkServer.Destroy(this.gameObject);
-            }
+    public void ClaimPrize(GameObject player)
+    {
+        if (available)
+        {
+            // This is a fast switch to prevent two players claiming the prize in a bang-bang close contest for it.
+            // First hit turns it off, pending the object being destroyed a few frames later.
+            available = false;
+
+            // calculate the points from the color ... lighter scores higher as the average approaches 255
+            // UnityEngine.Color RGB values are float fractions of 255
+            points = (uint) 1;
+            if (LogFilter.Debug) Debug.LogFormat("Scored {0} points", points);
+
+            // award the points via SyncVar on the PlayerController
+            player.GetComponent<PlayerScoreQuesix>().score += points;
+
+            spawner.SpawnCheese();
+
+            // destroy this one
+            NetworkServer.Destroy(gameObject);
         }
     }
 }
+

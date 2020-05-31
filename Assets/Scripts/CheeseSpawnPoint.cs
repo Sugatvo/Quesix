@@ -4,9 +4,9 @@ using System.Linq;
 using UnityEngine;
 
 
-public class CheeseSpawnPoint : MonoBehaviour
+public class CheeseSpawnPoint : NetworkBehaviour
 {
-    private void Awake() => NetworkManagerQuesix.AddSpawnPoint(transform);
-    private void OnDestroy() => NetworkManagerQuesix.RemoveSpawnPoint(transform);
+    private void Awake() => Spawner.AddSpawnPoint(transform);
+    private void OnDestroy() => Spawner.RemoveSpawnPoint(transform);
 
 }

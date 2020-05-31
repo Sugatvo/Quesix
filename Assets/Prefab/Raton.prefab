@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 738005563674744215}
   - component: {fileID: -2408229579367460692}
   - component: {fileID: 738005563674744218}
-  - component: {fileID: 738005563674744219}
   - component: {fileID: 738005563674744213}
+  - component: {fileID: -6377079084132630154}
+  - component: {fileID: 6106790977221833519}
   m_Layer: 0
   m_Name: Raton
   m_TagString: Untagged
@@ -139,22 +140,6 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &738005563674744219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738005563674744216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4225cf519506e24cbf276de9b9a8604, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  speed: 5
-  rb: {fileID: -2408229579367460692}
 --- !u!114 &738005563674744213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,3 +158,35 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &-6377079084132630154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738005563674744216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb482155e9d489418fd5c933e28d6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  moveSpeed: 5
+  rb: {fileID: -2408229579367460692}
+--- !u!114 &6106790977221833519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738005563674744216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e785bde7419d9fe4a8d47eec86b56786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  index: 0
+  score: 0
