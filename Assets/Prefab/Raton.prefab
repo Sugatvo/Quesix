@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 738005563674744218}
   - component: {fileID: 738005563674744213}
   - component: {fileID: -6377079084132630154}
-  - component: {fileID: 6106790977221833519}
+  - component: {fileID: 4262500309128943503}
   m_Layer: 0
   m_Name: Raton
   m_TagString: Untagged
@@ -174,7 +174,7 @@ MonoBehaviour:
   syncInterval: 0.1
   moveSpeed: 5
   rb: {fileID: -2408229579367460692}
---- !u!114 &6106790977221833519
+--- !u!114 &4262500309128943503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,5 +188,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  index: 0
   score: 0
+  id_team: 0

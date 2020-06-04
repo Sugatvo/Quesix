@@ -110,7 +110,7 @@ namespace Mirror
 
         #region Optional UI
 
-        /// <summary>
+    /// <summary>
         /// Render a UI for the room.   Override to provide your on UI
         /// </summary>
         public virtual void OnGUI()
@@ -152,7 +152,7 @@ namespace Mirror
             }
 
             GUILayout.EndArea();
-        }
+        }    
 
         void DrawPlayerReadyButton()
         {

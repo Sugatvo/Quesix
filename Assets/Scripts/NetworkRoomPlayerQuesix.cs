@@ -4,10 +4,12 @@ using Mirror;
 
 public class NetworkRoomPlayerQuesix : NetworkRoomPlayer
 {
+    [SyncVar]
+    public int id_team = 0;
+
     public override void OnStartClient()
     {
         if (LogFilter.Debug) Debug.LogFormat("OnStartClient {0}", SceneManager.GetActiveScene().path);
-
         base.OnStartClient();
     }
 
