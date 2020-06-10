@@ -5,8 +5,15 @@ using Mirror;
 
 public class NetworkManagerRoomQuesix : NetworkRoomManager
 {
-    public List<int> team_test = new List<int>();
+    [SerializeField]
+    [Tooltip("Prefab to use for the team game object")]
+    protected GameObject teamPrefab;
 
+    public List<int> team_test = new List<int>();
+    public List<NetworkConnection> team_aux = new List<NetworkConnection>();
+    public List<GameObject> cameraPlayers = new List<GameObject>();
+
+    private Transform startPos = null;
     private int group_index = 1;
 
     /// <summary>
@@ -21,13 +28,19 @@ public class NetworkManagerRoomQuesix : NetworkRoomManager
     {
         PlayerScoreQuesix playerScore = gamePlayer.GetComponent<PlayerScoreQuesix>();
         playerScore.id_team = roomPlayer.GetComponent<NetworkRoomPlayerQuesix>().id_team;
+        playerScore.team_connections = new List<NetworkConnection>(team_aux);
 
-        foreach (int i in team_test)
+        Vector2 st_pos;
+        st_pos.x = gamePlayer.transform.position.x;
+        st_pos.y = gamePlayer.transform.position.y;
+        playerScore.start_pos = st_pos;
+
+        for(int i = 0; i < 2; i++)
         {
             Item item = new Item
             {
                 name = "Jugador",
-                player_id = i
+                player_id = team_test[i]
             };
             playerScore.equipo.Add(item);
         }
@@ -115,21 +128,41 @@ public class NetworkManagerRoomQuesix : NetworkRoomManager
                 if (roomPlayer.GetComponent<NetworkRoomPlayerQuesix>().id_team == 0)
                 {
                     roomPlayer.GetComponent<NetworkRoomPlayerQuesix>().id_team = group_index;
-                    team_test.Add(roomPlayer.GetComponent<NetworkRoomPlayerQuesix>().index);
+                    team_test.Add(conn.connectionId);
+                    team_aux.Add(conn);     
                 }
+
                 if (team_test.Count == 2)
                 {
-                    SceneLoadedForPlayer(conn, roomPlayer);
+                    GameObject gp = SceneLoadedForPlayer(conn, roomPlayer);
+
+
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        GameObject cameraPlayer = startPos != null
+                                    ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+                                    : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+
+                        cameraPlayer.GetComponent<CameraController>().playerObject = gp;
+
+                        NetworkServer.ReplacePlayerForConnection(team_aux[i], cameraPlayer, true);
+
+                    }
+
                     team_test = new List<int>();
+                    team_aux = new List<NetworkConnection>();
                     group_index += 1;
                 }
+
+
             }
 
-            
+
         }
     }
 
-    void SceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer)
+    GameObject SceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer)
     {
         if (LogFilter.Debug) Debug.LogFormat("NetworkRoom SceneLoadedForPlayer scene: {0} {1}", SceneManager.GetActiveScene().path, conn);
 
@@ -140,25 +173,27 @@ public class NetworkManagerRoomQuesix : NetworkRoomManager
             pending.conn = conn;
             pending.roomPlayer = roomPlayer;
             pendingPlayers.Add(pending);
-            return;
+            return null;
         }
 
         GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
         if (gamePlayer == null)
         {
-            // get start position from base class
-            Transform startPos = GetStartPosition();
+            startPos = GetStartPosition();
             gamePlayer = startPos != null
-                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                ? Instantiate(teamPrefab, startPos.position, startPos.rotation)
+                : Instantiate(teamPrefab, Vector3.zero, Quaternion.identity);
         }
 
         if (!OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer))
-            return;
+            return null;
 
-        // replace room player with game player
-        NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
+        NetworkServer.Spawn(gamePlayer, conn);
+
+        return gamePlayer;
+
     }
+
 
 }
 

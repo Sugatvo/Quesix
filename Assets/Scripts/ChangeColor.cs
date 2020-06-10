@@ -40,6 +40,7 @@ public class ChangeColor : NetworkBehaviour
         RpcUpdateCube(go, c);
         // use a Client RPC function to "paint" the object on all clients
         objNetId.RemoveClientAuthority();    // remove the authority from the player who changed the color
+
     }
 
     [ClientRpc]

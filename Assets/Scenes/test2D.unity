@@ -1440,6 +1440,8 @@ MonoBehaviour:
   syncInterval: 0.1
   cheesePrefab: {fileID: 5721867276473565528, guid: 58389f59b1e79e44ba0217c1c670f946,
     type: 3}
+  trapPrefab: {fileID: 8217890463801844442, guid: 311c930eecae0304a992ebffba455b97,
+    type: 3}
 --- !u!114 &951329576
 MonoBehaviour:
   m_ObjectHideFlags: 0

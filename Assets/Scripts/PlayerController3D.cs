@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Mirror;
 
 
@@ -14,29 +16,8 @@ public class PlayerController3D : NetworkBehaviour
             characterController = GetComponent<CharacterController>();
     }
 
-    public override void OnStartLocalPlayer()
-    {
-        base.OnStartLocalPlayer();
-
-        Camera.main.orthographic = false;
-        Camera.main.transform.SetParent(transform);
-        Camera.main.transform.localPosition = new Vector3(0f, 3f, -8f);
-        Camera.main.transform.localEulerAngles = new Vector3(10f, 0f, 0f);
-    }
-
-    void OnDisable()
-    {
-        if (isLocalPlayer && Camera.main != null)
-        {
-            Camera.main.orthographic = true;
-            Camera.main.transform.SetParent(null);
-            Camera.main.transform.localPosition = new Vector3(0f, 70f, 0f);
-            Camera.main.transform.localEulerAngles = new Vector3(90f, 0f, 0f);
-        }
-    }
-
     [Header("Movement Settings")]
-    public float moveSpeed = 8f;
+    public float moveSpeed = 150f;
     public float turnSensitivity = 5f;
     public float maxTurnSpeed = 150f;
 
@@ -44,15 +25,38 @@ public class PlayerController3D : NetworkBehaviour
     public float horizontal;
     public float vertical;
     public float turn;
-    public float jumpSpeed;
-    public bool isGrounded = true;
-    public bool isFalling;
+    public bool GirarDer = false;
+    public bool GirarIzq = false;
+    public bool Up = false;
+    public bool Down = false;
+    public float aux = 0f;
     public Vector3 velocity;
+    Vector3 direction;
+    public float limit = 144f;
 
     void Update()
     {
-        if (!isLocalPlayer)
+
+        if (!this.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
             return;
+
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.name == "Arriba")
+        {
+            Avanzar();
+        }
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.name == "Izquierda")
+        {
+            GirarIzquierda();
+        }
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.name == "Derecha")
+        {
+            GirarDerecha();
+        }
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.name == "Abajo")
+        {
+            Retroceder();
+        }
+
 
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
@@ -67,39 +71,159 @@ public class PlayerController3D : NetworkBehaviour
         if (!Input.GetKey(KeyCode.Q) && !Input.GetKey(KeyCode.E))
             turn = Mathf.MoveTowards(turn, 0, turnSensitivity);
 
-        if (isGrounded)
-            isFalling = false;
 
-        if ((isGrounded || !isFalling) && jumpSpeed < 1f && Input.GetKey(KeyCode.Space))
-        {
-            jumpSpeed = Mathf.Lerp(jumpSpeed, 1f, 0.5f);
-        }
-        else if (!isGrounded)
-        {
-            isFalling = true;
-            jumpSpeed = 0;
-        }
+
+
     }
 
     void FixedUpdate()
     {
-        if (!isLocalPlayer || characterController == null)
+        if (!this.gameObject.GetComponent<NetworkIdentity>().hasAuthority || characterController == null)
             return;
 
-        transform.Rotate(0f, turn * Time.fixedDeltaTime, 0f);
+        if (GirarDer)
+        {
+            transform.Rotate(0f, 90f * Time.fixedDeltaTime, 0f);
+            aux += 90f * Time.fixedDeltaTime;
+            if (aux > 90f)
+            {
+                GirarDer = false;
+                aux = 0;
+            }
+            
+        }
 
-        Vector3 direction = new Vector3(horizontal, jumpSpeed, vertical);
-        direction = Vector3.ClampMagnitude(direction, 1f);
-        direction = transform.TransformDirection(direction);
-        direction *= moveSpeed;
+        if (GirarIzq)
+        {
+            transform.Rotate(0f, -90f * Time.fixedDeltaTime, 0f);
+            aux += -90f * Time.fixedDeltaTime;
+            if (aux < -90f)
+            {
+                GirarIzq = false;
+                aux = 0;
+            }
+        }
 
-        if (jumpSpeed > 0)
-            characterController.Move(direction * Time.fixedDeltaTime);
-        else
+        if (Up)
+        {
+            direction = new Vector3(0, 0, -1);
+            direction = transform.TransformDirection(direction);
+            direction *= moveSpeed;
+
+
+            if (transform.position.z < -4.6 && direction.z < 0)
+            {
+                direction.z = 0;
+            }
+
+            if (transform.position.z > 4.6 && direction.z > 0)
+            {
+                direction.z = 0;
+            }
+
+            direction = direction * Time.fixedDeltaTime;
             characterController.SimpleMove(direction);
 
-        isGrounded = characterController.isGrounded;
-        velocity = characterController.velocity;
+            Debug.Log(direction * Time.fixedDeltaTime);
+
+            Debug.Log(aux);
+            aux += direction.sqrMagnitude;
+            Debug.Log(aux);
+            if (aux > limit)
+            {
+                Up = false;
+                aux = 0;
+            }
+            
+
+        }
+
+        if (Down)
+        {
+            direction = new Vector3(0, 0, 1);
+            direction = transform.TransformDirection(direction);
+            direction *= moveSpeed;
+
+            if (transform.position.z < -4.6 && direction.z < 0)
+            {
+                direction.z = 0;
+            }
+
+            if (transform.position.z > 4.6 && direction.z > 0)
+            {
+                direction.z = 0;
+            }
+
+            direction = direction * Time.fixedDeltaTime;
+            characterController.SimpleMove(direction);
+
+
+            Debug.Log(aux);
+            aux += direction.sqrMagnitude;
+            Debug.Log(aux);
+            if (aux > limit)
+            {
+                Down = false;
+                aux = 0;
+            }
+           
+        }
+         
+        /*
+        characterController.SimpleMove(direction);
+
+
+        Vector3 direction = new Vector3();
+        direction.x = horizontal;
+        direction.y = 0;
+        direction.z = vertical;
+
+        direction = Vector3.ClampMagnitude(direction, 1f);
+        direction = transform.TransformDirection(direction);
+        direction *= -moveSpeed;
+
+
+        if (transform.position.x < -4.6 && direction.x < 0)
+        {
+            direction.x = 0;
+        }
+
+        if (transform.position.x > 4.6 && direction.x > 0)
+        {
+            direction.x = 0;
+        }
+
+        if (transform.position.z < -4.6 && direction.z < 0)
+        {
+            direction.z = 0;
+        }
+
+        if (transform.position.z > 4.6 && direction.z > 0)
+        {
+            direction.z = 0;
+        } */
+    }
+
+    public void Avanzar()
+    {
+        Up = true;
+    }
+
+    public void Retroceder()
+    {
+        Down = true;
+    }
+
+    public void GirarDerecha()
+    {
+        GirarDer = true;
+        turn = 90f;
+    }
+
+    public void GirarIzquierda()
+    {
+        GirarIzq = true;
+        turn = -90f;
     }
 }
 

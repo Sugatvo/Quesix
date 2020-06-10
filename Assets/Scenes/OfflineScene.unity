@@ -221,20 +221,25 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 738005563674744216, guid: 79225fba7fc6a2649a5d4b2efd9af190,
+  playerPrefab: {fileID: 6084385643226150902, guid: 54eacf42f44bd7049b5ff203a210b4f8,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 1021516859244301092, guid: 58389f59b1e79e44ba0217c1c670f946, type: 3}
+  - {fileID: 5263283516150333582, guid: b7ccadcaa3183424e8267ced9c8d67b9, type: 3}
+  - {fileID: 781714408822855196, guid: 0db74340be15aeb46a24167b79b432d6, type: 3}
+  - {fileID: 5726300978007831405, guid: 94b4859168d085e4ebe77a21c3fd2a50, type: 3}
   showRoomGUI: 1
   minPlayers: 2
   roomPlayerPrefab: {fileID: 989829553508129552, guid: 151f4ee1b7b998b4c82a480dceb3927d,
     type: 3}
   RoomScene: Assets/Scenes/Room.unity
-  GameplayScene: Assets/Scenes/test2D.unity
+  GameplayScene: Assets/Scenes/test3D.unity
   allPlayersReady: 0
   roomSlots: []
+  teamPrefab: {fileID: 5726300978007831405, guid: 94b4859168d085e4ebe77a21c3fd2a50,
+    type: 3}
+  team_test: 
 --- !u!114 &810727255
 MonoBehaviour:
   m_ObjectHideFlags: 0

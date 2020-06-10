@@ -9,13 +9,14 @@ public class Cheese : NetworkBehaviour
 
     // Only call this on server
     [ServerCallback]
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
             ClaimPrize(col.gameObject);
         }
     }
+
 
     public void ClaimPrize(GameObject player)
     {
