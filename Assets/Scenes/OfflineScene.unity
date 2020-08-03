@@ -190,7 +190,7 @@ MonoBehaviour:
   OnServerDisconnected:
     m_PersistentCalls:
       m_Calls: []
-  port: 7777
+  port: 7778
   NoDelay: 1
   serverMaxMessageSize: 16384
   serverMaxReceivesPerTick: 10000
@@ -228,7 +228,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 5263283516150333582, guid: b7ccadcaa3183424e8267ced9c8d67b9, type: 3}
   - {fileID: 781714408822855196, guid: 0db74340be15aeb46a24167b79b432d6, type: 3}
-  - {fileID: 5726300978007831405, guid: 94b4859168d085e4ebe77a21c3fd2a50, type: 3}
+  - {fileID: 8737005942940201369, guid: 94b4859168d085e4ebe77a21c3fd2a50, type: 3}
   showRoomGUI: 1
   minPlayers: 2
   roomPlayerPrefab: {fileID: 989829553508129552, guid: 151f4ee1b7b998b4c82a480dceb3927d,
@@ -237,9 +237,10 @@ MonoBehaviour:
   GameplayScene: Assets/Scenes/test3D.unity
   allPlayersReady: 0
   roomSlots: []
-  teamPrefab: {fileID: 5726300978007831405, guid: 94b4859168d085e4ebe77a21c3fd2a50,
+  teamPrefab: {fileID: 8737005942940201369, guid: 94b4859168d085e4ebe77a21c3fd2a50,
     type: 3}
   team_test: 
+  cameraPlayers: []
 --- !u!114 &810727255
 MonoBehaviour:
   m_ObjectHideFlags: 0

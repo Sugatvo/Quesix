@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ChatWindow
   - Tile
+  - TeamPlayer
   layers:
   - Default
   - TransparentFX
