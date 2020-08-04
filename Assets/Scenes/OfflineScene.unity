@@ -239,8 +239,8 @@ MonoBehaviour:
   roomSlots: []
   teamPrefab: {fileID: 8737005942940201369, guid: 94b4859168d085e4ebe77a21c3fd2a50,
     type: 3}
-  team_test: 
-  cameraPlayers: []
+  team_ids: 
+  team_aux: []
 --- !u!114 &810727255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showGUI: 1
-  offsetX: 0
-  offsetY: 0
+  offsetX: 300
+  offsetY: 150
 --- !u!1 &1374864024
 GameObject:
   m_ObjectHideFlags: 0
