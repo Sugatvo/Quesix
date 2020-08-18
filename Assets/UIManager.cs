@@ -4,12 +4,14 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+//using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
 
     public RectTransform mainMenu;
+    public Image background;
 
     void Awake()
     {
@@ -24,18 +26,19 @@ public class UIManager : MonoBehaviour
             Destroy(this);
         }
 
-
     }
 
     private void Start()
     {
         //on start transition
-        mainMenu.DOAnchorPos(Vector2.zero, 0.5f);
+        // mainMenu.DOAnchorPos(Vector2.zero, 0.5f);
+        background.DOColor(Color.white, 1);
+
     }
 
     void jumpFrame( GameObject frame, float time)
     {
-        
+
     }
 
 }
