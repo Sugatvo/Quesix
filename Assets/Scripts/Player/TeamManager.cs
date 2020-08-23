@@ -34,6 +34,7 @@ public class TeamManager : NetworkBehaviour
     [SerializeField] RectTransform sequence;
     [SerializeField] TextMeshProUGUI cardCountText;
     [SerializeField] TextMeshProUGUI actionInfoText;
+    [SerializeField] TextMeshProUGUI rolText;
 
     MovementCard[] _movimientos = null;
     public MovementCard[] Movimientos { get { return _movimientos; } }
@@ -64,6 +65,7 @@ public class TeamManager : NetworkBehaviour
         LoadMovementCards();
 
         actionInfoText = GameObject.Find("ActionInfo").GetComponent<TextMeshProUGUI>();
+        rolText = GameObject.Find("Rol").GetComponent<TextMeshProUGUI>();
         cardCountText = GameObject.Find("CardCount").GetComponent<TextMeshProUGUI>();
         handContentArea = GameObject.Find("Hand").GetComponent<RectTransform>();
         sequence = GameObject.Find("Sequence").GetComponent<RectTransform>();
@@ -91,6 +93,7 @@ public class TeamManager : NetworkBehaviour
         events.AcceptAnswer += Accept;
         events.ShowQuestion += Display;
         events.Ejecutar += MovePlayer;
+        events.Debug += Debugging;
         responder.onClick.AddListener(() => AcceptForTeam());
 
         GetComponent<CameraController>().teamObject = teamObject;
@@ -124,6 +127,27 @@ public class TeamManager : NetworkBehaviour
     {
         teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
         teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(teammate.connectionToClient);
+
+        TargetChangeAuthority(connectionToClient);
+        TargetChangeAuthority(teammate.connectionToClient);
+
+    }
+
+    [TargetRpc]
+    public void TargetChangeAuthority(NetworkConnection target)
+    {
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            uiManager.EnableButtons();
+            rolText.text = "Piloto";
+            actionInfoText.text = "Elegir acción a realizar.";
+        }
+        else
+        {
+            uiManager.DisableButtons();
+            rolText.text = "Copiloto";
+            actionInfoText.text = "Esperando la decisión del piloto.";
+        }
     }
 
     public void MovePlayer()
@@ -173,7 +197,13 @@ public class TeamManager : NetworkBehaviour
         MovementCard card = Movimientos[randomIndex];
         MovCardData newCard = Instantiate(cardPrefab, handContentArea);
         newCard.UpdateData(card.Titulo, card.Arrow);
+        newCard.GetComponent<ChangeColor>().enabled = false;
         cardCountText.text = $"{handContentArea.childCount}";
+
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority && int.Parse(cardCountText.text) >= 5)
+        {
+            uiManager.EnableProgramar();
+        }
     }
 
     void AcceptForTeam()
@@ -239,9 +269,149 @@ public class TeamManager : NetworkBehaviour
     public void TargetProgramar(NetworkConnection target)
     {
         uiManager.ShowCanvas();
-        //Debugging UI
+
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            uiManager.OnProgrammingWithAuthority();
+        }
+        else
+        {
+            uiManager.OnProgrammingWithoutAuthority();
+        }
         UptadeTimerProgramming(true);
     }
+
+    public void Debugging()
+    {
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            foreach (Transform child in sequence)
+            {
+                MovCardData card = child.GetComponent<MovCardData>();
+                Vector3 cardPosition = card.GetComponent<RectTransform>().position;
+                if (card != null)
+                {
+                    CmdSyncSequence(cardPosition, card.TitleText.text);
+                }
+            }
+
+            CmdDebuggingWithAuthority();
+        }
+        else
+        {
+            teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
+            teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+
+            int i = 0;
+            foreach (Transform child in sequence)
+            {
+                MovCardData card = child.GetComponent<MovCardData>();
+                Color cardColor = card.GetComponent<Image>().color;
+                if (card != null)
+                {
+                    card.GetComponent<ChangeColor>().enabled = false;
+                    CmdSyncColor(i, cardColor);  
+                }
+                i += 1;
+            }
+            CmdDebuggingWithoutAuthority();
+        }
+    }
+
+    [Command]
+    void CmdSyncSequence(Vector3 cardPosition, string cardName)
+    {
+        TargetSyncSequence(teammate.connectionToClient, cardPosition, cardName);
+    }
+
+    [TargetRpc]
+    public void TargetSyncSequence(NetworkConnection target, Vector3 cardPosition, string cardName)
+    {
+        foreach (Transform child in handContentArea)
+        {
+            MovCardData card = child.GetComponent<MovCardData>();
+            if(card.TitleText.text == cardName)
+            {
+                card.transform.position = cardPosition;
+                card.transform.SetParent(sequence);
+                card.GetComponent<Draggable>().enabled = false;
+                card.GetComponent<ChangeColor>().enabled = true;
+                break;
+            }
+        }
+    }
+
+    [Command]
+    void CmdSyncColor(int index, Color cardColor)
+    {
+        TargetSyncColor(teammate.connectionToClient, index, cardColor);
+    }
+
+    [TargetRpc]
+    public void TargetSyncColor(NetworkConnection target, int index, Color cardColor)
+    {
+        int i = 0;
+        foreach (Transform child in sequence)
+        {
+            MovCardData card = child.GetComponent<MovCardData>();
+            if (index == i)
+            {
+                card.GetComponent<Image>().color = cardColor;
+                card.GetComponent<Draggable>().enabled = true;
+                card.GetComponent<ChangeColor>().enabled = false;
+                break;
+            }
+            i += 1;
+        }
+    }
+
+    [Command]
+    void CmdDebuggingWithoutAuthority()
+    {
+        teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
+        teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(teammate.connectionToClient);
+
+
+        TargetReadyToRun(connectionToClient);
+        TargetReadyToRun(teammate.connectionToClient);
+    }
+
+    [TargetRpc]
+    public void TargetReadyToRun(NetworkConnection target)
+    {
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            uiManager.DisabledButtonDebug();
+            uiManager.EnabledButtonRun();
+        }
+        else
+        {
+            uiManager.DisabledButtonDebug();
+            uiManager.DisabledButtonRun();
+        }
+    }
+
+    [Command]
+    void CmdDebuggingWithAuthority()
+    {
+        TargetDebugging(connectionToClient);
+        TargetDebugging(teammate.connectionToClient);
+    }
+
+    [TargetRpc]
+    public void TargetDebugging(NetworkConnection target)
+    {
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            uiManager.DisabledButtonDebug();
+        }
+        else
+        {
+            uiManager.EnabledButtonDebug();
+        }
+    }
+
+
 
     public void SelectAnswer(int AnswerIndex)
     {
@@ -473,7 +643,6 @@ public class TeamManager : NetworkBehaviour
             MovCardData card = child.GetComponent<MovCardData>();
             if (card != null)
             {
-                Debug.Log(card.TitleText.text);
 
                 if (card.TitleText.text.Equals("Avanzar"))
                 {
@@ -491,10 +660,30 @@ public class TeamManager : NetworkBehaviour
                 {
                     teamObject.GetComponent<PlayerController3D>().GirarDer = true;
                 }
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(1.2f);
             }
         }
+        CmdBorrarCartas();
+        CmdCambiarAutoridad();
     }
+
+    [Command]
+    void CmdBorrarCartas()
+    {
+        TargetBorrarCartas(connectionToClient);
+        TargetBorrarCartas(teammate.connectionToClient);
+    }
+
+    [TargetRpc]
+    public void TargetBorrarCartas(NetworkConnection target)
+    {
+        foreach (Transform item in sequence)
+        {
+            Destroy(item.gameObject);
+        }
+        cardCountText.text = $"{handContentArea.childCount}";
+    }
+
 
     IEnumerator HideAndShow()
     {
@@ -507,6 +696,7 @@ public class TeamManager : NetworkBehaviour
                 yield return new WaitForSeconds(1.0f);
             }
         }
+        yield return new WaitForSeconds(1.0f);
         uiManager.ShowButtons();
     }
 

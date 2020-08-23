@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -12,6 +13,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         parentToReturnTo = this.transform.parent;
         this.transform.SetParent(this.transform.parent.parent);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
+        GetComponent<Image>().color = Color.white;
     }
 
     public void OnDrag(PointerEventData eventData)

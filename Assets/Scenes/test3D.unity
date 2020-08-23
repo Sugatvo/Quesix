@@ -4092,7 +4092,7 @@ GameObject:
   - component: {fileID: 331735450}
   - component: {fileID: 331735449}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Run
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5377,6 +5377,9 @@ MonoBehaviour:
   programmingCanvasGroup: {fileID: 2087978961}
   buttonsCanvasGroup: {fileID: 747585661}
   playerinfoCanvasGroup: {fileID: 298558059}
+  handCanvasGroup: {fileID: 157619584}
+  buttonDebug: {fileID: 1077912120}
+  buttonRun: {fileID: 331735447}
 --- !u!1 &474408519
 GameObject:
   m_ObjectHideFlags: 0
@@ -11058,7 +11061,7 @@ GameObject:
   - component: {fileID: 1077912123}
   - component: {fileID: 1077912122}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11126,7 +11129,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1077912123}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 463686632}
+        m_MethodName: OnClickDebug
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1077912123
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showGUI: 1
-  offsetX: 300
-  offsetY: 150
+  offsetX: 0
+  offsetY: 0
 --- !u!1 &1374864024
 GameObject:
   m_ObjectHideFlags: 0

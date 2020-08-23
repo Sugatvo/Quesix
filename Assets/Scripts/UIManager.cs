@@ -75,6 +75,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] CanvasGroup programmingCanvasGroup;
     [SerializeField] CanvasGroup buttonsCanvasGroup;
     [SerializeField] CanvasGroup playerinfoCanvasGroup;
+    [SerializeField] CanvasGroup handCanvasGroup;
+    [SerializeField] GameObject buttonDebug;
+    [SerializeField] GameObject buttonRun;
 
 
     List<AnswerData> currentAnswers = new List<AnswerData>();
@@ -196,6 +199,11 @@ public class UIManager : MonoBehaviour
         events.Ejecutar();
     }
 
+    public void OnClickDebug()
+    {
+        events.Debug();
+    }
+
     public void ShowQuestion()
     {
         questionCard.alpha = 1.0f;
@@ -252,8 +260,50 @@ public class UIManager : MonoBehaviour
     public void EnableButtons()
     {
         buttonPreguntas.GetComponent<Button>().interactable = true;
-        buttonProgramar.GetComponent<Button>().interactable = true;
+        buttonProgramar.GetComponent<Button>().interactable = false;
         buttonResponder.GetComponent<Button>().interactable = true;
+    }
+
+    public void EnableProgramar()
+    {
+        buttonProgramar.GetComponent<Button>().interactable = true;
+    }
+
+    public void OnProgrammingWithAuthority()
+    {
+        buttonRun.GetComponent<Button>().interactable = false;
+        buttonDebug.GetComponent<Button>().interactable = true;
+        handCanvasGroup.interactable = true;
+        handCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void OnProgrammingWithoutAuthority()
+    {
+        buttonDebug.GetComponent<Button>().interactable = false;
+        buttonRun.GetComponent<Button>().interactable = false;
+        handCanvasGroup.interactable = false;
+        handCanvasGroup.blocksRaycasts = false;
+    }
+
+    public void DisabledButtonDebug()
+    {
+        buttonDebug.GetComponent<Button>().interactable = false;
+    }
+
+    public void EnabledButtonDebug()
+    {
+        buttonDebug.GetComponent<Button>().interactable = true;
+    }
+
+
+    public void DisabledButtonRun()
+    {
+        buttonRun.GetComponent<Button>().interactable = false;
+    }
+
+    public void EnabledButtonRun()
+    {
+        buttonRun.GetComponent<Button>().interactable = true;
     }
 
     public void SetScoreText(string score)

@@ -34,5 +34,6 @@ public class GameEvents : ScriptableObject
     public delegate void EjecutarCallback();
     public EjecutarCallback Ejecutar;
 
-
+    public delegate void DebugCallback();
+    public DebugCallback Debug;
 }
