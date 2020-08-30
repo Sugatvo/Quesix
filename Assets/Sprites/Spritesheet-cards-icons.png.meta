@@ -431,6 +431,9 @@ TextureImporter:
   - first:
       213: -3102572059919836347
     second: Spritesheet-cards-icons_14
+  - first:
+      213: 7164551033553536811
+    second: Spritesheet-cards-icons_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -490,7 +493,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -502,7 +505,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -514,7 +517,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -526,7 +529,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -543,10 +546,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_0
       rect:
         serializedVersion: 2
-        x: 37
-        y: 1918
-        width: 280
-        height: 90
+        x: 77
+        y: 3837
+        width: 556
+        height: 178
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -564,10 +567,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_1
       rect:
         serializedVersion: 2
-        x: 364
-        y: 1953
-        width: 307
-        height: 54
+        x: 727
+        y: 3905
+        width: 616
+        height: 110
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -585,10 +588,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_3
       rect:
         serializedVersion: 2
-        x: 706
-        y: 1516
-        width: 330
-        height: 489
+        x: 1413
+        y: 3031
+        width: 660
+        height: 980
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -606,10 +609,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_4
       rect:
         serializedVersion: 2
-        x: 1307
-        y: 1917
-        width: 89
-        height: 89
+        x: 2617
+        y: 3838
+        width: 173
+        height: 174
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -627,10 +630,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_5
       rect:
         serializedVersion: 2
-        x: 1552
-        y: 1872
-        width: 132
-        height: 136
+        x: 3104
+        y: 3747
+        width: 266
+        height: 267
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -648,10 +651,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_6
       rect:
         serializedVersion: 2
-        x: 1750
-        y: 1928
-        width: 82
-        height: 77
+        x: 3503
+        y: 3856
+        width: 159
+        height: 153
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -669,10 +672,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_7
       rect:
         serializedVersion: 2
-        x: 1862
-        y: 1956
-        width: 171
-        height: 49
+        x: 3727
+        y: 3911
+        width: 340
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -690,10 +693,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_15
       rect:
         serializedVersion: 2
-        x: 364
-        y: 1701
-        width: 307
-        height: 238
+        x: 727
+        y: 3400
+        width: 616
+        height: 479
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -711,10 +714,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_16
       rect:
         serializedVersion: 2
-        x: 1751
-        y: 1851
-        width: 82
-        height: 67
+        x: 3503
+        y: 3703
+        width: 158
+        height: 132
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -732,10 +735,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_18
       rect:
         serializedVersion: 2
-        x: 1864
-        y: 1895
-        width: 170
-        height: 49
+        x: 3727
+        y: 3789
+        width: 340
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -750,34 +753,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet-cards-icons_19
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 1908
-        width: 4
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9cf4047dcc3477e0800000000000000
-      internalID: -1768721900537316193
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Spritesheet-cards-icons_20
       rect:
         serializedVersion: 2
-        x: 38
-        y: 1812
-        width: 278
-        height: 92
+        x: 77
+        y: 3627
+        width: 556
+        height: 178
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -795,10 +777,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_21
       rect:
         serializedVersion: 2
-        x: 1312
-        y: 1820
-        width: 356
-        height: 28
+        x: 2625
+        y: 3640
+        width: 708
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -816,10 +798,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_23
       rect:
         serializedVersion: 2
-        x: 38
-        y: 1708
-        width: 280
-        height: 90
+        x: 77
+        y: 3417
+        width: 556
+        height: 178
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -837,10 +819,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_25
       rect:
         serializedVersion: 2
-        x: 39
-        y: 1603
-        width: 277
-        height: 89
+        x: 77
+        y: 3207
+        width: 556
+        height: 178
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -858,10 +840,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_26
       rect:
         serializedVersion: 2
-        x: 364
-        y: 1647
-        width: 307
-        height: 40
+        x: 727
+        y: 3293
+        width: 616
+        height: 82
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -879,10 +861,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_27
       rect:
         serializedVersion: 2
-        x: 36
-        y: 1495
-        width: 283
-        height: 95
+        x: 71
+        y: 2991
+        width: 568
+        height: 190
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -900,10 +882,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_28
       rect:
         serializedVersion: 2
-        x: 364
-        y: 1522
-        width: 308
-        height: 112
+        x: 727
+        y: 3045
+        width: 616
+        height: 222
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -921,10 +903,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_29
       rect:
         serializedVersion: 2
-        x: 1445
-        y: 1582
-        width: 201
-        height: 31
+        x: 2888
+        y: 3163
+        width: 406
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -942,10 +924,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_32
       rect:
         serializedVersion: 2
-        x: 362
-        y: 1445
-        width: 310
-        height: 65
+        x: 725
+        y: 2889
+        width: 618
+        height: 130
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -963,10 +945,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_33
       rect:
         serializedVersion: 2
-        x: 707
-        y: 1439
-        width: 329
-        height: 50
+        x: 1413
+        y: 2877
+        width: 660
+        height: 102
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -984,10 +966,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_35
       rect:
         serializedVersion: 2
-        x: 1249
-        y: 1435
-        width: 53
-        height: 54
+        x: 2498
+        y: 2877
+        width: 100
+        height: 101
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1005,10 +987,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_38
       rect:
         serializedVersion: 2
-        x: 36
-        y: 1390
-        width: 284
-        height: 95
+        x: 71
+        y: 2781
+        width: 568
+        height: 190
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1026,10 +1008,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_40
       rect:
         serializedVersion: 2
-        x: 1361
-        y: 1439
-        width: 47
-        height: 45
+        x: 2721
+        y: 2878
+        width: 97
+        height: 93
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1047,10 +1029,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_41
       rect:
         serializedVersion: 2
-        x: 1468
-        y: 1439
-        width: 49
-        height: 45
+        x: 2939
+        y: 2877
+        width: 96
+        height: 93
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1068,10 +1050,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_44
       rect:
         serializedVersion: 2
-        x: 360
-        y: 1322
-        width: 312
-        height: 111
+        x: 725
+        y: 2643
+        width: 618
+        height: 224
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1089,10 +1071,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_49
       rect:
         serializedVersion: 2
-        x: 41
-        y: 1318
-        width: 279
-        height: 60
+        x: 83
+        y: 2637
+        width: 556
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1110,10 +1092,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_52
       rect:
         serializedVersion: 2
-        x: 1268
-        y: 1296
-        width: 44
-        height: 44
+        x: 2541
+        y: 2593
+        width: 80
+        height: 86
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1131,10 +1113,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_53
       rect:
         serializedVersion: 2
-        x: 1360
-        y: 1300
-        width: 40
-        height: 40
+        x: 2723
+        y: 2604
+        width: 74
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1152,10 +1134,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_54
       rect:
         serializedVersion: 2
-        x: 1452
-        y: 1300
-        width: 40
-        height: 40
+        x: 2909
+        y: 2606
+        width: 74
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1173,10 +1155,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_55
       rect:
         serializedVersion: 2
-        x: 1544
-        y: 1303
-        width: 40
-        height: 37
+        x: 3093
+        y: 2605
+        width: 70
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1194,10 +1176,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_56
       rect:
         serializedVersion: 2
-        x: 42
-        y: 1246
-        width: 277
-        height: 56
+        x: 83
+        y: 2491
+        width: 556
+        height: 114
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1215,10 +1197,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_57
       rect:
         serializedVersion: 2
-        x: 363
-        y: 1277
-        width: 309
-        height: 31
+        x: 725
+        y: 2553
+        width: 618
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1236,10 +1218,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_58
       rect:
         serializedVersion: 2
-        x: 1636
-        y: 1166
-        width: 41
-        height: 38
+        x: 3292
+        y: 2325
+        width: 110
+        height: 104
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1257,10 +1239,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_60
       rect:
         serializedVersion: 2
-        x: 363
-        y: 921
-        width: 308
-        height: 346
+        x: 725
+        y: 1841
+        width: 618
+        height: 694
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1278,10 +1260,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_62
       rect:
         serializedVersion: 2
-        x: 39
-        y: 1168
-        width: 283
-        height: 64
+        x: 77
+        y: 2335
+        width: 568
+        height: 130
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1299,10 +1281,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_63
       rect:
         serializedVersion: 2
-        x: 1268
-        y: 1168
-        width: 33
-        height: 34
+        x: 2539
+        y: 2337
+        width: 64
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1320,10 +1302,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_64
       rect:
         serializedVersion: 2
-        x: 1369
-        y: 1168
-        width: 31
-        height: 33
+        x: 2727
+        y: 2329
+        width: 84
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1341,10 +1323,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_65
       rect:
         serializedVersion: 2
-        x: 1444
-        y: 1168
-        width: 36
-        height: 36
+        x: 2901
+        y: 2325
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1362,10 +1344,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_66
       rect:
         serializedVersion: 2
-        x: 1540
-        y: 1166
-        width: 40
-        height: 38
+        x: 3111
+        y: 2331
+        width: 88
+        height: 88
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1383,10 +1365,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_67
       rect:
         serializedVersion: 2
-        x: 1734
-        y: 1167
-        width: 39
-        height: 36
+        x: 3491
+        y: 2335
+        width: 84
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1404,10 +1386,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_68
       rect:
         serializedVersion: 2
-        x: 1840
-        y: 1166
-        width: 32
-        height: 34
+        x: 3706
+        y: 2334
+        width: 81
+        height: 89
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1425,10 +1407,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_69
       rect:
         serializedVersion: 2
-        x: 1927
-        y: 1172
-        width: 26
-        height: 28
+        x: 3913
+        y: 2348
+        width: 79
+        height: 73
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1446,10 +1428,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_70
       rect:
         serializedVersion: 2
-        x: 42
-        y: 1094
-        width: 277
-        height: 42
+        x: 83
+        y: 2187
+        width: 556
+        height: 86
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1467,10 +1449,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_72
       rect:
         serializedVersion: 2
-        x: 42
-        y: 1035
-        width: 277
-        height: 42
+        x: 83
+        y: 2069
+        width: 556
+        height: 86
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1488,10 +1470,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_73
       rect:
         serializedVersion: 2
-        x: 39
-        y: 972
-        width: 283
-        height: 49
+        x: 77
+        y: 1945
+        width: 568
+        height: 98
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1509,10 +1491,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_74
       rect:
         serializedVersion: 2
-        x: 1075
-        y: 947
-        width: 87
-        height: 69
+        x: 2160
+        y: 1908
+        width: 155
+        height: 123
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1530,10 +1512,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_75
       rect:
         serializedVersion: 2
-        x: 1212
-        y: 970
-        width: 52
-        height: 58
+        x: 2423
+        y: 1938
+        width: 102
+        height: 112
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1551,10 +1533,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_76
       rect:
         serializedVersion: 2
-        x: 1297
-        y: 971
-        width: 44
-        height: 45
+        x: 2595
+        y: 1944
+        width: 86
+        height: 82
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1572,10 +1554,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_77
       rect:
         serializedVersion: 2
-        x: 1392
-        y: 968
-        width: 60
-        height: 56
+        x: 2789
+        y: 1937
+        width: 110
+        height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1593,10 +1575,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_78
       rect:
         serializedVersion: 2
-        x: 707
-        y: 877
-        width: 329
-        height: 64
+        x: 1413
+        y: 1753
+        width: 660
+        height: 130
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1614,10 +1596,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_79
       rect:
         serializedVersion: 2
-        x: 37
-        y: 677
-        width: 660
-        height: 59
+        x: 73
+        y: 1353
+        width: 1332
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1635,10 +1617,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_83
       rect:
         serializedVersion: 2
-        x: 426
-        y: 615
-        width: 187
-        height: 34
+        x: 853
+        y: 1229
+        width: 372
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1656,10 +1638,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_88
       rect:
         serializedVersion: 2
-        x: 426
-        y: 568
-        width: 310
-        height: 34
+        x: 853
+        y: 1135
+        width: 618
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1677,10 +1659,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_95
       rect:
         serializedVersion: 2
-        x: 37
-        y: 240
-        width: 361
-        height: 306
+        x: 73
+        y: 445
+        width: 722
+        height: 650
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1698,10 +1680,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_120
       rect:
         serializedVersion: 2
-        x: 36
-        y: 39
-        width: 362
-        height: 173
+        x: 73
+        y: 74
+        width: 722
+        height: 349
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1719,10 +1701,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_71
       rect:
         serializedVersion: 2
-        x: 37
-        y: 575
-        width: 380
-        height: 74
+        x: 73
+        y: 1149
+        width: 757
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1740,10 +1722,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_81
       rect:
         serializedVersion: 2
-        x: 705
-        y: 943
-        width: 332
-        height: 478
+        x: 1413
+        y: 1918
+        width: 660
+        height: 923
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1761,10 +1743,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_82
       rect:
         serializedVersion: 2
-        x: 1081
-        y: 1077
-        width: 40
-        height: 40
+        x: 2163
+        y: 2155
+        width: 78
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1782,10 +1764,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_96
       rect:
         serializedVersion: 2
-        x: 1158
-        y: 1076
-        width: 42
-        height: 42
+        x: 2317
+        y: 2153
+        width: 82
+        height: 82
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1803,10 +1785,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_121
       rect:
         serializedVersion: 2
-        x: 1170
-        y: 1294
-        width: 47
-        height: 46
+        x: 2349
+        y: 2593
+        width: 80
+        height: 86
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1824,10 +1806,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_36
       rect:
         serializedVersion: 2
-        x: 1832
-        y: 950
-        width: 144
-        height: 142
+        x: 3656
+        y: 1896
+        width: 293
+        height: 292
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1845,10 +1827,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_84
       rect:
         serializedVersion: 2
-        x: 1179
-        y: 1172
-        width: 31
-        height: 27
+        x: 2365
+        y: 2347
+        width: 42
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1866,10 +1848,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_86
       rect:
         serializedVersion: 2
-        x: 1073
-        y: 1162
-        width: 59
-        height: 48
+        x: 2154
+        y: 2328
+        width: 94
+        height: 83
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1887,10 +1869,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_61
       rect:
         serializedVersion: 2
-        x: 1059
-        y: 1527
-        width: 109
-        height: 51
+        x: 2117
+        y: 3053
+        width: 218
+        height: 104
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1908,10 +1890,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_87
       rect:
         serializedVersion: 2
-        x: 1172
-        y: 1529
-        width: 50
-        height: 47
+        x: 2343
+        y: 3057
+        width: 102
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1929,10 +1911,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_89
       rect:
         serializedVersion: 2
-        x: 1226
-        y: 1529
-        width: 51
-        height: 47
+        x: 2452
+        y: 3057
+        width: 102
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1950,10 +1932,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_90
       rect:
         serializedVersion: 2
-        x: 1061
-        y: 1604
-        width: 216
-        height: 31
+        x: 2121
+        y: 3207
+        width: 434
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1971,10 +1953,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_91
       rect:
         serializedVersion: 2
-        x: 1061
-        y: 1651
-        width: 216
-        height: 31
+        x: 2121
+        y: 3301
+        width: 434
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1992,10 +1974,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_92
       rect:
         serializedVersion: 2
-        x: 1061
-        y: 1698
-        width: 216
-        height: 31
+        x: 2121
+        y: 3395
+        width: 434
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2013,10 +1995,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_93
       rect:
         serializedVersion: 2
-        x: 1061
-        y: 1745
-        width: 216
-        height: 31
+        x: 2121
+        y: 3489
+        width: 434
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2034,10 +2016,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_94
       rect:
         serializedVersion: 2
-        x: 1049
-        y: 1784
-        width: 240
-        height: 235
+        x: 2103
+        y: 3568
+        width: 474
+        height: 466
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2055,10 +2037,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_100
       rect:
         serializedVersion: 2
-        x: 1412
-        y: 1917
-        width: 95
-        height: 91
+        x: 2821
+        y: 3826
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2076,10 +2058,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_17
       rect:
         serializedVersion: 2
-        x: 426
-        y: 36
-        width: 310
-        height: 420
+        x: 853
+        y: 75
+        width: 618
+        height: 836
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2097,10 +2079,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_2
       rect:
         serializedVersion: 2
-        x: 1989
-        y: 1835
-        width: 48
-        height: 43
+        x: 3979
+        y: 3670
+        width: 94
+        height: 87
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2118,10 +2100,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_8
       rect:
         serializedVersion: 2
-        x: 1924
-        y: 1708
-        width: 108
-        height: 72
+        x: 3848
+        y: 3412
+        width: 219
+        height: 148
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2139,10 +2121,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_9
       rect:
         serializedVersion: 2
-        x: 1928
-        y: 1632
-        width: 100
-        height: 57
+        x: 3853
+        y: 3268
+        width: 205
+        height: 106
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2160,10 +2142,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_10
       rect:
         serializedVersion: 2
-        x: 1928
-        y: 1563
-        width: 100
-        height: 54
+        x: 3852
+        y: 3124
+        width: 204
+        height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2181,10 +2163,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_11
       rect:
         serializedVersion: 2
-        x: 1468
-        y: 1643
-        width: 124
-        height: 36
+        x: 2937
+        y: 3287
+        width: 246
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2202,10 +2184,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_12
       rect:
         serializedVersion: 2
-        x: 1606
-        y: 1640
-        width: 41
-        height: 41
+        x: 3213
+        y: 3281
+        width: 80
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2223,10 +2205,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_13
       rect:
         serializedVersion: 2
-        x: 1322
-        y: 1658
-        width: 31
-        height: 35
+        x: 2639
+        y: 3316
+        width: 73
+        height: 69
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2244,10 +2226,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_14
       rect:
         serializedVersion: 2
-        x: 1320
-        y: 1783
-        width: 339
-        height: 17
+        x: 2641
+        y: 3570
+        width: 676
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2265,10 +2247,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_22
       rect:
         serializedVersion: 2
-        x: 1319
-        y: 1748
-        width: 342
-        height: 20
+        x: 2635
+        y: 3498
+        width: 689
+        height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2286,10 +2268,10 @@ TextureImporter:
       name: Spritesheet-cards-icons_24
       rect:
         serializedVersion: 2
-        x: 1318
-        y: 1703
-        width: 344
-        height: 25
+        x: 2637
+        y: 3411
+        width: 688
+        height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2307,12 +2289,12 @@ TextureImporter:
       name: Spritesheet-cards-icons_30
       rect:
         serializedVersion: 2
-        x: 1050
-        y: 1376
-        width: 102
-        height: 138
+        x: 2098
+        y: 2749
+        width: 208
+        height: 278
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2328,12 +2310,12 @@ TextureImporter:
       name: Spritesheet-cards-icons_31
       rect:
         serializedVersion: 2
-        x: 1050
-        y: 1276
-        width: 100
-        height: 94
+        x: 2099
+        y: 2544
+        width: 207
+        height: 204
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2349,12 +2331,12 @@ TextureImporter:
       name: Spritesheet-cards-icons_34
       rect:
         serializedVersion: 2
-        x: 712
-        y: 827
-        width: 318
-        height: 21
+        x: 1429
+        y: 1654
+        width: 629
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2362,6 +2344,48 @@ TextureImporter:
       bones: []
       spriteID: 4a064c2bb3c8c5800800000000000000
       internalID: 602510638190977188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_19
+      rect:
+        serializedVersion: 2
+        x: 2341
+        y: 2878
+        width: 92
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b27cd12a4399d6360800000000000000
+      internalID: 7164551033553536811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_37
+      rect:
+        serializedVersion: 2
+        x: 3502
+        y: 3547
+        width: 159
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fecccc84bce0eb2f0800000000000000
+      internalID: -955309804693435153
       vertices: []
       indices: 
       edges: []
