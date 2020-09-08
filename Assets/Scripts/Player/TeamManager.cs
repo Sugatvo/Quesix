@@ -33,8 +33,8 @@ public class TeamManager : NetworkBehaviour
     [SerializeField] RectTransform handContentArea;
     [SerializeField] RectTransform sequence;
     [SerializeField] TextMeshProUGUI cardCountText;
-    [SerializeField] TextMeshProUGUI actionInfoText;
-    [SerializeField] TextMeshProUGUI rolText;
+    [SerializeField] TextMeshProUGUI JugadorPiText;
+    [SerializeField] TextMeshProUGUI JugadorCoText;
 
     MovementCard[] _movimientos = null;
     public MovementCard[] Movimientos { get { return _movimientos; } }
@@ -60,12 +60,20 @@ public class TeamManager : NetworkBehaviour
     private IEnumerator IE_Ejecutar = null;
     private IEnumerator IE_HideAndShow = null;
 
+
+    [SyncVar]
+    public int ownerID = -1;
+
+    [SyncVar]
+    public int teammateID = -1;
+
+
     void OnEnable()
     {
         LoadMovementCards();
 
-        actionInfoText = GameObject.Find("ActionInfo").GetComponent<TextMeshProUGUI>();
-        rolText = GameObject.Find("Rol").GetComponent<TextMeshProUGUI>();
+        JugadorPiText = GameObject.Find("Jugador_Pi").GetComponent<TextMeshProUGUI>();
+        JugadorCoText = GameObject.Find("Jugador_Co").GetComponent<TextMeshProUGUI>();
         cardCountText = GameObject.Find("CardCount").GetComponent<TextMeshProUGUI>();
         handContentArea = GameObject.Find("Hand").GetComponent<RectTransform>();
         sequence = GameObject.Find("Sequence").GetComponent<RectTransform>();
@@ -102,12 +110,15 @@ public class TeamManager : NetworkBehaviour
         if (!teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             uiManager.DisableButtons();
-            actionInfoText.text = "Esperando la decisión del piloto.";
+            JugadorCoText.text = "*Jugador " + ownerID.ToString();
+            JugadorPiText.text = "Jugador " + teammateID.ToString();
+            
         }
         else
         {
             uiManager.EnableButtons();
-            actionInfoText.text = "Elegir acción a realizar.";
+            JugadorPiText.text = "*Jugador " + ownerID.ToString();
+            JugadorCoText.text = "Jugador " + teammateID.ToString();
         }
     }
 
@@ -139,15 +150,15 @@ public class TeamManager : NetworkBehaviour
         if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             uiManager.EnableButtons();
-            rolText.text = "Piloto";
-            actionInfoText.text = "Elegir acción a realizar.";
         }
         else
         {
             uiManager.DisableButtons();
-            rolText.text = "Copiloto";
-            actionInfoText.text = "Esperando la decisión del piloto.";
         }
+
+        string aux = JugadorPiText.text;
+        JugadorPiText.text = JugadorCoText.text;
+        JugadorCoText.text = aux;
     }
 
     public void MovePlayer()

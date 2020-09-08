@@ -36,4 +36,13 @@ public class GameEvents : ScriptableObject
 
     public delegate void DebugCallback();
     public DebugCallback Debug;
+
+    public delegate void RefreshCallback();
+    public RefreshCallback RefreshUsers;
+
+    public delegate void RefreshReassignCallback();
+    public RefreshReassignCallback RefreshReassign;
+
+    public delegate void SelectCursoCallback(string[] students, int id_curso);
+    public SelectCursoCallback SelectCurso;
 }

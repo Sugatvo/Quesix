@@ -1,0 +1,2408 @@
+fileFormatVersion: 2
+guid: 06b7280e9229fc241957f91737c75c43
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7912734464908286654
+    second: Spritesheet-cards-icons_0
+  - first:
+      213: 149910295613704098
+    second: Spritesheet-cards-icons_1
+  - first:
+      213: 1076878866468474354
+    second: Spritesheet-cards-icons_2
+  - first:
+      213: 1583847967800248323
+    second: Spritesheet-cards-icons_3
+  - first:
+      213: -2874945702670194991
+    second: Spritesheet-cards-icons_4
+  - first:
+      213: -6495539812054745073
+    second: Spritesheet-cards-icons_5
+  - first:
+      213: -9028309951988129936
+    second: Spritesheet-cards-icons_6
+  - first:
+      213: 6322343683842097281
+    second: Spritesheet-cards-icons_7
+  - first:
+      213: 6756745505691742102
+    second: Spritesheet-cards-icons_8
+  - first:
+      213: 4762748879453535518
+    second: Spritesheet-cards-icons_9
+  - first:
+      213: 6957888852670221163
+    second: Spritesheet-cards-icons_10
+  - first:
+      213: -8019053096033826929
+    second: Spritesheet-cards-icons_11
+  - first:
+      213: 3022093371870050532
+    second: Spritesheet-cards-icons_12
+  - first:
+      213: -659292518227055119
+    second: Spritesheet-cards-icons_13
+  - first:
+      213: -8732187588264428007
+    second: Spritesheet-cards-icons_14
+  - first:
+      213: -4744882309317575549
+    second: Spritesheet-cards-icons_15
+  - first:
+      213: -2560444691546683452
+    second: Spritesheet-cards-icons_16
+  - first:
+      213: 3644952973756216127
+    second: Spritesheet-cards-icons_17
+  - first:
+      213: 772997045375029101
+    second: Spritesheet-cards-icons_18
+  - first:
+      213: -1768721900537316193
+    second: Spritesheet-cards-icons_19
+  - first:
+      213: -5390963143324215722
+    second: Spritesheet-cards-icons_20
+  - first:
+      213: 2404586261297715868
+    second: Spritesheet-cards-icons_21
+  - first:
+      213: 1763060110954166728
+    second: Spritesheet-cards-icons_22
+  - first:
+      213: 5819509338938936136
+    second: Spritesheet-cards-icons_23
+  - first:
+      213: 3111816698391296367
+    second: Spritesheet-cards-icons_24
+  - first:
+      213: -7996392852632673862
+    second: Spritesheet-cards-icons_25
+  - first:
+      213: -2501479303348945015
+    second: Spritesheet-cards-icons_26
+  - first:
+      213: 6781407355190926
+    second: Spritesheet-cards-icons_27
+  - first:
+      213: 2665335464772437857
+    second: Spritesheet-cards-icons_28
+  - first:
+      213: 3941222312832027846
+    second: Spritesheet-cards-icons_29
+  - first:
+      213: -8832951587609495300
+    second: Spritesheet-cards-icons_30
+  - first:
+      213: 2244396347419686273
+    second: Spritesheet-cards-icons_31
+  - first:
+      213: 5548792513365026321
+    second: Spritesheet-cards-icons_32
+  - first:
+      213: -3178049190633615129
+    second: Spritesheet-cards-icons_33
+  - first:
+      213: 602510638190977188
+    second: Spritesheet-cards-icons_34
+  - first:
+      213: 3414444923487824010
+    second: Spritesheet-cards-icons_35
+  - first:
+      213: 4195621722671003941
+    second: Spritesheet-cards-icons_36
+  - first:
+      213: -955309804693435153
+    second: Spritesheet-cards-icons_37
+  - first:
+      213: -1343037661629503972
+    second: Spritesheet-cards-icons_38
+  - first:
+      213: 6904928866446434591
+    second: Spritesheet-cards-icons_39
+  - first:
+      213: 3521901666158670301
+    second: Spritesheet-cards-icons_40
+  - first:
+      213: -1376108466972693246
+    second: Spritesheet-cards-icons_41
+  - first:
+      213: -4654338155737659253
+    second: Spritesheet-cards-icons_42
+  - first:
+      213: -5026034997398735361
+    second: Spritesheet-cards-icons_43
+  - first:
+      213: -1620488720847262086
+    second: Spritesheet-cards-icons_44
+  - first:
+      213: 5834248633604107150
+    second: Spritesheet-cards-icons_45
+  - first:
+      213: -2486322471819542819
+    second: Spritesheet-cards-icons_46
+  - first:
+      213: -9085741885050570962
+    second: Spritesheet-cards-icons_47
+  - first:
+      213: -6815449648988724890
+    second: Spritesheet-cards-icons_48
+  - first:
+      213: -7808383019917591725
+    second: Spritesheet-cards-icons_49
+  - first:
+      213: 7228718847666929518
+    second: Spritesheet-cards-icons_50
+  - first:
+      213: -1187926948631378954
+    second: Spritesheet-cards-icons_51
+  - first:
+      213: -6577319394306380319
+    second: Spritesheet-cards-icons_52
+  - first:
+      213: 7732716269960808665
+    second: Spritesheet-cards-icons_53
+  - first:
+      213: -3794685749743081962
+    second: Spritesheet-cards-icons_54
+  - first:
+      213: -4563462881206098229
+    second: Spritesheet-cards-icons_55
+  - first:
+      213: 8001594026080653016
+    second: Spritesheet-cards-icons_56
+  - first:
+      213: 2587042977772000947
+    second: Spritesheet-cards-icons_57
+  - first:
+      213: -4340818573741340048
+    second: Spritesheet-cards-icons_58
+  - first:
+      213: 7405772707044971025
+    second: Spritesheet-cards-icons_59
+  - first:
+      213: 375778435213352907
+    second: Spritesheet-cards-icons_60
+  - first:
+      213: 700118642938506757
+    second: Spritesheet-cards-icons_61
+  - first:
+      213: 8551192713544463420
+    second: Spritesheet-cards-icons_62
+  - first:
+      213: 2215149012620953784
+    second: Spritesheet-cards-icons_63
+  - first:
+      213: -5831058358678347411
+    second: Spritesheet-cards-icons_64
+  - first:
+      213: -5729512763155032416
+    second: Spritesheet-cards-icons_65
+  - first:
+      213: 7408754389442677424
+    second: Spritesheet-cards-icons_66
+  - first:
+      213: -1344002166743569427
+    second: Spritesheet-cards-icons_67
+  - first:
+      213: -362970207223204128
+    second: Spritesheet-cards-icons_68
+  - first:
+      213: -6802275787394969164
+    second: Spritesheet-cards-icons_69
+  - first:
+      213: 6002261800770304274
+    second: Spritesheet-cards-icons_70
+  - first:
+      213: 5886915618854022072
+    second: Spritesheet-cards-icons_71
+  - first:
+      213: -5331817125917640348
+    second: Spritesheet-cards-icons_72
+  - first:
+      213: -6782095648600057235
+    second: Spritesheet-cards-icons_73
+  - first:
+      213: 4544212751978365109
+    second: Spritesheet-cards-icons_74
+  - first:
+      213: -1350815806448202723
+    second: Spritesheet-cards-icons_75
+  - first:
+      213: -4249685915044667615
+    second: Spritesheet-cards-icons_76
+  - first:
+      213: 4892801296324964677
+    second: Spritesheet-cards-icons_77
+  - first:
+      213: -8837965222331050884
+    second: Spritesheet-cards-icons_78
+  - first:
+      213: -5183918670523659421
+    second: Spritesheet-cards-icons_79
+  - first:
+      213: 8833183530108836278
+    second: Spritesheet-cards-icons_80
+  - first:
+      213: -8694121703381835644
+    second: Spritesheet-cards-icons_81
+  - first:
+      213: 5719031109501517382
+    second: Spritesheet-cards-icons_82
+  - first:
+      213: 6247413699663847518
+    second: Spritesheet-cards-icons_83
+  - first:
+      213: -6543356613713181647
+    second: Spritesheet-cards-icons_84
+  - first:
+      213: -2763721645549525523
+    second: Spritesheet-cards-icons_85
+  - first:
+      213: -7087614861076830009
+    second: Spritesheet-cards-icons_86
+  - first:
+      213: -7954452954650866762
+    second: Spritesheet-cards-icons_87
+  - first:
+      213: -5293185633725517064
+    second: Spritesheet-cards-icons_88
+  - first:
+      213: -7542546376908827532
+    second: Spritesheet-cards-icons_89
+  - first:
+      213: -1620678578820204633
+    second: Spritesheet-cards-icons_90
+  - first:
+      213: 6281318615283623174
+    second: Spritesheet-cards-icons_91
+  - first:
+      213: 507123802782013570
+    second: Spritesheet-cards-icons_92
+  - first:
+      213: -5055518922410357727
+    second: Spritesheet-cards-icons_93
+  - first:
+      213: -8221143850488106497
+    second: Spritesheet-cards-icons_94
+  - first:
+      213: -4166784412912276932
+    second: Spritesheet-cards-icons_95
+  - first:
+      213: 209212765119993150
+    second: Spritesheet-cards-icons_96
+  - first:
+      213: 9082655358266946339
+    second: Spritesheet-cards-icons_97
+  - first:
+      213: 951216596042935716
+    second: Spritesheet-cards-icons_98
+  - first:
+      213: -2108387084270789610
+    second: Spritesheet-cards-icons_99
+  - first:
+      213: -2664479908808511836
+    second: Spritesheet-cards-icons_100
+  - first:
+      213: 3239177719367095263
+    second: Spritesheet-cards-icons_101
+  - first:
+      213: -1440958336342178754
+    second: Spritesheet-cards-icons_102
+  - first:
+      213: -8726597471665020190
+    second: Spritesheet-cards-icons_103
+  - first:
+      213: 2576244392451064717
+    second: Spritesheet-cards-icons_104
+  - first:
+      213: -4183381007822304161
+    second: Spritesheet-cards-icons_105
+  - first:
+      213: 8629206706163986609
+    second: Spritesheet-cards-icons_106
+  - first:
+      213: 2418778997448324119
+    second: Spritesheet-cards-icons_107
+  - first:
+      213: -864569876299656334
+    second: Spritesheet-cards-icons_108
+  - first:
+      213: 5459698313910895146
+    second: Spritesheet-cards-icons_109
+  - first:
+      213: 8180843931749514164
+    second: Spritesheet-cards-icons_110
+  - first:
+      213: -2368636055183267714
+    second: Spritesheet-cards-icons_111
+  - first:
+      213: -1252434916503927191
+    second: Spritesheet-cards-icons_112
+  - first:
+      213: 681074717597180104
+    second: Spritesheet-cards-icons_113
+  - first:
+      213: -6113358274678801234
+    second: Spritesheet-cards-icons_114
+  - first:
+      213: -7674917928947046363
+    second: Spritesheet-cards-icons_115
+  - first:
+      213: -1141704915614290723
+    second: Spritesheet-cards-icons_116
+  - first:
+      213: -243998910622198586
+    second: Spritesheet-cards-icons_117
+  - first:
+      213: 868361949040878929
+    second: Spritesheet-cards-icons_118
+  - first:
+      213: -773243012707374185
+    second: Spritesheet-cards-icons_119
+  - first:
+      213: -335157966223708620
+    second: Spritesheet-cards-icons_120
+  - first:
+      213: 3290283380784755776
+    second: Spritesheet-cards-icons_121
+  - first:
+      213: 1962563544917088144
+    second: Spritesheet-cards-icons_36
+  - first:
+      213: 2440295080500382564
+    second: Spritesheet-cards-icons_84
+  - first:
+      213: -8192772693687372624
+    second: Spritesheet-cards-icons_86
+  - first:
+      213: 1433247563321474391
+    second: Spritesheet-cards-icons_61
+  - first:
+      213: -7337875990727816238
+    second: Spritesheet-cards-icons_87
+  - first:
+      213: 2664888341368746323
+    second: Spritesheet-cards-icons_89
+  - first:
+      213: 292997528323566930
+    second: Spritesheet-cards-icons_90
+  - first:
+      213: -7653571908140458908
+    second: Spritesheet-cards-icons_91
+  - first:
+      213: 3514682243346652718
+    second: Spritesheet-cards-icons_92
+  - first:
+      213: -6393453479078217136
+    second: Spritesheet-cards-icons_93
+  - first:
+      213: 6689299616613808113
+    second: Spritesheet-cards-icons_94
+  - first:
+      213: -7356428776461409824
+    second: Spritesheet-cards-icons_100
+  - first:
+      213: 6834619062108307927
+    second: Spritesheet-cards-icons_17
+  - first:
+      213: -2711969364969734752
+    second: Spritesheet-cards-icons_2
+  - first:
+      213: 4994123239954773837
+    second: Spritesheet-cards-icons_8
+  - first:
+      213: -4880795504936291706
+    second: Spritesheet-cards-icons_9
+  - first:
+      213: -3919923037188290406
+    second: Spritesheet-cards-icons_10
+  - first:
+      213: 5308966399569557134
+    second: Spritesheet-cards-icons_11
+  - first:
+      213: -3584819268770599091
+    second: Spritesheet-cards-icons_12
+  - first:
+      213: -4964223940617839898
+    second: Spritesheet-cards-icons_13
+  - first:
+      213: -3102572059919836347
+    second: Spritesheet-cards-icons_14
+  - first:
+      213: 7164551033553536811
+    second: Spritesheet-cards-icons_19
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_0
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 3837
+        width: 556
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eba59d6821eafcd60800000000000000
+      internalID: 7912734464908286654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_1
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 3905
+        width: 616
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a78a3e9e96941200800000000000000
+      internalID: 149910295613704098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_3
+      rect:
+        serializedVersion: 2
+        x: 1413
+        y: 3031
+        width: 660
+        height: 980
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30845fac555faf510800000000000000
+      internalID: 1583847967800248323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_4
+      rect:
+        serializedVersion: 2
+        x: 2617
+        y: 3838
+        width: 173
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d6aec39d142a18d0800000000000000
+      internalID: -2874945702670194991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_5
+      rect:
+        serializedVersion: 2
+        x: 3104
+        y: 3747
+        width: 266
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f00c11ea4f43bd5a0800000000000000
+      internalID: -6495539812054745073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_6
+      rect:
+        serializedVersion: 2
+        x: 3503
+        y: 3856
+        width: 159
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07f9f95ceeff4b280800000000000000
+      internalID: -9028309951988129936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_7
+      rect:
+        serializedVersion: 2
+        x: 3727
+        y: 3911
+        width: 340
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 180c75f451a7db750800000000000000
+      internalID: 6322343683842097281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_15
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 3400
+        width: 616
+        height: 479
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38c371cddaac62eb0800000000000000
+      internalID: -4744882309317575549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_16
+      rect:
+        serializedVersion: 2
+        x: 3503
+        y: 3703
+        width: 158
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c7435d6e19777cd0800000000000000
+      internalID: -2560444691546683452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_18
+      rect:
+        serializedVersion: 2
+        x: 3727
+        y: 3789
+        width: 340
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6f410e97bc3aba00800000000000000
+      internalID: 772997045375029101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_20
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 3627
+        width: 556
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 656dfec65937f25b0800000000000000
+      internalID: -5390963143324215722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_21
+      rect:
+        serializedVersion: 2
+        x: 2625
+        y: 3640
+        width: 708
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9a5f60f67ece5120800000000000000
+      internalID: 2404586261297715868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_23
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 3417
+        width: 556
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84b068229ec03c050800000000000000
+      internalID: 5819509338938936136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_25
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 3207
+        width: 556
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab16b56311b170190800000000000000
+      internalID: -7996392852632673862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_26
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 3293
+        width: 616
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98ff4e6b3d5f84dd0800000000000000
+      internalID: -2501479303348945015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_27
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 2991
+        width: 568
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8ebb7077a7181000800000000000000
+      internalID: 6781407355190926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_28
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 3045
+        width: 616
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1670301db7c2df420800000000000000
+      internalID: 2665335464772437857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_29
+      rect:
+        serializedVersion: 2
+        x: 2888
+        y: 3163
+        width: 406
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cc4231efc802b630800000000000000
+      internalID: 3941222312832027846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_32
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 2889
+        width: 618
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11628736465410d40800000000000000
+      internalID: 5548792513365026321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_33
+      rect:
+        serializedVersion: 2
+        x: 1413
+        y: 2877
+        width: 660
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e0d091691d45e3d0800000000000000
+      internalID: -3178049190633615129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_35
+      rect:
+        serializedVersion: 2
+        x: 2498
+        y: 2877
+        width: 100
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a88a0a1419b826f20800000000000000
+      internalID: 3414444923487824010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_38
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 2781
+        width: 568
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c162a9acc529c5de0800000000000000
+      internalID: -1343037661629503972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_40
+      rect:
+        serializedVersion: 2
+        x: 2721
+        y: 2878
+        width: 97
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd17e31d7ee40e030800000000000000
+      internalID: 3521901666158670301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_41
+      rect:
+        serializedVersion: 2
+        x: 2939
+        y: 2877
+        width: 96
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20d6fa5e3a417ece0800000000000000
+      internalID: -1376108466972693246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_44
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 2643
+        width: 618
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7e2f57181ed289e0800000000000000
+      internalID: -1620488720847262086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_49
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 2637
+        width: 556
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35bbe93930d03a390800000000000000
+      internalID: -7808383019917591725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_52
+      rect:
+        serializedVersion: 2
+        x: 2541
+        y: 2593
+        width: 80
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eda418ebdaa8b4a0800000000000000
+      internalID: -6577319394306380319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_53
+      rect:
+        serializedVersion: 2
+        x: 2723
+        y: 2604
+        width: 74
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d8c5e35a70205b60800000000000000
+      internalID: 7732716269960808665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_54
+      rect:
+        serializedVersion: 2
+        x: 2909
+        y: 2606
+        width: 74
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 616a35c6a61965bc0800000000000000
+      internalID: -3794685749743081962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_55
+      rect:
+        serializedVersion: 2
+        x: 3093
+        y: 2605
+        width: 70
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc6a70410b25ba0c0800000000000000
+      internalID: -4563462881206098229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_56
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 2491
+        width: 556
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8decc695f5f5b0f60800000000000000
+      internalID: 8001594026080653016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_57
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 2553
+        width: 618
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b6d4cca1e507e320800000000000000
+      internalID: 2587042977772000947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_58
+      rect:
+        serializedVersion: 2
+        x: 3292
+        y: 2325
+        width: 110
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07acabd718052c3c0800000000000000
+      internalID: -4340818573741340048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_60
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 1841
+        width: 618
+        height: 694
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcfd421fe78073500800000000000000
+      internalID: 375778435213352907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_62
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 2335
+        width: 568
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c34f9b08770fba670800000000000000
+      internalID: 8551192713544463420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_63
+      rect:
+        serializedVersion: 2
+        x: 2539
+        y: 2337
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b844d56a4acdbe10800000000000000
+      internalID: 2215149012620953784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_64
+      rect:
+        serializedVersion: 2
+        x: 2727
+        y: 2329
+        width: 84
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d61a76a215be31fa0800000000000000
+      internalID: -5831058358678347411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_65
+      rect:
+        serializedVersion: 2
+        x: 2901
+        y: 2325
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a6d3188f7eac70b0800000000000000
+      internalID: -5729512763155032416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_66
+      rect:
+        serializedVersion: 2
+        x: 3111
+        y: 2331
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bac8da2dde21d660800000000000000
+      internalID: 7408754389442677424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_67
+      rect:
+        serializedVersion: 2
+        x: 3491
+        y: 2335
+        width: 84
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: debe4e17625295de0800000000000000
+      internalID: -1344002166743569427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_68
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 2334
+        width: 81
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e63966058876faf0800000000000000
+      internalID: -362970207223204128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_69
+      rect:
+        serializedVersion: 2
+        x: 3913
+        y: 2348
+        width: 79
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b1151c16367991a0800000000000000
+      internalID: -6802275787394969164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_70
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 2187
+        width: 556
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2197fc37e415c4350800000000000000
+      internalID: 6002261800770304274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_72
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 2069
+        width: 556
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469b55ab2949106b0800000000000000
+      internalID: -5331817125917640348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_73
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 1945
+        width: 568
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6a9870d0f721e1a0800000000000000
+      internalID: -6782095648600057235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_74
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 1908
+        width: 155
+        height: 123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b08871fb69401f30800000000000000
+      internalID: 4544212751978365109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_75
+      rect:
+        serializedVersion: 2
+        x: 2423
+        y: 1938
+        width: 102
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1c0ca35e20f04de0800000000000000
+      internalID: -1350815806448202723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_76
+      rect:
+        serializedVersion: 2
+        x: 2595
+        y: 1944
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12f18c21d251605c0800000000000000
+      internalID: -4249685915044667615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_77
+      rect:
+        serializedVersion: 2
+        x: 2789
+        y: 1937
+        width: 110
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54135081bd8b6e340800000000000000
+      internalID: 4892801296324964677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_78
+      rect:
+        serializedVersion: 2
+        x: 1413
+        y: 1753
+        width: 660
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7493b1b47d395580800000000000000
+      internalID: -8837965222331050884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_79
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1353
+        width: 1332
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36b0cea4f650f08b0800000000000000
+      internalID: -5183918670523659421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_83
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 1229
+        width: 372
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e506f5dd8a543b650800000000000000
+      internalID: 6247413699663847518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_88
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 1135
+        width: 618
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f2f69be5b3da86b0800000000000000
+      internalID: -5293185633725517064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_95
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 445
+        width: 722
+        height: 650
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3aaabc27ab9c26c0800000000000000
+      internalID: -4166784412912276932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_120
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 74
+        width: 722
+        height: 349
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ee79ffa97495bf0800000000000000
+      internalID: -335157966223708620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_71
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1149
+        width: 757
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bb2e7ca09682b150800000000000000
+      internalID: 5886915618854022072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_81
+      rect:
+        serializedVersion: 2
+        x: 1413
+        y: 1918
+        width: 660
+        height: 923
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48069ebcf56485780800000000000000
+      internalID: -8694121703381835644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_82
+      rect:
+        serializedVersion: 2
+        x: 2163
+        y: 2155
+        width: 78
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64efe3d4e741e5f40800000000000000
+      internalID: 5719031109501517382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_96
+      rect:
+        serializedVersion: 2
+        x: 2317
+        y: 2153
+        width: 82
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e355473c6e547e200800000000000000
+      internalID: 209212765119993150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_121
+      rect:
+        serializedVersion: 2
+        x: 2349
+        y: 2593
+        width: 80
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 044fb0a5d4f69ad20800000000000000
+      internalID: 3290283380784755776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_36
+      rect:
+        serializedVersion: 2
+        x: 3656
+        y: 1896
+        width: 293
+        height: 292
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0971aef552d6c3b10800000000000000
+      internalID: 1962563544917088144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_84
+      rect:
+        serializedVersion: 2
+        x: 2365
+        y: 2347
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46bcb5c427badd120800000000000000
+      internalID: 2440295080500382564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_86
+      rect:
+        serializedVersion: 2
+        x: 2154
+        y: 2328
+        width: 94
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b47e3b64ac6d4e80800000000000000
+      internalID: -8192772693687372624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_61
+      rect:
+        serializedVersion: 2
+        x: 2117
+        y: 3053
+        width: 218
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75d78fea01be3e310800000000000000
+      internalID: 1433247563321474391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_87
+      rect:
+        serializedVersion: 2
+        x: 2343
+        y: 3057
+        width: 102
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2db0dc60aa0aa2a90800000000000000
+      internalID: -7337875990727816238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_89
+      rect:
+        serializedVersion: 2
+        x: 2452
+        y: 3057
+        width: 102
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3513d59c3d59bf420800000000000000
+      internalID: 2664888341368746323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_90
+      rect:
+        serializedVersion: 2
+        x: 2121
+        y: 3207
+        width: 434
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25d2bcb13bfe01400800000000000000
+      internalID: 292997528323566930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_91
+      rect:
+        serializedVersion: 2
+        x: 2121
+        y: 3301
+        width: 434
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46c116066ec09c590800000000000000
+      internalID: -7653571908140458908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_92
+      rect:
+        serializedVersion: 2
+        x: 2121
+        y: 3395
+        width: 434
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2edc05f0e8a6c030800000000000000
+      internalID: 3514682243346652718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_93
+      rect:
+        serializedVersion: 2
+        x: 2121
+        y: 3489
+        width: 434
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05abe8b4fe3e547a0800000000000000
+      internalID: -6393453479078217136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_94
+      rect:
+        serializedVersion: 2
+        x: 2103
+        y: 3568
+        width: 474
+        height: 466
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f73c645f8a25dc50800000000000000
+      internalID: 6689299616613808113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_100
+      rect:
+        serializedVersion: 2
+        x: 2821
+        y: 3826
+        width: 196
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e16e8bf007b8e990800000000000000
+      internalID: -7356428776461409824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_17
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 75
+        width: 618
+        height: 836
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f333eb7fa69759230800000000000000
+      internalID: 3644952973756216127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_2
+      rect:
+        serializedVersion: 2
+        x: 3979
+        y: 3670
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0adbc3f2b362d5ad0800000000000000
+      internalID: -2711969364969734752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_8
+      rect:
+        serializedVersion: 2
+        x: 3848
+        y: 3412
+        width: 219
+        height: 148
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d47f60270a0be4540800000000000000
+      internalID: 4994123239954773837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_9
+      rect:
+        serializedVersion: 2
+        x: 3853
+        y: 3268
+        width: 205
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 682f2fa095ee34cb0800000000000000
+      internalID: -4880795504936291706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_10
+      rect:
+        serializedVersion: 2
+        x: 3852
+        y: 3124
+        width: 204
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a98858d24c2a999c0800000000000000
+      internalID: -3919923037188290406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_11
+      rect:
+        serializedVersion: 2
+        x: 2937
+        y: 3287
+        width: 246
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e86f3d2ffcc3da940800000000000000
+      internalID: 5308966399569557134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_12
+      rect:
+        serializedVersion: 2
+        x: 3213
+        y: 3281
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4fe3f44ed9204ec0800000000000000
+      internalID: -3584819268770599091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_13
+      rect:
+        serializedVersion: 2
+        x: 2639
+        y: 3316
+        width: 73
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eadbf9a0a88b1bb0800000000000000
+      internalID: -4964223940617839898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_14
+      rect:
+        serializedVersion: 2
+        x: 2641
+        y: 3570
+        width: 676
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b1d6e462371f4d0800000000000000
+      internalID: -3102572059919836347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_22
+      rect:
+        serializedVersion: 2
+        x: 2635
+        y: 3498
+        width: 689
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c9751f64d5a77810800000000000000
+      internalID: 1763060110954166728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_24
+      rect:
+        serializedVersion: 2
+        x: 2637
+        y: 3411
+        width: 688
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f69fdb1dcc46f2b20800000000000000
+      internalID: 3111816698391296367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_30
+      rect:
+        serializedVersion: 2
+        x: 2098
+        y: 2749
+        width: 208
+        height: 278
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf8305e745d0b6580800000000000000
+      internalID: -8832951587609495300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_31
+      rect:
+        serializedVersion: 2
+        x: 2099
+        y: 2544
+        width: 207
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 185722f2692b52f10800000000000000
+      internalID: 2244396347419686273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_34
+      rect:
+        serializedVersion: 2
+        x: 1429
+        y: 1654
+        width: 629
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a064c2bb3c8c5800800000000000000
+      internalID: 602510638190977188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_19
+      rect:
+        serializedVersion: 2
+        x: 2341
+        y: 2878
+        width: 92
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b27cd12a4399d6360800000000000000
+      internalID: 7164551033553536811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_37
+      rect:
+        serializedVersion: 2
+        x: 3502
+        y: 3547
+        width: 159
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fecccc84bce0eb2f0800000000000000
+      internalID: -955309804693435153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

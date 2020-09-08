@@ -24,14 +24,14 @@ public struct UIElements
 {
     [SerializeField] RectTransform answerContentArea;
     public RectTransform AnswerContentArea { get { return answerContentArea; } }
-    [SerializeField] Text temaText;
-    public Text TemaText { get { return temaText; } }
+    [SerializeField] TextMeshProUGUI temaText;
+    public TextMeshProUGUI TemaText { get { return temaText; } }
     [SerializeField] Image contornoImage;
     public Image ContornoImage { get { return contornoImage; } }
-    [SerializeField] Text preguntaText;
-    public Text PreguntaText { get { return preguntaText; } }
-    [SerializeField] Text beneficioText;
-    public Text BeneficioText { get { return beneficioText; } }
+    [SerializeField] TextMeshProUGUI preguntaText;
+    public TextMeshProUGUI PreguntaText { get { return preguntaText; } }
+    [SerializeField] TextMeshProUGUI beneficioText;
+    public TextMeshProUGUI BeneficioText { get { return beneficioText; } }
 
     [Space]
     [SerializeField] Animator resolutionScreenAnimator;
@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
     void UpdateQuestionCardUI(QuestionCard card)
     {
         uIElements.TemaText.text = card.Tema;
-        uIElements.ContornoImage.color = card.Contorno;
+        // uIElements.ContornoImage.color = card.Contorno;
         uIElements.PreguntaText.text = card.Pregunta;
         uIElements.BeneficioText.text = "Obtienes " + card.AddCards.ToString() + " Digipasos";
         CreateAnswers(card);
@@ -210,8 +210,8 @@ public class UIManager : MonoBehaviour
         questionCard.blocksRaycasts = true;
         buttonPreguntas.SetActive(false);
         buttonProgramar.SetActive(false);
-        playerinfoCanvasGroup.alpha = 0.0f;
-        playerinfoCanvasGroup.blocksRaycasts = false;
+        // playerinfoCanvasGroup.alpha = 0.0f;
+        // playerinfoCanvasGroup.blocksRaycasts = false;
     }
 
     public void HideAll()
@@ -224,8 +224,8 @@ public class UIManager : MonoBehaviour
         programmingCanvasGroup.blocksRaycasts = false;
         buttonsCanvasGroup.alpha = 0.0f;
         buttonsCanvasGroup.blocksRaycasts = false;
-        playerinfoCanvasGroup.alpha = 0.0f;
-        playerinfoCanvasGroup.blocksRaycasts = false;
+        // playerinfoCanvasGroup.alpha = 0.0f;
+        // playerinfoCanvasGroup.blocksRaycasts = false;
     }
 
     public void ShowButtons()

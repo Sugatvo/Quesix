@@ -151,11 +151,15 @@ public class NetworkManagerRoomQuesix : NetworkRoomManager
                         if (i == 0)
                         {
                             cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[1];
+                            cameraPlayer.GetComponent<TeamManager>().ownerID = team_ids[0];
+                            cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[1];
                             cameraPlayer.GetComponent<CameraController>().type = 1;
                         }
                         else
                         {
                             cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[0];
+                            cameraPlayer.GetComponent<TeamManager>().ownerID = team_ids[1];
+                            cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[0];
                             cameraPlayer.GetComponent<CameraController>().type = 2;
                         }
                         NetworkServer.ReplacePlayerForConnection(team_aux[i].connectionToClient, cameraPlayer, true);

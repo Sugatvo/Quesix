@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using Mirror;
 
 public class AnswerData : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] Text infoTextObject = null;
+    [SerializeField] TextMeshProUGUI infoTextObject = null;
     [SerializeField] Image toggle1 = null;
     [SerializeField] Image toggle2 = null;
 
     [Header("Textures")]
     [SerializeField] Sprite uncheckedToggle = null;
-    [SerializeField] Sprite checkedToggle = null;
+
+    [SerializeField] Sprite checkedToggle1 = null;
+    [SerializeField] Sprite checkedToggle2 = null;
+
 
     [Header("References")]
     [SerializeField] GameEvents events = null;
@@ -69,7 +73,7 @@ public class AnswerData : MonoBehaviour
             {
                 return;
             }
-            toggle1.sprite = (Checked1) ? checkedToggle : uncheckedToggle;
+            toggle1.sprite = (Checked1) ? checkedToggle1 : uncheckedToggle;
 
         }
         if (p2)
@@ -78,7 +82,7 @@ public class AnswerData : MonoBehaviour
             {
                 return;
             }
-            toggle2.sprite = (Checked2) ? checkedToggle : uncheckedToggle;
+            toggle2.sprite = (Checked2) ? checkedToggle2 : uncheckedToggle;
         }
     }
 
