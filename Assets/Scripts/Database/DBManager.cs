@@ -1,5 +1,6 @@
 ﻿public static class DBManager {
 
+    public static string id_user;
     public static string username;
     public static string nombre;
     public static string apellido;

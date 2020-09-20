@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.InputSystem;
@@ -67,9 +68,9 @@ public class TeamManager : NetworkBehaviour
     [SyncVar]
     public int teammateID = -1;
 
-
     void OnEnable()
     {
+        Debug.Log("OnEnable: TeamManager");
         LoadMovementCards();
 
         JugadorPiText = GameObject.Find("Jugador_Pi").GetComponent<TextMeshProUGUI>();
@@ -93,8 +94,9 @@ public class TeamManager : NetworkBehaviour
 
     }
 
-    public override void OnStartAuthority()
+    public override void OnStartLocalPlayer()
     {
+        Debug.Log("OnStartLocalPlayer: TeamManager");
         events.DisplayQuestion += DisplayForTeam;
         events.DisplayProgramar += ProgramarForTeam;
         events.SelectAnswer += SelectAnswer;
@@ -112,7 +114,7 @@ public class TeamManager : NetworkBehaviour
             uiManager.DisableButtons();
             JugadorCoText.text = "*Jugador " + ownerID.ToString();
             JugadorPiText.text = "Jugador " + teammateID.ToString();
-            
+
         }
         else
         {
@@ -121,6 +123,7 @@ public class TeamManager : NetworkBehaviour
             JugadorCoText.text = "Jugador " + teammateID.ToString();
         }
     }
+
 
     void OnDisable()
     {
@@ -310,8 +313,8 @@ public class TeamManager : NetworkBehaviour
         }
         else
         {
-            teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
-            teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+            //teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
+            //teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
 
             int i = 0;
             foreach (Transform child in sequence)
@@ -379,8 +382,8 @@ public class TeamManager : NetworkBehaviour
     [Command]
     void CmdDebuggingWithoutAuthority()
     {
-        teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
-        teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(teammate.connectionToClient);
+        //teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
+        //teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(teammate.connectionToClient);
 
 
         TargetReadyToRun(connectionToClient);
@@ -426,31 +429,17 @@ public class TeamManager : NetworkBehaviour
 
     public void SelectAnswer(int AnswerIndex)
     {
-        bool tempAuth = false;
-
-        if (!teamObject.GetComponent<NetworkIdentity>().hasAuthority)
-        {
-            tempAuth = true;
-            teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
-            teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-        }
-
-        CmdSelectAnswer(AnswerIndex, tempAuth);
+        CmdSelectAnswer(AnswerIndex);
     }
 
     [Command]
-    void CmdSelectAnswer(int AnswerIndex, bool tempAuth)
+    void CmdSelectAnswer(int AnswerIndex)
     {
         int type = connectionToClient.identity.gameObject.GetComponent<CameraController>().type;
 
         TargetSelection(teammate.connectionToClient, AnswerIndex, type);
         TargetSelection(connectionToClient, AnswerIndex, type);
 
-        if (tempAuth)
-        {
-            teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
-            teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(teammate.connectionToClient);
-        }
     }
 
     [TargetRpc]

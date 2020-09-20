@@ -46,13 +46,23 @@ public class CursoData : MonoBehaviour
         id_curso = curso_id;
         StartCoroutine(GetUsers(id_curso));
     }
+    public void UpdateDataTeacher(string curso_id, string name, int index)
+    {
+        nombre = name;
+        _cursoIndex = index;
+        nombreCurso.text = nombre;
+        id_curso = curso_id;
+        StartCoroutine(GetStudents(id_curso));
+    }
+
+
 
     public IEnumerator GetUsers(string id_curso)
     {
         WWWForm form = new WWWForm();
         form.AddField("id_curso", id_curso);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/admin/usersclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/admin/usersincourse.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -66,6 +76,29 @@ public class CursoData : MonoBehaviour
                 string fulldata = webRequest.downloadHandler.text;
                 usersClassroom = fulldata.Split(new string[] { "<br>" }, System.StringSplitOptions.None);
 
+                cantidadUsuarios.text = (usersClassroom.Length - 1).ToString() + " Usuarios";
+            }
+        }
+    }
+
+    public IEnumerator GetStudents(string id_curso)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("id_curso", id_curso);
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/studentsincourse.php", form))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                Debug.Log("Received: " + webRequest.downloadHandler.text);
+                string fulldata = webRequest.downloadHandler.text;
+                usersClassroom = fulldata.Split(new string[] { "<br>" }, System.StringSplitOptions.None);
                 cantidadUsuarios.text = (usersClassroom.Length - 1).ToString() + " Alumnos";
             }
         }
@@ -76,7 +109,7 @@ public class CursoData : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_curso", id_curso);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/admin/usersclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/admin/usersincourse.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();

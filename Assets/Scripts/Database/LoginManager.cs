@@ -32,6 +32,9 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField passwordFieldLogin;
     [SerializeField] Button entrarButton;
 
+
+    private bool usernameFlag = false;
+
     public void CallLogin()
     {
         StartCoroutine(Login());
@@ -42,6 +45,7 @@ public class LoginManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", usernameFieldLogin.text);
         form.AddField("password", passwordFieldLogin.text);
+
         WWW www = new WWW("http://localhost/quesix/login.php", form);
         yield return www;
 
@@ -55,6 +59,7 @@ public class LoginManager : MonoBehaviour
             DBManager.nombre = www.text.Split('\t')[1];
             DBManager.apellido = www.text.Split('\t')[2];
             DBManager.rol = www.text.Split('\t')[3];
+            DBManager.id_user = www.text.Split('\t')[4];
 
             if (DBManager.rol.Equals("Administrador"))
             {
@@ -95,7 +100,7 @@ public class LoginManager : MonoBehaviour
         form.AddField("password", passwordField.text);
         form.AddField("mail", mailField.text);
 
-        WWW www = new WWW("http://localhost/quesix/registro.php", form);
+        WWW www = new WWW("http://localhost/quesix/register/create.php", form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -119,18 +124,47 @@ public class LoginManager : MonoBehaviour
         {
             usernameInfo.color = new Color32(243, 68, 68, 255);
             usernameInfo.text = "Lo sentimos, tu nombre de usuario debe tener entre 6 y 30 caracteres.";
+            usernameFlag = false;
+            VerifyInputs();
         }
         else
         {
+            StartCoroutine(UsernameCheck());  
+        }
+    }
+
+    IEnumerator UsernameCheck()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("username", usernameField.text);
+
+        WWW www = new WWW("http://localhost/quesix/register/username_check.php", form);
+        yield return www;
+
+        if (!string.IsNullOrEmpty(www.error))
+            Debug.Log(www.error);
+
+
+        if (www.text == "0")
+        {
             usernameInfo.color = new Color32(255, 255, 255, 255);
             usernameInfo.text = "Puedes utilizar letras y números.";
+            usernameFlag = true;
         }
+        else
+        {
+            usernameInfo.color = new Color32(243, 68, 68, 255);
+            usernameInfo.text = "Ese nombre de usuario ya está en uso. Prueba con otro.";
+            usernameFlag = false;
+        }
+
+        VerifyInputs();
     }
 
 
     public void VerifyInputs()
     {
-        crearButton.interactable = (usernameField.text.Length >= 6 && passwordField.text.Length >= 3 && repeatField.text.Length >= 3 && nameField.text.Length > 0  && lastField.text.Length > 0 && mailField.text.Length > 0);
+        crearButton.interactable = (usernameFlag && passwordField.text.Length >= 3 && repeatField.text.Length >= 3 && nameField.text.Length > 0  && lastField.text.Length > 0 && mailField.text.Length > 0);
     }
 
 

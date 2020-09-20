@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.InputSystem;
 using Mirror;
@@ -18,12 +19,14 @@ public class CameraController : NetworkBehaviour
     [SyncVar]
     public int type = 0;
 
-    public override void OnStartAuthority()
+    public override void OnStartLocalPlayer()
     {
         virtualCamera.gameObject.SetActive(true);
         enabled = true;
+        
     }
 
+                        
     void Update()
     {
         if(teamObject != null)

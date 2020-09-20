@@ -103,7 +103,7 @@ public class AdminManager : MonoBehaviour
                 Debug.Log("Received: " + webRequest.downloadHandler.text);
                 string fulldata = webRequest.downloadHandler.text;
                 users = fulldata.Split(new string[] { "<br>" }, System.StringSplitOptions.None);
-                Debug.Log(System.String.Format("There are {0} users.", users.Length));
+                Debug.Log(System.String.Format("There are {0} users.", users.Length - 1));
 
                 CreateUsers(users);
                 ShowAssign();
@@ -182,6 +182,7 @@ public class AdminManager : MonoBehaviour
         {
             string[] data = result[i].Split('\t');
 
+            Debug.Log(data[0] + data[1] + data[2] + data[3] + data[4]);
             UserData user = (UserData)Instantiate(userClassroomPrefab, userClassroomContentArea);
             user.UpdateData(data[0], data[1], data[2], data[3], data[4], i);
             user.UpdateCursos(cursos);

@@ -1,6 +1,7 @@
 ﻿using Mirror;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -11,6 +12,10 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
     [SyncVar]
     public int id_team;
+
+
+    [SyncVar]
+    public int matchIndex;
 
 
     [SyncVar] private Color objectColor;
@@ -58,9 +63,9 @@ public class PlayerScoreQuesix : NetworkBehaviour
         set { currentQuestion = value; }
     }
 
-
     void OnEnable()
     {
+        Debug.Log("OnEnable: PlayerScoreQuesix");
         uiManager = GameObject.Find("Managers").GetComponent<UIManager>();
         LoadQuestionCards();
 

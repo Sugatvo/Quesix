@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class ElementSpawnPoint : NetworkBehaviour
 {
-    private void Awake() => Spawner.AddSpawnPoint(transform);
+    private void Awake()
+    {
+        Spawner.AddSpawnPoint(transform);
+    }
     private void OnDestroy() => Spawner.RemoveSpawnPoint(transform);
 
 }

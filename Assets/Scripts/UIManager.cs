@@ -89,6 +89,7 @@ public class UIManager : MonoBehaviour
 
     void OnEnable()
     {
+        Debug.Log("OnEnable UIManager");
         events.UpdateQuestionCardUI += UpdateQuestionCardUI;
         events.DisplayResolutionScreen += DisplayResolution;
     }
