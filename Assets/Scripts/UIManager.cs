@@ -74,11 +74,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] CanvasGroup questionCard;
     [SerializeField] CanvasGroup programmingCanvasGroup;
     [SerializeField] CanvasGroup buttonsCanvasGroup;
-    [SerializeField] CanvasGroup playerinfoCanvasGroup;
+    [SerializeField] CanvasGroup PilotoInfoCanvasGroup;
+    [SerializeField] CanvasGroup CopilotoInfoCanvasGroup;
     [SerializeField] CanvasGroup handCanvasGroup;
+    [SerializeField] CanvasGroup sequenceCanvasGroup;
+    [SerializeField] CanvasGroup popUpRun;
     [SerializeField] GameObject buttonDebug;
     [SerializeField] GameObject buttonRun;
 
+    public bool isCheck = false;
+
+    private bool isAllowTo = false;
 
     List<AnswerData> currentAnswers = new List<AnswerData>();
     public List<AnswerData> CurrentAnswers { get { return currentAnswers; } }
@@ -197,7 +203,30 @@ public class UIManager : MonoBehaviour
 
     public void OnClickEjecutar()
     {
-        events.Ejecutar();
+        if (!isCheck)
+        {
+            popUpRun.alpha = 1.0f;
+            popUpRun.blocksRaycasts = true;
+        }
+        else
+        {
+            events.Ejecutar();
+        }
+    }
+
+    public void PopUpRunNo()
+    {
+        popUpRun.alpha = 0.0f;
+        popUpRun.blocksRaycasts = false;
+    }
+
+    public void PopUpRunYes()
+    {
+        isCheck = true;
+        OnClickEjecutar();
+
+        popUpRun.alpha = 0.0f;
+        popUpRun.blocksRaycasts = false;
     }
 
     public void OnClickDebug()
@@ -215,6 +244,34 @@ public class UIManager : MonoBehaviour
         // playerinfoCanvasGroup.blocksRaycasts = false;
     }
 
+
+    public void DisableQuestion()
+    {
+        foreach (var item in currentAnswers)
+        {
+            item.GetComponent<Button>().interactable = false;
+        }
+
+        if(buttonResponder.GetComponent<Button>().interactable == true){
+            isAllowTo = true;
+        }
+        buttonResponder.GetComponent<Button>().interactable = false;
+    }
+
+    public void EnableQuestion()
+    {
+        foreach (var item in currentAnswers)
+        {
+            item.GetComponent<Button>().interactable = true;
+        }
+
+        if (isAllowTo)
+        {
+            buttonResponder.GetComponent<Button>().interactable = true;
+            isAllowTo = false;
+        }
+    }
+
     public void HideAll()
     {
         questionCard.alpha = 0.0f;
@@ -229,7 +286,7 @@ public class UIManager : MonoBehaviour
         // playerinfoCanvasGroup.blocksRaycasts = false;
     }
 
-    public void ShowButtons()
+    public void ShowInterface()
     {
         questionCard.alpha = 0.0f;
         questionCard.blocksRaycasts = false;
@@ -239,8 +296,12 @@ public class UIManager : MonoBehaviour
         programmingCanvasGroup.blocksRaycasts = false;
         buttonsCanvasGroup.alpha = 1.0f;
         buttonsCanvasGroup.blocksRaycasts = true;
-        playerinfoCanvasGroup.alpha = 1.0f;
-        playerinfoCanvasGroup.blocksRaycasts = true;
+
+        PilotoInfoCanvasGroup.alpha = 1.0f;
+        PilotoInfoCanvasGroup.blocksRaycasts = true;
+
+        CopilotoInfoCanvasGroup.alpha = 1.0f;
+        CopilotoInfoCanvasGroup.blocksRaycasts = true;
     }
 
     public void ShowCanvas()
@@ -272,10 +333,11 @@ public class UIManager : MonoBehaviour
 
     public void OnProgrammingWithAuthority()
     {
-        buttonRun.GetComponent<Button>().interactable = false;
+        buttonRun.GetComponent<Button>().interactable = true;
         buttonDebug.GetComponent<Button>().interactable = true;
         handCanvasGroup.interactable = true;
         handCanvasGroup.blocksRaycasts = true;
+        sequenceCanvasGroup.blocksRaycasts = true;
     }
 
     public void OnProgrammingWithoutAuthority()
@@ -284,6 +346,7 @@ public class UIManager : MonoBehaviour
         buttonRun.GetComponent<Button>().interactable = false;
         handCanvasGroup.interactable = false;
         handCanvasGroup.blocksRaycasts = false;
+        sequenceCanvasGroup.blocksRaycasts = false;
     }
 
     public void DisabledButtonDebug()
@@ -307,8 +370,30 @@ public class UIManager : MonoBehaviour
         buttonRun.GetComponent<Button>().interactable = true;
     }
 
+    public void DisabledMovement()
+    {
+        handCanvasGroup.blocksRaycasts = false;
+        sequenceCanvasGroup.blocksRaycasts = false;
+    }
+
+    public void EnabledMovement()
+    {
+        handCanvasGroup.blocksRaycasts = true;
+        sequenceCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void EnabledChangeColor()
+    {
+        sequenceCanvasGroup.blocksRaycasts = true;
+    }
     public void SetScoreText(string score)
     {
         uIElements.ScoreText.text = score;
+    }
+
+    public void SetRol(bool pilot, bool copilot)
+    {
+        transform.GetComponent<TutorialManager>().m_Animator.SetBool("isPilot", pilot);
+        transform.GetComponent<TutorialManager>().m_Animator.SetBool("isCopilot", copilot);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 [CreateAssetMenu(fileName = "GameEvents", menuName = "Quesix/new GameEvents")]
 public class GameEvents : ScriptableObject
@@ -45,4 +45,28 @@ public class GameEvents : ScriptableObject
 
     public delegate void SelectCursoCallback(string[] students, int id_curso);
     public SelectCursoCallback SelectCurso;
+
+    public delegate void AssignCardCallback(int index);
+    public AssignCardCallback AssignCard;
+
+    public delegate void ReassignCardCallback(int index);
+    public ReassignCardCallback ReassignCard;
+
+    public delegate void CreateCardInstanceCallback(int indexPrefab);
+    public CreateCardInstanceCallback CreteCardInstance;
+
+    public delegate void SynchronizeOnBeginDragCallback(int index);
+    public SynchronizeOnBeginDragCallback SynchronizeOnBeginDrag;
+
+    public delegate void SynchronizeOnDragCallback(int index, Vector2 position, float oldX, float oldY);
+    public SynchronizeOnDragCallback SynchronizeOnDrag;
+
+    public delegate void SynchronizeOnDropCallback(int cardIndex, int dropIndex);
+    public SynchronizeOnDropCallback SynchronizeOnDrop;
+
+    public delegate void SynchronizeOnEndDragCallback(int index);
+    public SynchronizeOnEndDragCallback SynchronizeOnEndDrag;
+
+    public delegate void PlayerIsMovingCallback(bool statement);
+    public PlayerIsMovingCallback PlayerIsMoving;
 }

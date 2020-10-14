@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Mirror;
 
-
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(NetworkTransform))]
 public class PlayerController3D : NetworkBehaviour
@@ -17,7 +16,7 @@ public class PlayerController3D : NetworkBehaviour
     }
 
     [Header("Movement Settings")]
-    public float moveSpeed = 150f;
+    public float moveSpeed = 100f;
     public float turnSensitivity = 5f;
     public float maxTurnSpeed = 150f;
 
@@ -34,6 +33,13 @@ public class PlayerController3D : NetworkBehaviour
     Vector3 direction;
     public float limit = 144f;
 
+    private Vector3 startPosition;
+    private Vector3 targetPosition;
+
+    public float rotation;
+
+    float threshold = 10f;
+
     void FixedUpdate()
     {
         if (!this.gameObject.GetComponent<NetworkIdentity>().hasAuthority || characterController == null)
@@ -48,7 +54,7 @@ public class PlayerController3D : NetworkBehaviour
                 GirarDer = false;
                 aux = 0;
             }
-            
+
         }
 
         if (GirarIzq)
@@ -64,40 +70,64 @@ public class PlayerController3D : NetworkBehaviour
 
         if (Up)
         {
-            direction = new Vector3(0, 0, -1);
-            direction = transform.TransformDirection(direction);
-            direction *= moveSpeed;
 
-
-            if (transform.position.z < -4.6 && direction.z < 0)
+            if (270f - threshold < rotation && rotation < 270f + threshold)
+            {
+                direction = new Vector3(0, 0, -1);
+            }
+            else if (-threshold < rotation && rotation < threshold)
+            {
+                direction = new Vector3(-1, 0, 0);
+            }
+            else if (90f - threshold < rotation && rotation < 90f + threshold)
+            {
+                direction = new Vector3(0, 0, 1);
+            }
+            else
+            {
+                direction = new Vector3(1, 0, 0);
+            }
+            /*
+            if (transform.position.z < -9 && direction.z < 0)
             {
                 direction.z = 0;
             }
 
-            if (transform.position.z > 4.6 && direction.z > 0)
+            if (transform.position.z > 9 && direction.z > 0)
             {
                 direction.z = 0;
+            }*/
+
+            if (2 > Vector3.Distance(startPosition, transform.position))
+            {
+                characterController.SimpleMove(direction * Time.deltaTime * moveSpeed);
             }
-
-            direction = direction * Time.fixedDeltaTime;
-            characterController.SimpleMove(direction);
-
-            aux += direction.sqrMagnitude;
-            if (aux > limit)
+            else
             {
                 Up = false;
-                aux = 0;
             }
-            
-
         }
 
         if (Down)
         {
-            direction = new Vector3(0, 0, 1);
-            direction = transform.TransformDirection(direction);
-            direction *= moveSpeed;
+            if (270f - threshold < rotation && rotation < 270f + threshold)
+            {
+                direction = new Vector3(0, 0, 1);
+            }
+            else if (-threshold < rotation && rotation < threshold)
+            {
+                direction = new Vector3(1, 0, 0);
+            }
+            else if (90f - threshold < rotation && rotation < 90f + threshold)
+            {
+                direction = new Vector3(0, 0, -1);
+            }
+            else
+            {
+                direction = new Vector3(-1, 0, 0);
+            }
 
+            /*
             if (transform.position.z < -4.6 && direction.z < 0)
             {
                 direction.z = 0;
@@ -106,30 +136,75 @@ public class PlayerController3D : NetworkBehaviour
             if (transform.position.z > 4.6 && direction.z > 0)
             {
                 direction.z = 0;
+            }*/
+
+            if (2 > Vector3.Distance(startPosition, transform.position))
+            {
+                characterController.SimpleMove(direction * Time.deltaTime * moveSpeed);
             }
-
-            direction = direction * Time.fixedDeltaTime;
-            characterController.SimpleMove(direction);
-
-            aux += direction.sqrMagnitude;
-            if (aux > limit)
+            else
             {
                 Down = false;
-                aux = 0;
             }
-           
         }
-        
+
     }
 
     public void Avanzar()
     {
+        rotation = this.transform.rotation.eulerAngles.y;
+
+        //Get the starting positions, the target position and the offset
+        startPosition = transform.position;
+
+        if(270f - threshold < rotation && rotation < 270f + threshold)
+        {
+            targetPosition = startPosition + new Vector3(0, 0, -2);
+        }
+        else if (-threshold < rotation && rotation < threshold)
+        {
+            targetPosition = startPosition + new Vector3(-2, 0, 0);
+        }
+        else if(90f - threshold < rotation && rotation < 90f + threshold)
+        {
+            targetPosition = startPosition + new Vector3(0, 0, 2);
+        }
+        else
+        {
+            targetPosition = startPosition + new Vector3(2, 0, 0);
+        }
+
+
         Up = true;
     }
 
     public void Retroceder()
     {
+        rotation = this.transform.rotation.eulerAngles.y;
+
+        //Get the starting positions, the target position and the offset
+        startPosition = transform.position;
+
+
+        if (270f - threshold < rotation && rotation < 270f + threshold)
+        {
+            targetPosition = startPosition + new Vector3(0, 0, 2);
+        }
+        else if (-threshold < rotation && rotation < threshold)
+        {
+            targetPosition = startPosition + new Vector3(2, 0, 0);
+        }
+        else if (90f - threshold < rotation && rotation < 90f + threshold)
+        {
+            targetPosition = startPosition + new Vector3(0, 0, -2);
+        }
+        else
+        {
+            targetPosition = startPosition + new Vector3(-2, 0, 0);
+        }
+
         Down = true;
+
     }
 
     public void GirarDerecha()
@@ -143,6 +218,7 @@ public class PlayerController3D : NetworkBehaviour
         GirarIzq = true;
         turn = -90f;
     }
+
 }
 
 

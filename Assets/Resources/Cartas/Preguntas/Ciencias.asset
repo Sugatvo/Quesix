@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5168fbce61fe314aad232a52767a34b, type: 3}
   m_Name: Ciencias
   m_EditorClassIdentifier: 
-  tema: Ciencias
+  tema: "Matem\xE1ticas"
   contorno: {r: 0.14718115, g: 1, b: 0, a: 1}
   id: 1
-  pregunta: "\xBFCu\xE1l de los siguientes tipos celulares act\xFAa en la respuesta
-    inmune innata?"
+  pregunta: "\xBFCu\xE1l es el n\xFAmero que sigue en la siguiente secuencia l\xF3gica
+    64, 49, 36, 25, ?"
   _answers:
-  - _info: "Linfocitos citol\xEDticos naturales (NK)."
+  - _info: 12
+    _isCorrect: 0
+  - _info: 18
+    _isCorrect: 0
+  - _info: 14
+    _isCorrect: 0
+  - _info: 16
     _isCorrect: 1
-  - _info: Linfocitos B.
-    _isCorrect: 0
-  - _info: Linfocitos T reguladores.
-    _isCorrect: 0
-  - _info: Linfocitos T supresores.
-    _isCorrect: 0
   _useTimer: 1
   _timer: 120
   _addCards: 1

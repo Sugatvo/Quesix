@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class MovCardData : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] Text titleText = null;
-    public Text TitleText { get { return titleText; } }
+    [SerializeField] string cardAction = null;
+    public string CardAction { get { return cardAction; } }
     [SerializeField] Image moveImg = null;
 
 
     public void UpdateData(string titulo, Sprite imgSprite)
     {
-        titleText.text = titulo;
+        cardAction = titulo;
         moveImg.sprite = imgSprite;
 
     }

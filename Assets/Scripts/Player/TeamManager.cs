@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using Mirror;
 using Cinemachine;
 using TMPro;
-
+using System.Data.Common;
+using UnityEditor;
 
 [System.Serializable]
 public struct AnswerID
@@ -36,6 +38,13 @@ public class TeamManager : NetworkBehaviour
     [SerializeField] TextMeshProUGUI cardCountText;
     [SerializeField] TextMeshProUGUI JugadorPiText;
     [SerializeField] TextMeshProUGUI JugadorCoText;
+    [SerializeField] TextMeshProUGUI JugadorPiPoText;
+    [SerializeField] TextMeshProUGUI JugadorCoPoText;
+
+    [SerializeField] TextMeshProUGUI leftCountText;
+    [SerializeField] TextMeshProUGUI fowardCountText;
+    [SerializeField] TextMeshProUGUI backCountText;
+    [SerializeField] TextMeshProUGUI rightCountText;
 
     MovementCard[] _movimientos = null;
     public MovementCard[] Movimientos { get { return _movimientos; } }
@@ -52,7 +61,7 @@ public class TeamManager : NetworkBehaviour
     private int timerStateParaHash = 0;
 
     [SerializeField] Animator timerAnimator_Programming = null;
-    [SerializeField] Text timerText_Programming = null;
+    [SerializeField] TextMeshProUGUI timerText_Programming = null;
 
 
     private IEnumerator IE_WaitTillNextRound = null;
@@ -61,12 +70,29 @@ public class TeamManager : NetworkBehaviour
     private IEnumerator IE_Ejecutar = null;
     private IEnumerator IE_HideAndShow = null;
 
+    [Header("Cards")]
+    [SerializeField] GameObject leftPrefab;
+    [SerializeField] GameObject fowardPrefab;
+    [SerializeField] GameObject backPrefab;
+    [SerializeField] GameObject rightPrefab;
 
+    [Space]
+
+    [SerializeField] Transform leftSpawner;
+    [SerializeField] Transform fowardSpawner;
+    [SerializeField] Transform backSpawner;
+    [SerializeField] Transform rightSpawner;
+
+    public GameObject currentCardInMovement;
+
+    [Space]
     [SyncVar]
     public int ownerID = -1;
 
     [SyncVar]
     public int teammateID = -1;
+
+    private bool isFirstQuestion = false;
 
     void OnEnable()
     {
@@ -75,6 +101,8 @@ public class TeamManager : NetworkBehaviour
 
         JugadorPiText = GameObject.Find("Jugador_Pi").GetComponent<TextMeshProUGUI>();
         JugadorCoText = GameObject.Find("Jugador_Co").GetComponent<TextMeshProUGUI>();
+        JugadorPiPoText = GameObject.Find("Jugador_Pi_Programming").GetComponent<TextMeshProUGUI>();
+        JugadorCoPoText = GameObject.Find("Jugador_Co_Programming").GetComponent<TextMeshProUGUI>();
         cardCountText = GameObject.Find("CardCount").GetComponent<TextMeshProUGUI>();
         handContentArea = GameObject.Find("Hand").GetComponent<RectTransform>();
         sequence = GameObject.Find("Sequence").GetComponent<RectTransform>();
@@ -83,15 +111,24 @@ public class TeamManager : NetworkBehaviour
         timerAnimator = GameObject.Find("Timer").GetComponent<Animator>();
         timerText = GameObject.Find("Timer").transform.GetChild(0).gameObject.GetComponent<Text>();
 
+        leftCountText = GameObject.Find("LeftCount").transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        fowardCountText = GameObject.Find("FowardCount").transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        backCountText = GameObject.Find("BackCount").transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        rightCountText = GameObject.Find("RightCount").transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+
+        leftSpawner = GameObject.Find("LeftCards").transform;
+        fowardSpawner = GameObject.Find("FowardCards").transform;
+        backSpawner = GameObject.Find("BackCards").transform;
+        rightSpawner = GameObject.Find("RightCards").transform;
+
         timerAnimator_Programming = GameObject.Find("Timer_Programming").GetComponent<Animator>();
-        timerText_Programming = GameObject.Find("Timer_Programming").transform.GetChild(0).gameObject.GetComponent<Text>();
+        timerText_Programming = GameObject.Find("ContornoTimerProgramming").transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
 
         timerDefaultColor = timerText.color;
         timerStateParaHash = Animator.StringToHash("TimeState");
 
         var seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         UnityEngine.Random.InitState(seed);
-
     }
 
     public override void OnStartLocalPlayer()
@@ -104,23 +141,44 @@ public class TeamManager : NetworkBehaviour
         events.ShowQuestion += Display;
         events.Ejecutar += MovePlayer;
         events.Debug += Debugging;
+        events.AssignCard += AssignCard;
+        events.ReassignCard += ReassignCard;
+        events.CreteCardInstance += CreateCardInstance;
+        events.SynchronizeOnBeginDrag += SynchronizeOnBeginDrag;
+        events.SynchronizeOnDrag += SynchronizeOnDrag;
+        events.SynchronizeOnDrop += SynchronizeOnDrop;
+        events.SynchronizeOnEndDrag += SynchronizeOnEndDrag;
         responder.onClick.AddListener(() => AcceptForTeam());
 
         GetComponent<CameraController>().teamObject = teamObject;
         playerController = teamObject.GetComponent<PlayerController3D>();
 
+        isFirstQuestion = true;
+
         if (!teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             uiManager.DisableButtons();
+            uiManager.SetRol(false, true);
             JugadorCoText.text = "*Jugador " + ownerID.ToString();
+            JugadorCoText.fontSize += 5;
+            JugadorCoPoText.text = "*Jugador " + ownerID.ToString();
+            JugadorCoPoText.fontSize += 5;
+
             JugadorPiText.text = "Jugador " + teammateID.ToString();
+            JugadorPiPoText.text = "Jugador " + teammateID.ToString();
 
         }
         else
         {
             uiManager.EnableButtons();
+            uiManager.SetRol(true, false);
             JugadorPiText.text = "*Jugador " + ownerID.ToString();
+            JugadorPiText.fontSize += 5;
+            JugadorPiPoText.text = "*Jugador " + ownerID.ToString();
+            JugadorPiPoText.fontSize += 5;
+
             JugadorCoText.text = "Jugador " + teammateID.ToString();
+            JugadorCoPoText.text = "Jugador " + teammateID.ToString();
         }
     }
 
@@ -133,6 +191,13 @@ public class TeamManager : NetworkBehaviour
         events.AcceptAnswer -= AcceptForTeam;
         events.ShowQuestion -= Display;
         events.Ejecutar -= MovePlayer;
+        events.AssignCard -= AssignCard;
+        events.ReassignCard -= ReassignCard;
+        events.CreteCardInstance -= CreateCardInstance;
+        events.SynchronizeOnBeginDrag -= SynchronizeOnBeginDrag;
+        events.SynchronizeOnDrag -= SynchronizeOnDrag;
+        events.SynchronizeOnDrop -= SynchronizeOnDrop;
+        events.SynchronizeOnEndDrag -= SynchronizeOnEndDrag;
         responder.onClick.RemoveListener(() => AcceptForTeam());
     }
 
@@ -162,15 +227,19 @@ public class TeamManager : NetworkBehaviour
         string aux = JugadorPiText.text;
         JugadorPiText.text = JugadorCoText.text;
         JugadorCoText.text = aux;
+
+        string aux2 = JugadorPiPoText.text;
+        JugadorPiPoText.text = JugadorCoPoText.text;
+        JugadorCoPoText.text = aux2;
     }
 
     public void MovePlayer()
     {
         if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
-            CmdHideUI();
-            IE_Ejecutar = Sequence();
-            StartCoroutine(IE_Ejecutar);
+                CmdHideUI();
+                IE_Ejecutar = Sequence();
+                StartCoroutine(IE_Ejecutar);
         }
     }
 
@@ -186,7 +255,7 @@ public class TeamManager : NetworkBehaviour
     {
         UptadeTimerProgramming(false);
         IE_HideAndShow = HideAndShow();
-        StartCoroutine(IE_HideAndShow);
+        StartCoroutine(IE_HideAndShow);  
     }
 
     public void AddCard()
@@ -208,17 +277,388 @@ public class TeamManager : NetworkBehaviour
     [TargetRpc]
     public void TargetAdd(NetworkConnection target, int randomIndex)
     {
-        MovementCard card = Movimientos[randomIndex];
-        MovCardData newCard = Instantiate(cardPrefab, handContentArea);
-        newCard.UpdateData(card.Titulo, card.Arrow);
-        newCard.GetComponent<ChangeColor>().enabled = false;
-        cardCountText.text = $"{handContentArea.childCount}";
+        if (randomIndex == 0)
+        {
+            leftCountText.text = (int.Parse(leftCountText.text) + 1).ToString();
+        }
+        else if (randomIndex == 1)
+        {
+           fowardCountText.text = (int.Parse(fowardCountText.text) + 1).ToString();
+        }
+        else if (randomIndex == 2)
+        {
+            backCountText.text = (int.Parse(backCountText.text) + 1).ToString();
+        }
+        else
+        {
+            rightCountText.text = (int.Parse(rightCountText.text) + 1).ToString();
+        }
+
+        cardCountText.text = (int.Parse(cardCountText.text) + 1).ToString();
 
         if (teamObject.GetComponent<NetworkIdentity>().hasAuthority && int.Parse(cardCountText.text) >= 5)
         {
             uiManager.EnableProgramar();
         }
     }
+
+    public void CreateCardInstance(int cardPrefabIndex)
+    {
+        Debug.Log("CreateCardInstance");
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            CmdCreateCardInstance(cardPrefabIndex);
+        }   
+    }
+
+    [Command]
+    void CmdCreateCardInstance(int cardPrefabIndex)
+    {
+        Debug.Log("CmdCreateCardInstance");
+        TargetCreateCardInstance(connectionToClient, cardPrefabIndex);
+        TargetCreateCardInstance(teammate.connectionToClient, cardPrefabIndex);
+    }
+
+    [TargetRpc]
+    public void TargetCreateCardInstance(NetworkConnection target, int card)
+    {
+        Debug.Log("TargetCreateCardInstance");
+
+        if (card == 0)
+        {
+            currentCardInMovement = Instantiate(leftPrefab, leftSpawner, false);
+        }
+        else if (card == 1)
+        {
+            currentCardInMovement = Instantiate(fowardPrefab, fowardSpawner, false);
+        }
+        else if (card == 2)
+        {
+            currentCardInMovement = Instantiate(backPrefab, backSpawner, false);
+        }
+        else
+        {
+            currentCardInMovement = Instantiate(rightPrefab, rightSpawner, false);
+        }
+        teamObject.GetComponent<PlayerScoreQuesix>().Cards.Add(currentCardInMovement);
+
+        currentCardInMovement.GetComponent<Draggable>().index = teamObject.GetComponent<PlayerScoreQuesix>().Cards.IndexOf(currentCardInMovement);
+    }
+
+    public void SynchronizeOnBeginDrag(int cardIndex)
+    {
+        Debug.Log("SynchronizeOnBeginDrag");
+        CmdSynchronizeOnBeginDrag(cardIndex);
+    }
+
+    [Command]
+    void CmdSynchronizeOnBeginDrag(int cardIndex)
+    {
+        Debug.Log("CmdSynchronizeOnBeginDrag");
+        TargetSynchronizeOnBeginDrag(connectionToClient, cardIndex);
+        TargetSynchronizeOnBeginDrag(teammate.connectionToClient, cardIndex);
+    }
+
+    [TargetRpc]
+    public void TargetSynchronizeOnBeginDrag(NetworkConnection target, int cardIndex)
+    {
+        Debug.Log("TargetSynchronizeOnBeginDrag");
+        teamObject.GetComponent<PlayerScoreQuesix>().Cards[cardIndex].GetComponent<Draggable>().SyncOnBeginDrag();
+    }
+
+
+    public void SynchronizeOnDrag(int cardIndex, Vector2 position, float oldX, float oldY)
+    {
+        Debug.Log("SynchronizeOnDrag");
+        CmdSynchronizeOnDrag(cardIndex, position, oldX, oldY);
+    }
+
+    [Command]
+    void CmdSynchronizeOnDrag(int cardIndex, Vector2 position, float oldX, float oldY)
+    {
+        Debug.Log("CmdSynchronizeOnBeginDrag");
+        TargetSynchronizeOnDrag(connectionToClient, cardIndex, position, oldX, oldY);
+        TargetSynchronizeOnDrag(teammate.connectionToClient, cardIndex, position, oldX, oldY);
+    }
+
+    [TargetRpc]
+    public void TargetSynchronizeOnDrag(NetworkConnection target, int cardIndex, Vector2 position, float oldX, float oldY)
+    {
+        Debug.Log("TargetSynchronizeOnDrag");
+        teamObject.GetComponent<PlayerScoreQuesix>().Cards[cardIndex].GetComponent<Draggable>().SyncOnDrag(position, oldX, oldY);
+    }
+
+    public void SynchronizeOnDrop(int cardIndex, int dropIndex)
+    {
+        Debug.Log("SynchronizeOnDrop");
+        CmdSynchronizeOnDrop(cardIndex, dropIndex);
+    }
+
+    [Command]
+    void CmdSynchronizeOnDrop(int cardIndex, int dropIndex)
+    {
+        Debug.Log("CmdSynchronizeOnDrop");
+        TargetSynchronizeOnDrop(connectionToClient, cardIndex, dropIndex);
+        TargetSynchronizeOnDrop(teammate.connectionToClient, cardIndex, dropIndex);
+    }
+
+    [TargetRpc]
+    public void TargetSynchronizeOnDrop(NetworkConnection target, int cardIndex, int dropIndex)
+    {
+        Debug.Log("SynchronizeOnDrop");
+        Draggable d = teamObject.GetComponent<PlayerScoreQuesix>().Cards[cardIndex].GetComponent<Draggable>();
+
+        DropZone dropZone = teamObject.GetComponent<PlayerScoreQuesix>().dropZones[dropIndex].GetComponent<DropZone>();
+
+        if (dropZone.currentMovement != null)
+        {
+            if (dropZone.currentMovement.CardAction.Equals("Izquierda"))
+            {
+                events.ReassignCard(0);
+            }
+            else if (dropZone.currentMovement.CardAction.Equals("Avanzar"))
+            {
+                events.ReassignCard(1);
+            }
+            else if (dropZone.currentMovement.CardAction.Equals("Retroceder"))
+            {
+                events.ReassignCard(2);
+            }
+            else
+            {
+                events.ReassignCard(3);
+            }
+            Destroy(dropZone.currentMovement.gameObject);
+        } 
+        d.parentToReturnTo = dropZone.transform;
+        d.droppedOnSlot = true;
+        dropZone.currentMovement = d.gameObject.GetComponent<MovCardData>();
+
+        if (dropZone.currentMovement.CardAction.Equals("Izquierda"))
+        {
+            dropZone.movementAction.text = "Girar";
+        }
+        else if (dropZone.currentMovement.CardAction.Equals("Avanzar"))
+        {
+            dropZone.movementAction.text = "Avanzar";
+        }
+        else if (dropZone.currentMovement.CardAction.Equals("Retroceder"))
+        {
+            dropZone.movementAction.text = "Retroceder";
+        }
+        else
+        {
+            dropZone.movementAction.text = "Girar";
+        }
+    }
+
+    public void SynchronizeOnEndDrag(int cardIndex)
+    {
+        Debug.Log("SynchronizeOnEndDrag");
+        CmdSynchronizeOnEndDrag(cardIndex);
+    }
+
+    [Command]
+    void CmdSynchronizeOnEndDrag(int cardIndex)
+    {
+        Debug.Log("CmdSynchronizeOnEndDrag");
+        TargetSynchronizeOnEndDrag(connectionToClient, cardIndex);
+        TargetSynchronizeOnEndDrag(teammate.connectionToClient, cardIndex);
+    }
+
+    [TargetRpc]
+    public void TargetSynchronizeOnEndDrag(NetworkConnection target, int cardIndex)
+    {
+        Debug.Log("TargetSynchronizeOnEndDrag");
+       
+        Draggable d = teamObject.GetComponent<PlayerScoreQuesix>().Cards[cardIndex].GetComponent<Draggable>();
+
+        Debug.Log("Card: " + d);
+
+        Debug.Log("Validation droppedOnSlot = " + d.droppedOnSlot);
+        if (d.droppedOnSlot)
+        {
+            // Verificar de donde viene y ver si quitar o no movimientos
+            SpawnOnDrag Spawner = d.validationParent.GetComponent<SpawnOnDrag>();
+
+            if (Spawner != null)
+            {
+                Debug.Log("Spawner drop on slot");
+                MovCardData cardInfo = d.GetComponent<MovCardData>();
+                if (cardInfo.CardAction.Equals("Izquierda"))
+                {
+                    events.AssignCard(0);
+                }
+                else if (cardInfo.CardAction.Equals("Avanzar"))
+                {
+                    events.AssignCard(1);
+                }
+                else if (cardInfo.CardAction.Equals("Retroceder"))
+                {
+                    events.AssignCard(2);
+                }
+                else
+                {
+                    events.AssignCard(3);
+                }
+            }
+            else
+            {
+                Debug.Log("Dropzone drop on slot");
+                DropZone dropZone = d.validationParent.GetComponent<DropZone>();
+                if (dropZone != null)
+                {
+                    dropZone.movementAction.text = string.Empty;
+                }
+
+                dropZone.currentMovement = null;
+
+            }
+
+            d.transform.SetParent(d.parentToReturnTo);
+            d.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+            d.canvasGroup.blocksRaycasts = true;
+            d.canvasGroup.alpha = 1.0f;
+
+            // Remover cartas destruidas
+            teamObject.GetComponent<PlayerScoreQuesix>().Cards.RemoveAll(x => x == null);
+
+            // Actualizar index de las cartas
+            foreach (var item in teamObject.GetComponent<PlayerScoreQuesix>().Cards)
+            {
+                item.GetComponent<Draggable>().index = teamObject.GetComponent<PlayerScoreQuesix>().Cards.IndexOf(item);
+            }
+
+
+        }
+        else
+        {
+            SpawnOnDrag Spawner = d.validationParent.GetComponent<SpawnOnDrag>();
+
+            if (Spawner != null)
+            {
+                Debug.Log("Spawner dont drop on slot");
+            }
+            else
+            {
+                Debug.Log("Dropzone dont drop on slot");
+                DropZone dropZone = d.validationParent.GetComponent<DropZone>();
+                if (dropZone != null)
+                {
+                    dropZone.movementAction.text = string.Empty;
+                }
+
+                MovCardData cardInfo = d.GetComponent<MovCardData>();
+                if (cardInfo.CardAction.Equals("Izquierda"))
+                {
+                    events.ReassignCard(0);
+                }
+                else if (cardInfo.CardAction.Equals("Avanzar"))
+                {
+                    events.ReassignCard(1);
+                }
+                else if (cardInfo.CardAction.Equals("Retroceder"))
+                {
+                    events.ReassignCard(2);
+                }
+                else
+                {
+                    events.ReassignCard(3);
+                }
+            }
+
+            Destroy(d.gameObject);
+
+            // Remover cartas destruidas
+            teamObject.GetComponent<PlayerScoreQuesix>().Cards.RemoveAll(x => x == null);
+
+            foreach (var item in teamObject.GetComponent<PlayerScoreQuesix>().Cards)
+            {
+                item.GetComponent<Draggable>().index = teamObject.GetComponent<PlayerScoreQuesix>().Cards.IndexOf(item);
+            }
+
+
+        }
+    }
+
+
+
+    public void AssignCard(int index)
+    {
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            CmdAssignCard(index);
+        }
+
+    }
+    [Command]
+    void CmdAssignCard(int index)
+    {
+        TargetAssign(connectionToClient, index);
+        TargetAssign(teammate.connectionToClient, index);
+    }
+
+    [TargetRpc]
+    public void TargetAssign(NetworkConnection target, int index)
+    {
+        if (index == 0)
+        {
+            leftCountText.text = (int.Parse(leftCountText.text) - 1).ToString();
+        }
+        else if (index == 1)
+        {
+            fowardCountText.text = (int.Parse(fowardCountText.text) - 1).ToString();
+        }
+        else if (index == 2)
+        {
+            backCountText.text = (int.Parse(backCountText.text) - 1).ToString();
+        }
+        else
+        {
+            rightCountText.text = (int.Parse(rightCountText.text) - 1).ToString();
+        }
+
+        cardCountText.text = (int.Parse(cardCountText.text) - 1).ToString();
+    }
+
+    public void ReassignCard(int index)
+    {
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            CmdReassignCard(index);
+        }
+
+    }
+    [Command]
+    void CmdReassignCard(int index)
+    {
+        TargetReassign(connectionToClient, index);
+        TargetReassign(teammate.connectionToClient, index);
+    }
+
+    [TargetRpc]
+    public void TargetReassign(NetworkConnection target, int index)
+    {
+        if (index == 0)
+        {
+            leftCountText.text = (int.Parse(leftCountText.text) + 1).ToString();
+        }
+        else if (index == 1)
+        {
+            fowardCountText.text = (int.Parse(fowardCountText.text) + 1).ToString();
+        }
+        else if (index == 2)
+        {
+            backCountText.text = (int.Parse(backCountText.text) + 1).ToString();
+        }
+        else
+        {
+            rightCountText.text = (int.Parse(rightCountText.text) + 1).ToString();
+        }
+
+        cardCountText.text = (int.Parse(cardCountText.text) + 1).ToString();
+    }
+
 
     void AcceptForTeam()
     {
@@ -299,109 +739,11 @@ public class TeamManager : NetworkBehaviour
     {
         if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
-            foreach (Transform child in sequence)
-            {
-                MovCardData card = child.GetComponent<MovCardData>();
-                Vector3 cardPosition = card.GetComponent<RectTransform>().position;
-                if (card != null)
-                {
-                    CmdSyncSequence(cardPosition, card.TitleText.text);
-                }
-            }
-
             CmdDebuggingWithAuthority();
         }
         else
         {
-            //teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
-            //teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-
-            int i = 0;
-            foreach (Transform child in sequence)
-            {
-                MovCardData card = child.GetComponent<MovCardData>();
-                Color cardColor = card.GetComponent<Image>().color;
-                if (card != null)
-                {
-                    card.GetComponent<ChangeColor>().enabled = false;
-                    CmdSyncColor(i, cardColor);  
-                }
-                i += 1;
-            }
             CmdDebuggingWithoutAuthority();
-        }
-    }
-
-    [Command]
-    void CmdSyncSequence(Vector3 cardPosition, string cardName)
-    {
-        TargetSyncSequence(teammate.connectionToClient, cardPosition, cardName);
-    }
-
-    [TargetRpc]
-    public void TargetSyncSequence(NetworkConnection target, Vector3 cardPosition, string cardName)
-    {
-        foreach (Transform child in handContentArea)
-        {
-            MovCardData card = child.GetComponent<MovCardData>();
-            if(card.TitleText.text == cardName)
-            {
-                card.transform.position = cardPosition;
-                card.transform.SetParent(sequence);
-                card.GetComponent<Draggable>().enabled = false;
-                card.GetComponent<ChangeColor>().enabled = true;
-                break;
-            }
-        }
-    }
-
-    [Command]
-    void CmdSyncColor(int index, Color cardColor)
-    {
-        TargetSyncColor(teammate.connectionToClient, index, cardColor);
-    }
-
-    [TargetRpc]
-    public void TargetSyncColor(NetworkConnection target, int index, Color cardColor)
-    {
-        int i = 0;
-        foreach (Transform child in sequence)
-        {
-            MovCardData card = child.GetComponent<MovCardData>();
-            if (index == i)
-            {
-                card.GetComponent<Image>().color = cardColor;
-                card.GetComponent<Draggable>().enabled = true;
-                card.GetComponent<ChangeColor>().enabled = false;
-                break;
-            }
-            i += 1;
-        }
-    }
-
-    [Command]
-    void CmdDebuggingWithoutAuthority()
-    {
-        //teamObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
-        //teamObject.GetComponent<NetworkIdentity>().AssignClientAuthority(teammate.connectionToClient);
-
-
-        TargetReadyToRun(connectionToClient);
-        TargetReadyToRun(teammate.connectionToClient);
-    }
-
-    [TargetRpc]
-    public void TargetReadyToRun(NetworkConnection target)
-    {
-        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
-        {
-            uiManager.DisabledButtonDebug();
-            uiManager.EnabledButtonRun();
-        }
-        else
-        {
-            uiManager.DisabledButtonDebug();
-            uiManager.DisabledButtonRun();
         }
     }
 
@@ -417,15 +759,84 @@ public class TeamManager : NetworkBehaviour
     {
         if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
+            uiManager.isCheck = true;
             uiManager.DisabledButtonDebug();
+            uiManager.DisabledButtonRun();
+            uiManager.DisabledMovement();
         }
         else
         {
+            foreach (Transform movement in sequence)
+            {
+                GameObject m_checkAnswer = movement.transform.GetChild(2).gameObject;
+                if(movement.transform.GetChild(0).childCount > 0)
+                {
+                    movement.transform.GetChild(0).GetChild(0).GetComponent<Draggable>().enabled = false;
+                    m_checkAnswer.GetComponent<CanvasGroup>().alpha = 1.0f;
+                    m_checkAnswer.GetComponent<CanvasGroup>().blocksRaycasts = true;
+                }
+            }
+            uiManager.EnabledChangeColor();
             uiManager.EnabledButtonDebug();
         }
     }
 
+    [Command]
+    void CmdDebuggingWithoutAuthority()
+    {
+        TargetReadyToRun(connectionToClient);
+        TargetReadyToRun(teammate.connectionToClient);
+    }
 
+    [TargetRpc]
+    public void TargetReadyToRun(NetworkConnection target)
+    {
+        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            uiManager.DisabledButtonDebug();
+            uiManager.EnabledButtonRun();
+            uiManager.EnabledMovement();
+        }
+        else
+        {
+            int i = 0;
+            foreach (Transform movement in sequence)
+            {
+                GameObject m_checkAnswer = movement.transform.GetChild(2).gameObject;
+                if (movement.transform.GetChild(0).childCount > 0)
+                {
+                    CmdSyncColor(i, m_checkAnswer.GetComponent<Image>().color);
+                }
+                i += 1;
+            }
+            uiManager.DisabledButtonDebug();
+            uiManager.DisabledButtonRun();
+            uiManager.DisabledMovement();
+        }
+    }
+
+    [Command]
+    void CmdSyncColor(int index, Color cardColor)
+    {
+        TargetSyncColor(teammate.connectionToClient, index, cardColor);
+    }
+
+    [TargetRpc]
+    public void TargetSyncColor(NetworkConnection target, int index, Color cardColor)
+    {
+        int i = 0;
+        foreach (Transform movement in sequence)
+        {
+            GameObject m_checkAnswer = movement.transform.GetChild(2).gameObject;
+            if (index == i)
+            {
+                m_checkAnswer.GetComponent<Image>().color = cardColor;
+                m_checkAnswer.GetComponent<CanvasGroup>().alpha = 1.0f;
+                m_checkAnswer.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            }
+            i += 1;
+        }
+    }
 
     public void SelectAnswer(int AnswerIndex)
     {
@@ -500,14 +911,44 @@ public class TeamManager : NetworkBehaviour
 
         if (pregunta.UseTimer)
         {
-            UptadeTimer(pregunta.UseTimer);
+            if (isFirstQuestion)
+            {
+                Debug.Log("isFirstQuestion: " + isFirstQuestion);
+                // Si es la primera vez, mostrar tutorial y luego iniciar cronometro
+                Animator tutorialAnimator = uiManager.transform.GetComponent<TutorialManager>().m_Animator;
+                if(tutorialAnimator != null)
+                {
+                    tutorialAnimator.SetBool("isFirstQuestion", true);
+                }
+                else
+                {
+                    Debug.Log("tutorialAnimator is null");
+                }
+                
+                UptadeTimerFirstTime(pregunta.UseTimer);
+                Debug.Log("UpdateTimerFirstTime");
+                isFirstQuestion = false;
+            }
+            else
+            {
+                UptadeTimer(pregunta.UseTimer);
+                Debug.Log("UpdateTimer");
+            }
         }
     }
 
 
     public void Accept()
     {
-        UptadeTimer(false);
+        if (isFirstQuestion)
+        {
+            UptadeTimerFirstTime(false);
+        }
+        else
+        {
+            UptadeTimer(false);
+        }
+        
         int CountCorrectAnswers = teamObject.GetComponent<PlayerScoreQuesix>().CompareAnswers();
         teamObject.GetComponent<PlayerScoreQuesix>().FinishedQuestions.Add(teamObject.GetComponent<PlayerScoreQuesix>().CurrentQuestion);
 
@@ -559,6 +1000,26 @@ public class TeamManager : NetworkBehaviour
         }
     }
 
+    void UptadeTimerFirstTime(bool state)
+    {
+        switch (state)
+        {
+            case true:
+                IE_StartTimer = StartTimerFirstQuestion();
+                StartCoroutine(IE_StartTimer);
+                timerAnimator.SetInteger(timerStateParaHash, 2);
+                break;
+            case false:
+                if (IE_StartTimer != null)
+                {
+                    StopCoroutine(IE_StartTimer);
+                }
+                timerAnimator.SetInteger(timerStateParaHash, 1);
+                break;
+        }
+    }
+
+
     IEnumerator StartTimer()
     {
         var totalTime = teamObject.GetComponent<PlayerScoreQuesix>().Preguntas[teamObject.GetComponent<PlayerScoreQuesix>().CurrentQuestion].Timer;
@@ -581,6 +1042,40 @@ public class TeamManager : NetworkBehaviour
         }
         Accept();
     }
+
+    IEnumerator StartTimerFirstQuestion()
+    {
+        uiManager.DisableQuestion();
+        var waitTime = 9.0f;
+        while (waitTime > 0)
+        {
+            waitTime--;
+            yield return new WaitForSeconds(1.0f);
+        }
+        uiManager.EnableQuestion();
+
+        var totalTime = teamObject.GetComponent<PlayerScoreQuesix>().Preguntas[teamObject.GetComponent<PlayerScoreQuesix>().CurrentQuestion].Timer;
+        var timeLeft = totalTime;
+
+        timerText.color = timerDefaultColor;
+        while (timeLeft > 0)
+        {
+            timeLeft--;
+            if (timeLeft < totalTime / 2 && timeLeft > totalTime / 4)
+            {
+                timerText.color = timerHalfWayOutColor;
+            }
+            if (timeLeft < totalTime / 4)
+            {
+                timerText.color = timerAlmostOutColor;
+            }
+            timerText.text = timeLeft.ToString();
+            yield return new WaitForSeconds(1.0f);
+        }
+        Accept();
+    }
+
+
 
 
 
@@ -632,33 +1127,35 @@ public class TeamManager : NetworkBehaviour
     IEnumerator WaitTillNextRound()
     {
         yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);
-        // Mostrar denuevo los botones
-        uiManager.ShowButtons();
+        // Mostrar ui denuevo
+        uiManager.ShowInterface();
     }
 
     IEnumerator Sequence()
     {
-        foreach (Transform child in sequence)
+        yield return new WaitForSeconds(1.0f);
+        foreach (Transform movement in sequence)
         {
-            MovCardData card = child.GetComponent<MovCardData>();
-            if (card != null)
-            {
+            Transform placeHolder = movement.transform.GetChild(0);
 
-                if (card.TitleText.text.Equals("Avanzar"))
+            if(placeHolder.childCount > 0)
+            {
+                MovCardData card = placeHolder.GetChild(0).GetComponent<MovCardData>();
+                if (card.CardAction.Equals("Avanzar"))
                 {
-                    teamObject.GetComponent<PlayerController3D>().Up = true;
+                    teamObject.GetComponent<PlayerController3D>().Avanzar();
                 }
-                else if (card.TitleText.text.Equals("Retroceder"))
+                else if (card.CardAction.Equals("Retroceder"))
                 {
-                    teamObject.GetComponent<PlayerController3D>().Down = true;
+                    teamObject.GetComponent<PlayerController3D>().Retroceder();
                 }
-                else if (card.TitleText.text.Equals("Izquierda"))
+                else if (card.CardAction.Equals("Izquierda"))
                 {
-                    teamObject.GetComponent<PlayerController3D>().GirarIzq = true;
+                    teamObject.GetComponent<PlayerController3D>().GirarIzquierda();
                 }
                 else
                 {
-                    teamObject.GetComponent<PlayerController3D>().GirarDer = true;
+                    teamObject.GetComponent<PlayerController3D>().GirarDerecha();
                 }
                 yield return new WaitForSeconds(1.2f);
             }
@@ -677,27 +1174,72 @@ public class TeamManager : NetworkBehaviour
     [TargetRpc]
     public void TargetBorrarCartas(NetworkConnection target)
     {
-        foreach (Transform item in sequence)
+        foreach (Transform movement in sequence)
         {
-            Destroy(item.gameObject);
+            Transform placeHolder = movement.transform.GetChild(0);
+
+            if (placeHolder.childCount > 0)
+            {
+                GameObject movementGameObject = placeHolder.GetChild(0).gameObject;
+                DropZone dropZone = placeHolder.GetComponent<DropZone>();
+                if (dropZone != null)
+                {
+                    dropZone.movementAction.text = string.Empty;
+                }
+                else
+                {
+                    Debug.Log("DropZone is null");
+                }
+                Destroy(movementGameObject);
+
+            }
+
+            GameObject m_checkAnswer = movement.transform.GetChild(2).gameObject;
+
+            if (m_checkAnswer != null)
+            {
+                m_checkAnswer.GetComponent<Image>().color = Color.white;
+                m_checkAnswer.GetComponent<CanvasGroup>().alpha = 0.0f;
+                m_checkAnswer.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            }
+
+           
+            
+
         }
-        cardCountText.text = $"{handContentArea.childCount}";
+
+        // Remover cartas destruidas
+        teamObject.GetComponent<PlayerScoreQuesix>().Cards.RemoveAll(x => x == null);
+
+        // Actualizar index de las cartas
+        foreach (var item in teamObject.GetComponent<PlayerScoreQuesix>().Cards)
+        {
+            item.GetComponent<Draggable>().index = teamObject.GetComponent<PlayerScoreQuesix>().Cards.IndexOf(item);
+        }
+
+        // cardCountText.text = $"{handContentArea.childCount}";
     }
 
 
     IEnumerator HideAndShow()
     {
+        
         uiManager.HideAll();
-        foreach (Transform child in sequence)
+        events.PlayerIsMoving(true);
+        yield return new WaitForSeconds(1.0f);
+
+        foreach (Transform movement in sequence)
         {
-            MovCardData card = child.GetComponent<MovCardData>();
-            if (card != null)
+            Transform placeHolder = movement.transform.GetChild(0);
+
+            if (placeHolder.childCount > 0)
             {
                 yield return new WaitForSeconds(1.0f);
             }
         }
         yield return new WaitForSeconds(1.0f);
-        uiManager.ShowButtons();
+        events.PlayerIsMoving(false);
+        uiManager.ShowInterface();   
     }
 
 

@@ -241,17 +241,42 @@ public class MatchMaker : NetworkBehaviour
         GameObject teamGameObject = null;
         if (teamGameObject == null)
         {
-            startPos = NetworkManager.singleton.GetStartPosition();
+            int index = UnityEngine.Random.Range(0, NetworkManager.startPositions.Count);
+            startPos = NetworkManager.startPositions[index];
+            NetworkManager.startPositions.RemoveAt(index);
+
             teamGameObject = startPos != null
                 ? Instantiate(teamPrefab, startPos.position, startPos.rotation)
                 : Instantiate(teamPrefab, Vector3.zero, Quaternion.identity);
 
+           
+            if (startPos.position.z == 9)
+            {
+                // Left
+                teamGameObject.transform.eulerAngles = new Vector3(teamGameObject.transform.eulerAngles.x, -90.0f, teamGameObject.transform.eulerAngles.z);
+            }
+            else if (startPos.position.z ==  -9)
+            {
+                // Right
+                teamGameObject.transform.eulerAngles = new Vector3(teamGameObject.transform.eulerAngles.x, 90.0f, teamGameObject.transform.eulerAngles.z);
+            }
+            else if(startPos.position.x == -9)
+            {
+                // Bot
+                teamGameObject.transform.eulerAngles = new Vector3(teamGameObject.transform.eulerAngles.x, 180.0f, teamGameObject.transform.eulerAngles.z);
+            }
+            else
+            {
+                // Top
+                teamGameObject.transform.eulerAngles = new Vector3(teamGameObject.transform.eulerAngles.x, 0.0f, teamGameObject.transform.eulerAngles.z);
+            }
         }
 
         if (!OnRoomServerSceneLoadedForPlayer(conn, cameraPlayer, teamGameObject))
             return null;
 
         NetworkServer.Spawn(teamGameObject, conn);
+
 
         return teamGameObject;
 

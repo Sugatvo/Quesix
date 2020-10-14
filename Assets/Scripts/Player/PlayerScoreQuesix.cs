@@ -63,6 +63,10 @@ public class PlayerScoreQuesix : NetworkBehaviour
         set { currentQuestion = value; }
     }
 
+    public List<GameObject> Cards;
+
+    public List<DropZone> dropZones;
+
     void OnEnable()
     {
         Debug.Log("OnEnable: PlayerScoreQuesix");
@@ -82,8 +86,40 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        Transform cubeTransform = transform.GetChild(0).transform.Find("Cube");
-        cubeTransform.GetComponent<MeshRenderer>().material.color = ObjectColor;
+        Transform ratonTransform = transform.GetChild(0).transform.Find("Raton");
+        ratonTransform.GetComponent<SkinnedMeshRenderer>().material.color = ObjectColor;
+
+        Transform orejasTransform = transform.GetChild(0).transform.Find("Cube.009");
+        orejasTransform.GetComponent<SkinnedMeshRenderer>().material.color = ObjectColor;
+
+        Transform narizTransform = transform.GetChild(0).transform.Find("Cube.005");
+        narizTransform.GetComponent<SkinnedMeshRenderer>().material.color = ObjectColor;
+
+
+        GameObject initialLeftCard = GameObject.Find("LeftCard");
+        GameObject initialFowardCard = GameObject.Find("FowardCard");
+        GameObject initialBackCard = GameObject.Find("BackCard");
+        GameObject initialRightCard = GameObject.Find("RightCard");
+
+        Cards.Add(initialLeftCard);
+        initialLeftCard.GetComponent<Draggable>().index = Cards.IndexOf(initialLeftCard);
+        Cards.Add(initialFowardCard);
+        initialFowardCard.GetComponent<Draggable>().index = Cards.IndexOf(initialFowardCard);
+        Cards.Add(initialBackCard);
+        initialBackCard.GetComponent<Draggable>().index = Cards.IndexOf(initialBackCard);
+        Cards.Add(initialRightCard);
+        initialRightCard.GetComponent<Draggable>().index = Cards.IndexOf(initialRightCard);
+
+        var Objects=  Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "PlaceHolder");
+
+        int i = 0;
+        foreach (var item in Objects)
+        {
+            DropZone dropZone = item.GetComponent<DropZone>();
+            dropZone.index = i;
+            dropZones.Add(dropZone);
+            i += 1;
+        }
     }
 
 
