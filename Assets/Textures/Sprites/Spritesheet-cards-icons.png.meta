@@ -965,8 +965,8 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
+    compressionQuality: 33
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -977,8 +977,8 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
+    compressionQuality: 33
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -989,8 +989,8 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
+    compressionQuality: 33
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -1001,8 +1001,8 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
+    compressionQuality: 33
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -1032,7 +1032,7 @@ TextureImporter:
         height: 178
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 60, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1053,7 +1053,7 @@ TextureImporter:
         height: 110
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 0, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1074,7 +1074,7 @@ TextureImporter:
         height: 980
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 38, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1137,7 +1137,7 @@ TextureImporter:
         height: 153
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 24, y: 36, z: 24, w: 24}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1158,7 +1158,7 @@ TextureImporter:
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 24, y: 36, z: 24, w: 24}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1174,12 +1174,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 727
-        y: 3400
+        y: 3401
         width: 616
-        height: 479
+        height: 478
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 60, z: 40, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1221,7 +1221,7 @@ TextureImporter:
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 24, y: 30, z: 24, w: 24}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1242,7 +1242,7 @@ TextureImporter:
         height: 178
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 60, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1263,7 +1263,7 @@ TextureImporter:
         height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 33, y: 0, z: 32, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1305,7 +1305,7 @@ TextureImporter:
         height: 178
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 25, y: 38, z: 23, w: 25}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1368,7 +1368,7 @@ TextureImporter:
         height: 222
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 56, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1389,7 +1389,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 13, y: 12, z: 13, w: 12}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1410,7 +1410,7 @@ TextureImporter:
         height: 130
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 42, y: 0, z: 42, w: 37}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1431,7 +1431,7 @@ TextureImporter:
         height: 102
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 40, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1536,7 +1536,7 @@ TextureImporter:
         height: 224
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 40, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1683,7 +1683,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 36, y: 0, z: 36, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1725,7 +1725,7 @@ TextureImporter:
         height: 694
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 60, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2061,7 +2061,7 @@ TextureImporter:
         height: 130
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 40, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2078,11 +2078,11 @@ TextureImporter:
         serializedVersion: 2
         x: 73
         y: 1353
-        width: 1332
+        width: 1340
         height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 29, y: 24, z: 19, w: 27}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2103,7 +2103,7 @@ TextureImporter:
         height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 36, y: 35, z: 36, w: 35}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2124,7 +2124,7 @@ TextureImporter:
         height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 36, y: 35, z: 36, w: 35}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2166,7 +2166,7 @@ TextureImporter:
         height: 349
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 60, y: 60, z: 60, w: 60}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2208,7 +2208,7 @@ TextureImporter:
         height: 923
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 40, z: 40, w: 40}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2283,27 +2283,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet-cards-icons_36
-      rect:
-        serializedVersion: 2
-        x: 3656
-        y: 1896
-        width: 293
-        height: 292
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0971aef552d6c3b10800000000000000
-      internalID: 1962563544917088144
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Spritesheet-cards-icons_84
       rect:
         serializedVersion: 2
@@ -2355,7 +2334,7 @@ TextureImporter:
         height: 104
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 30, y: 30, z: 30, w: 30}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2376,7 +2355,7 @@ TextureImporter:
         height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 24, y: 32, z: 24, w: 24}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2397,7 +2376,7 @@ TextureImporter:
         height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 24, y: 32, z: 24, w: 24}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2418,7 +2397,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 30, y: 32, z: 30, w: 32}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2439,7 +2418,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 30, y: 32, z: 30, w: 32}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2460,7 +2439,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 30, y: 32, z: 30, w: 32}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2481,7 +2460,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 30, y: 32, z: 30, w: 32}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2517,8 +2496,8 @@ TextureImporter:
       name: Spritesheet-cards-icons_100
       rect:
         serializedVersion: 2
-        x: 2821
-        y: 3826
+        x: 2822
+        y: 3827
         width: 196
         height: 196
       alignment: 0
@@ -2559,13 +2538,13 @@ TextureImporter:
       name: Spritesheet-cards-icons_2
       rect:
         serializedVersion: 2
-        x: 3979
+        x: 3977
         y: 3670
-        width: 94
+        width: 96
         height: 87
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 18, y: 24, z: 18, w: 18}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2582,11 +2561,11 @@ TextureImporter:
         serializedVersion: 2
         x: 3848
         y: 3412
-        width: 219
+        width: 220
         height: 148
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 53, y: 55, z: 55, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2601,13 +2580,13 @@ TextureImporter:
       name: Spritesheet-cards-icons_9
       rect:
         serializedVersion: 2
-        x: 3852
-        y: 3270
+        x: 3853
+        y: 3269
         width: 205
-        height: 101
+        height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 5, y: 5, z: 5, w: 5}
+      border: {x: 53, y: 54, z: 53, w: 54}
       outline:
       - - {x: -93.5, y: 50.5}
         - {x: -97.5, y: 37.5}
@@ -2632,11 +2611,11 @@ TextureImporter:
         serializedVersion: 2
         x: 3852
         y: 3124
-        width: 204
+        width: 205
         height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 56, y: 54, z: 54, w: 54}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2651,13 +2630,13 @@ TextureImporter:
       name: Spritesheet-cards-icons_11
       rect:
         serializedVersion: 2
-        x: 2937
+        x: 2934
         y: 3287
-        width: 246
+        width: 251
         height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 22, y: 18, z: 22, w: 18}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2720,7 +2699,7 @@ TextureImporter:
         height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 15, y: 0, z: 13, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2741,7 +2720,7 @@ TextureImporter:
         height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 30, y: 0, z: 30, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2762,7 +2741,7 @@ TextureImporter:
         height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 30, y: 0, z: 30, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2798,13 +2777,13 @@ TextureImporter:
       name: Spritesheet-cards-icons_31
       rect:
         serializedVersion: 2
-        x: 2099
-        y: 2544
-        width: 207
-        height: 204
+        x: 2097
+        y: 2542
+        width: 210
+        height: 208
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 50, y: 49, z: 50, w: 49}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2819,13 +2798,13 @@ TextureImporter:
       name: Spritesheet-cards-icons_34
       rect:
         serializedVersion: 2
-        x: 1429
-        y: 1654
-        width: 629
+        x: 1391
+        y: 1655
+        width: 707
         height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 50, y: 0, z: 54, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2874,6 +2853,111 @@ TextureImporter:
       bones: []
       spriteID: fecccc84bce0eb2f0800000000000000
       internalID: -955309804693435153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_39
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 1002
+        width: 636
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 50, y: 0, z: 50, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1161eb583c33df50800000000000000
+      internalID: 6904928866446434591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_42
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 1648
+        width: 204
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b88c5ba6b18786fb0800000000000000
+      internalID: -4654338155737659253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_43
+      rect:
+        serializedVersion: 2
+        x: 2420
+        y: 1648
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff5fd578ccfef3ab0800000000000000
+      internalID: -5026034997398735361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_45
+      rect:
+        serializedVersion: 2
+        x: 2662
+        y: 1649
+        width: 204
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8be749983a67f050800000000000000
+      internalID: 5834248633604107150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet-cards-icons_46
+      rect:
+        serializedVersion: 2
+        x: 2904
+        y: 1648
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddeff1e82eece7dd0800000000000000
+      internalID: -2486322471819542819
       vertices: []
       indices: 
       edges: []
