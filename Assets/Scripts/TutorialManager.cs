@@ -8,8 +8,10 @@ public class TutorialManager : MonoBehaviour
     private int popUpIndex;
 
     public Animator m_Animator;
+    public Animator p_Animator;
 
     public float waitTime;
+    public float waitTimeProgramming = 1.0f;
 
     private bool m_pilot = false;
     private bool m_copilot = false;
@@ -24,7 +26,7 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        if(popUpIndex == 0)
+        if (popUpIndex == 0)
         {
             if (waitTime <= 0)
             {
@@ -42,7 +44,7 @@ public class TutorialManager : MonoBehaviour
         if (popUpIndex == 1)
         {
             if (waitTime <= 0)
-            { 
+            {
                 waitTime = 1.0f;
                 popUpIndex++;
                 m_Animator.SetInteger("PopUpIndex", popUpIndex);
@@ -56,7 +58,7 @@ public class TutorialManager : MonoBehaviour
 
         if (popUpIndex == 2)
         {
-            if(waitTime <= 0)
+            if (waitTime <= 0)
             {
                 // Tiempo de espera de la descripcion de los quesos recolectados
                 waitTime = 5.0f;
@@ -68,7 +70,7 @@ public class TutorialManager : MonoBehaviour
             {
                 waitTime -= Time.deltaTime;
             }
-            
+
         }
         if (popUpIndex == 3)
         {

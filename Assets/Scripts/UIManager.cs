@@ -86,6 +86,8 @@ public class UIManager : MonoBehaviour
 
     private bool isAllowTo = false;
 
+    private bool firstProgramming = true;
+
     List<AnswerData> currentAnswers = new List<AnswerData>();
     public List<AnswerData> CurrentAnswers { get { return currentAnswers; } }
 
@@ -308,6 +310,12 @@ public class UIManager : MonoBehaviour
     {
         programmingCanvasGroup.alpha = 1.0f;
         programmingCanvasGroup.blocksRaycasts = true;
+
+        if (firstProgramming)
+        {
+            transform.GetComponent<TutorialManager>().p_Animator.SetBool("FirstProgramming", firstProgramming);
+            firstProgramming = false;
+        }
         buttonsCanvasGroup.alpha = 0.0f;
         buttonsCanvasGroup.blocksRaycasts = false;
     }
@@ -338,6 +346,8 @@ public class UIManager : MonoBehaviour
         handCanvasGroup.interactable = true;
         handCanvasGroup.blocksRaycasts = true;
         sequenceCanvasGroup.blocksRaycasts = true;
+
+        // Tutorial copiloto
     }
 
     public void OnProgrammingWithoutAuthority()
@@ -347,6 +357,8 @@ public class UIManager : MonoBehaviour
         handCanvasGroup.interactable = false;
         handCanvasGroup.blocksRaycasts = false;
         sequenceCanvasGroup.blocksRaycasts = false;
+
+        // Tutorial piloto
     }
 
     public void DisabledButtonDebug()
@@ -395,5 +407,11 @@ public class UIManager : MonoBehaviour
     {
         transform.GetComponent<TutorialManager>().m_Animator.SetBool("isPilot", pilot);
         transform.GetComponent<TutorialManager>().m_Animator.SetBool("isCopilot", copilot);
+    }
+
+    public void SetRolProgramming(bool pilot, bool copilot)
+    {
+        transform.GetComponent<TutorialManager>().p_Animator.SetBool("isPilot", pilot);
+        transform.GetComponent<TutorialManager>().p_Animator.SetBool("isCopilot", copilot);
     }
 }

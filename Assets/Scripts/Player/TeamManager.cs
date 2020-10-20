@@ -93,6 +93,7 @@ public class TeamManager : NetworkBehaviour
     public int teammateID = -1;
 
     private bool isFirstQuestion = false;
+    private bool isFirstProgramming = true;
 
     void OnEnable()
     {
@@ -159,6 +160,7 @@ public class TeamManager : NetworkBehaviour
         {
             uiManager.DisableButtons();
             uiManager.SetRol(false, true);
+            uiManager.SetRolProgramming(false, true);
             JugadorCoText.text = "*Jugador " + ownerID.ToString();
             JugadorCoText.fontSize += 5;
             JugadorCoPoText.text = "*Jugador " + ownerID.ToString();
@@ -172,6 +174,7 @@ public class TeamManager : NetworkBehaviour
         {
             uiManager.EnableButtons();
             uiManager.SetRol(true, false);
+            uiManager.SetRolProgramming(true, false);
             JugadorPiText.text = "*Jugador " + ownerID.ToString();
             JugadorPiText.fontSize += 5;
             JugadorPiPoText.text = "*Jugador " + ownerID.ToString();
@@ -253,7 +256,14 @@ public class TeamManager : NetworkBehaviour
     [TargetRpc]
     public void TargetHide(NetworkConnection target)
     {
-        UptadeTimerProgramming(false);
+        if (isFirstProgramming)
+        {
+            UptadeTimerProgrammingFirstTime(false);
+        }
+        else
+        {
+            UptadeTimerProgramming(false);
+        }
         IE_HideAndShow = HideAndShow();
         StartCoroutine(IE_HideAndShow);  
     }
@@ -732,7 +742,16 @@ public class TeamManager : NetworkBehaviour
         {
             uiManager.OnProgrammingWithoutAuthority();
         }
-        UptadeTimerProgramming(true);
+
+        if (isFirstProgramming)
+        {
+            UptadeTimerProgrammingFirstTime(true);
+        }
+        else
+        {
+            UptadeTimerProgramming(true);
+        }
+        
     }
 
     public void Debugging()
@@ -1100,6 +1119,27 @@ public class TeamManager : NetworkBehaviour
         }
     }
 
+    void UptadeTimerProgrammingFirstTime(bool state)
+    {
+        switch (state)
+        {
+            case true:
+                IE_StartTimerProgramming = StartTimerProgrammingFirstTime();
+                StartCoroutine(IE_StartTimerProgramming);
+
+                timerAnimator_Programming.SetInteger(timerStateParaHash, 2);
+                break;
+            case false:
+                if (IE_StartTimerProgramming != null)
+                {
+                    StopCoroutine(IE_StartTimerProgramming);
+                }
+
+                timerAnimator_Programming.SetInteger(timerStateParaHash, 1);
+                break;
+        }
+    }
+
     IEnumerator StartTimerProgramming()
     {
         var totalTime = 60;
@@ -1123,8 +1163,39 @@ public class TeamManager : NetworkBehaviour
         uiManager.OnClickEjecutar();
     }
 
+    IEnumerator StartTimerProgrammingFirstTime()
+    {
+        var waitTime = 43.0f;
+        while (waitTime > 0)
+        {
+            waitTime--;
+            yield return new WaitForSeconds(1.0f);
+        }
 
-    IEnumerator WaitTillNextRound()
+        var totalTime = 60;
+        var timeLeft = totalTime;
+
+        timerText_Programming.color = timerDefaultColor;
+        while (timeLeft > 0)
+        {
+            timeLeft--;
+            if (timeLeft < totalTime / 2 && timeLeft > totalTime / 4)
+            {
+                timerText_Programming.color = timerHalfWayOutColor;
+            }
+            if (timeLeft < totalTime / 4)
+            {
+                timerText_Programming.color = timerAlmostOutColor;
+            }
+            timerText_Programming.text = timeLeft.ToString();
+            yield return new WaitForSeconds(1.0f);
+        }
+        uiManager.OnClickEjecutar();
+    }
+   
+
+
+IEnumerator WaitTillNextRound()
     {
         yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);
         // Mostrar ui denuevo
