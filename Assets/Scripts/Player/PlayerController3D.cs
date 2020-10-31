@@ -73,30 +73,51 @@ public class PlayerController3D : NetworkBehaviour
 
             if (270f - threshold < rotation && rotation < 270f + threshold)
             {
-                direction = new Vector3(0, 0, -1);
+                if(transform.position.z > -9)
+                {
+                    direction = new Vector3(0, 0, -1);
+                }
+                else
+                {
+                    Up = false;
+                }
+                
             }
             else if (-threshold < rotation && rotation < threshold)
             {
-                direction = new Vector3(-1, 0, 0);
+                if(transform.position.x > -9)
+                {
+                    direction = new Vector3(-1, 0, 0);
+                }
+                else
+                {
+                    Up = false;
+                }
+                
             }
             else if (90f - threshold < rotation && rotation < 90f + threshold)
             {
-                direction = new Vector3(0, 0, 1);
+                if(transform.position.z < 9)
+                {
+                    direction = new Vector3(0, 0, 1);
+                }
+                else
+                {
+                    Up = false;
+                }
             }
             else
             {
-                direction = new Vector3(1, 0, 0);
+                if(transform.position.x < 9)
+                {
+                    direction = new Vector3(1, 0, 0);
+                }
+                else
+                {
+                    Up = false;
+                }
+                
             }
-            /*
-            if (transform.position.z < -9 && direction.z < 0)
-            {
-                direction.z = 0;
-            }
-
-            if (transform.position.z > 9 && direction.z > 0)
-            {
-                direction.z = 0;
-            }*/
 
             if (2 > Vector3.Distance(startPosition, transform.position))
             {
@@ -112,31 +133,52 @@ public class PlayerController3D : NetworkBehaviour
         {
             if (270f - threshold < rotation && rotation < 270f + threshold)
             {
-                direction = new Vector3(0, 0, 1);
+                if(transform.position.z < 9)
+                {
+                    direction = new Vector3(0, 0, 1);
+                }
+                else
+                {
+                    Down = false;
+                }
+
             }
             else if (-threshold < rotation && rotation < threshold)
             {
-                direction = new Vector3(1, 0, 0);
+                if(transform.position.x < 9)
+                {
+                    direction = new Vector3(1, 0, 0);
+                }
+                else
+                {
+                    Down = false;
+                }
+                
             }
             else if (90f - threshold < rotation && rotation < 90f + threshold)
             {
-                direction = new Vector3(0, 0, -1);
+                if(transform.position.z > -9)
+                {
+                    direction = new Vector3(0, 0, -1);
+                }
+                else
+                {
+                    Down = false;
+                }
+                
             }
             else
             {
-                direction = new Vector3(-1, 0, 0);
+                if(transform.position.x > -9)
+                {
+                   direction = new Vector3(-1, 0, 0);
+                }
+                else
+                {
+                    Down = false;
+                }
+                
             }
-
-            /*
-            if (transform.position.z < -4.6 && direction.z < 0)
-            {
-                direction.z = 0;
-            }
-
-            if (transform.position.z > 4.6 && direction.z > 0)
-            {
-                direction.z = 0;
-            }*/
 
             if (2 > Vector3.Distance(startPosition, transform.position))
             {

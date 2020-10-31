@@ -11,11 +11,15 @@ using UnityEngine.SceneManagement;
 public class Match
 {
     public string matchID;
+    public int MaxTime;
+    public bool isStarted;
     public SyncListGameObject players = new SyncListGameObject();
 
-    public Match(string matchID, GameObject player)
+    public Match(string matchID, GameObject player, int mt, bool statement)
     {
         this.matchID = matchID;
+        this.MaxTime = mt;
+        this.isStarted = statement;
         players.Add(player);
     }
 
@@ -58,14 +62,12 @@ public class MatchMaker : NetworkBehaviour
 
     private int group_index = 1;
 
+    private int sceneIndex = 1;
+
     private Transform startPos = null;
 
-    // Verde
-    Color color_team1 = new Color(0.63f, 0.78f, 0.29f);
-
-    // Morado
-    Color color_team2 = new Color(0.71f, 0.12f, 1.0f);
-
+    public Material baseRosa;
+    public Material baseVerde;
 
     private void Start()
     {
@@ -78,7 +80,7 @@ public class MatchMaker : NetworkBehaviour
         if (!matchIDs.Contains(_matchID))
         {
             matchIDs.Add(_matchID);
-            matches.Add(new Match(_matchID, _player));
+            matches.Add(new Match(_matchID, _player, 900, false));
             Debug.Log($"Match generated");
             playerIndex = 1;
             return true;
@@ -134,14 +136,17 @@ public class MatchMaker : NetworkBehaviour
 
     IEnumerator LoadScene(Match _match) {
         yield return SceneManager.LoadSceneAsync(gameScene, new LoadSceneParameters { loadSceneMode = LoadSceneMode.Additive, localPhysicsMode = LocalPhysicsMode.Physics3D });
-        subScenes.Add(SceneManager.GetSceneAt(matches.Count));
+        subScenes.Add(SceneManager.GetSceneAt(sceneIndex));
 
         foreach (var player in _match.players)
         {
             NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
-            OnServerReady(player.GetComponent<NetworkIdentity>().connectionToClient, matches.Count);
+            OnServerReady(player.GetComponent<NetworkIdentity>().connectionToClient, sceneIndex);
             _player.StartGame();
         }
+        _match.isStarted = true;
+        sceneIndex ++;
+        SyncGlobalTimer(_match);
     }
 
     public static string GetRandomMatchID()
@@ -183,13 +188,11 @@ public class MatchMaker : NetworkBehaviour
 
         if (conn != null && conn.identity != null)
         {
-            Debug.Log("Primer IF");
             GameObject networkPlayer = conn.identity.gameObject;
 
             // if null or not a room player, dont replace it
             if (networkPlayer != null && networkPlayer.GetComponent<NetworkPlayer>() != null)
             {
-                Debug.Log("Segudo IF");
 
                 if (networkPlayer.GetComponent<NetworkPlayer>().id_team == 0)
                 {
@@ -200,7 +203,6 @@ public class MatchMaker : NetworkBehaviour
 
                 if (team_ids.Count == 2)
                 {
-                    Debug.Log("Tercer IF");
                     GameObject gp = SceneLoadedForPlayer(conn, networkPlayer);
 
                     for (int i = 0; i < 2; i++)
@@ -236,7 +238,7 @@ public class MatchMaker : NetworkBehaviour
             }
         }
     }
-    GameObject SceneLoadedForPlayer(NetworkConnection conn, GameObject cameraPlayer)
+    GameObject SceneLoadedForPlayer(NetworkConnection conn, GameObject networkPlayer)
     {
         GameObject teamGameObject = null;
         if (teamGameObject == null)
@@ -272,7 +274,7 @@ public class MatchMaker : NetworkBehaviour
             }
         }
 
-        if (!OnRoomServerSceneLoadedForPlayer(conn, cameraPlayer, teamGameObject))
+        if (!OnRoomServerSceneLoadedForPlayer(conn, networkPlayer, teamGameObject))
             return null;
 
         NetworkServer.Spawn(teamGameObject, conn);
@@ -293,18 +295,67 @@ public class MatchMaker : NetworkBehaviour
         st_pos.y = networkPlayer.transform.position.y;
         playerScore.start_pos = st_pos;
 
-        if (networkPlayer.GetComponent<NetworkPlayer>().id_team == 1)
+        Debug.Log("networkPlayer.id_team = " + networkPlayer.GetComponent<NetworkPlayer>().id_team);
+
+        if (playerScore.id_team == 1)
         {
-            playerScore.ObjectColor = color_team1;
+            playerScore.objectColor = new Color(0.52f, 0.16f, 0.9f);
+            playerScore.emissionColor = new Color(0.0951f, 0.0431f, 0.2f);
         }
-        else
+
+        if (playerScore.id_team == 2)
         {
-            playerScore.ObjectColor = color_team2;
+            playerScore.objectColor = new Color(0.38f, 0.91f, 0.19f);
+            playerScore.emissionColor = new Color(0.039f, 0.2f, 0.043f);
         }
 
         return true;
-    } 
+    }
 
+    [ServerCallback]
+    public void SyncGlobalTimer(Match _match)
+    {
+        if (_match.isStarted)
+        {
+            StartCoroutine(StartGlobalTimer(_match));
+        }
+    }
+
+    IEnumerator StartGlobalTimer(Match _match)
+    {
+        while (_match.isStarted && _match.MaxTime > 0)
+        {
+            int contador = 0;
+            foreach (var player in _match.players)
+            {
+                if (player.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject.GetComponent<GlobalTimer>().isReady)
+                {
+                    contador++;
+                }
+            }
+            // Verify all players are ready
+            if (contador == _match.players.Count)
+            {
+                foreach (var player in _match.players)
+                {
+                    TargetLocalGlobalTime(player.GetComponent<NetworkIdentity>().connectionToClient, _match.MaxTime);
+                }
+
+                _match.MaxTime--;
+            }
+            
+            yield return new WaitForSeconds(1.0f);
+
+        }
+        
+    }
+
+
+    [TargetRpc]
+    public void TargetLocalGlobalTime(NetworkConnection target, int mt)
+    {
+        target.identity.gameObject.GetComponent<GlobalTimer>().SetMaxTime(mt);
+    }
 
 }
 

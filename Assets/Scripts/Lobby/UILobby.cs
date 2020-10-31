@@ -22,6 +22,10 @@ public class UILobby : MonoBehaviour
     [SerializeField] GameObject beginGameButton;
     [SerializeField] GameObject fullCanvas;
 
+
+    [Header("Settings")]
+    [SerializeField] CanvasGroup settingsCanvasGroup;
+
     private void Start()
     {
         instance = this;
@@ -92,5 +96,17 @@ public class UILobby : MonoBehaviour
     public void Hide()
     {
         fullCanvas.SetActive(false);
+    }
+
+    public void OnClickSettings()
+    {
+        settingsCanvasGroup.alpha = 1f;
+        settingsCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void OnClickCloseSettings()
+    {
+        settingsCanvasGroup.alpha = 0f;
+        settingsCanvasGroup.blocksRaycasts = false;
     }
 }

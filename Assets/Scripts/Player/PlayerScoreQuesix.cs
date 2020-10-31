@@ -18,12 +18,11 @@ public class PlayerScoreQuesix : NetworkBehaviour
     public int matchIndex;
 
 
-    [SyncVar] private Color objectColor;
-    public Color ObjectColor
-    {
-        get { return objectColor; }
-        set { objectColor = value; }
-    }
+    [SyncVar]
+    public Color objectColor;
+
+    [SyncVar]
+    public Color emissionColor;
 
     public List<NetworkIdentity> equipo;
 
@@ -86,15 +85,18 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
     public override void OnStartClient()
     {
+
         Transform ratonTransform = transform.GetChild(0).transform.Find("Raton");
-        ratonTransform.GetComponent<SkinnedMeshRenderer>().material.color = ObjectColor;
+        ratonTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", objectColor);
+        ratonTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_EmissionColor", emissionColor);
 
         Transform orejasTransform = transform.GetChild(0).transform.Find("Cube.009");
-        orejasTransform.GetComponent<SkinnedMeshRenderer>().material.color = ObjectColor;
+        orejasTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", objectColor);
+        orejasTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_EmissionColor", emissionColor);
 
         Transform narizTransform = transform.GetChild(0).transform.Find("Cube.005");
-        narizTransform.GetComponent<SkinnedMeshRenderer>().material.color = ObjectColor;
-
+        narizTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", objectColor);
+        narizTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_EmissionColor", emissionColor);
 
         GameObject initialLeftCard = GameObject.Find("LeftCard");
         GameObject initialFowardCard = GameObject.Find("FowardCard");
@@ -130,6 +132,15 @@ public class PlayerScoreQuesix : NetworkBehaviour
         {
             TargetUpdateScore(item.connectionToClient, score);
         }
+
+        // Termino de juego
+        if(score == 2)
+        {
+            foreach (var item in equipo)
+            {
+                TargetFinishGame(item.connectionToClient);
+            }
+        }
     }
 
     [TargetRpc]
@@ -137,6 +148,42 @@ public class PlayerScoreQuesix : NetworkBehaviour
     {
         score = newScore;
         uiManager.SetScoreText(score.ToString());
+    }
+
+
+    [TargetRpc]
+    public void TargetFinishGame(NetworkConnection target)
+    {
+        Debug.Log("FinishGame");
+        string auxMinutes;
+        string auxSeconds;
+            
+        var time = target.identity.gameObject.GetComponent<GlobalTimer>().MaxTime;
+
+        var minutes = Mathf.Floor(time / 60);
+
+        if(minutes < 10)
+        {
+            auxMinutes = "0" + minutes.ToString();
+        }
+        else
+        {
+            auxMinutes = minutes.ToString();
+        }
+        var seconds = time - minutes * 60;
+
+        if (seconds < 10)
+        {
+            auxSeconds = "0" + seconds.ToString();
+        }
+        else
+        {
+            auxSeconds = seconds.ToString();
+        }
+
+        uiManager.AddScore("Equipo " + id_team.ToString(), auxMinutes + ":" + auxSeconds);
+        uiManager.DisplayFinish();
+            
     }
 
     public void UpdateQuestionCardAnswer(AnswerData newAnswer)

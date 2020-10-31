@@ -9,14 +9,14 @@ public class AnswerData : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI infoTextObject = null;
-    [SerializeField] Image toggle1 = null;
-    [SerializeField] Image toggle2 = null;
+    [SerializeField] Image checkboxOwner = null;
+    [SerializeField] Image checkboxTeammate = null;
 
     [Header("Textures")]
     [SerializeField] Sprite uncheckedToggle = null;
 
-    [SerializeField] Sprite checkedToggle1 = null;
-    [SerializeField] Sprite checkedToggle2 = null;
+    [SerializeField] Sprite checkedToggleOwner = null;
+    [SerializeField] Sprite checkedToggleTeammate = null;
 
 
     [Header("References")]
@@ -69,20 +69,20 @@ public class AnswerData : MonoBehaviour
     {
         if (p1)
         {
-            if (toggle1 == null)
+            if (checkboxOwner == null)
             {
                 return;
             }
-            toggle1.sprite = (Checked1) ? checkedToggle1 : uncheckedToggle;
+            checkboxOwner.sprite = (Checked1) ? checkedToggleOwner : uncheckedToggle;
 
         }
         if (p2)
         {
-            if (toggle2 == null)
+            if (checkboxTeammate == null)
             {
                 return;
             }
-            toggle2.sprite = (Checked2) ? checkedToggle2 : uncheckedToggle;
+            checkboxTeammate.sprite = (Checked2) ? checkedToggleTeammate : uncheckedToggle;
         }
     }
 

@@ -169,6 +169,7 @@ MonoBehaviour:
   score: 0
   id_team: 0
   matchIndex: 0
+  objectColor: {r: 0, g: 0, b: 0, a: 0}
   equipo: []
   start_pos: {x: 0, y: 0}
   events: {fileID: 11400000, guid: 43c1160ed6b600b4d8db67ff8e074f99, type: 2}
@@ -185,6 +186,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 31248650067144760}
     m_Modifications:
+    - target: {fileID: -8718769943576871904, guid: 59087c4e2742d5944bb51dadedb8279a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d25e2c1f1a78c948b17473abc8fa185, type: 2}
     - target: {fileID: -4216859302048453862, guid: 59087c4e2742d5944bb51dadedb8279a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -245,6 +251,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raton Rigged
       objectReference: {fileID: 0}
+    - target: {fileID: 4445104219637104059, guid: 59087c4e2742d5944bb51dadedb8279a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a059b758b6f4bca408a2bac24d5e706a, type: 2}
+    - target: {fileID: 7031488050998009522, guid: 59087c4e2742d5944bb51dadedb8279a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d25e2c1f1a78c948b17473abc8fa185, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59087c4e2742d5944bb51dadedb8279a, type: 3}
 --- !u!1 &1909455994258624864 stripped

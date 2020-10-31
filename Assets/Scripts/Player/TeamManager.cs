@@ -865,21 +865,20 @@ public class TeamManager : NetworkBehaviour
     [Command]
     void CmdSelectAnswer(int AnswerIndex)
     {
-        int type = connectionToClient.identity.gameObject.GetComponent<CameraController>().type;
-
-        TargetSelection(teammate.connectionToClient, AnswerIndex, type);
-        TargetSelection(connectionToClient, AnswerIndex, type);
-
+        TargetSelection(connectionToClient, AnswerIndex, 1);
+        TargetSelection(teammate.connectionToClient, AnswerIndex, 2);
     }
 
     [TargetRpc]
     public void TargetSelection(NetworkConnection target, int AnswerIndex, int type)
     {
+        // Owner
         if (type == 1)
         {
             uiManager.CurrentAnswers[AnswerIndex].SelectionPlayer1 = true;
             uiManager.CurrentAnswers[AnswerIndex].SelectionPlayer2 = false;
         }
+        // Teammate
         if (type == 2)
         {
             uiManager.CurrentAnswers[AnswerIndex].SelectionPlayer1 = false;

@@ -13,10 +13,11 @@ public struct UIManagerParameters
     public float Margins { get { return margins; } }
 
     [Header("Resolution Screen Options")]
-    [SerializeField] Color correctBGColor;
-    public Color CorrectBGColor { get { return correctBGColor; } }
-    [SerializeField] Color incorrectBGColor;
-    public Color IncorrectBGColor { get { return incorrectBGColor; } }
+    [SerializeField] Sprite correctGradient;
+    public Sprite CorrectGradient { get { return correctGradient; } }
+
+    [SerializeField] Sprite incorrectGradient;
+    public Sprite IncorrectGradient { get { return incorrectGradient; } }
 }
 
 [Serializable()]
@@ -38,8 +39,8 @@ public struct UIElements
     public Animator ResolutionScreenAnimator { get { return resolutionScreenAnimator; } }
     [SerializeField] Image resolutionBG;
     public Image ResolutionBG { get { return resolutionBG; } }
-    [SerializeField] Text resolutionStateInfoText;
-    public Text ResolutionStateInfoText { get { return resolutionStateInfoText; } }
+    [SerializeField] TextMeshProUGUI resolutionStateInfoText;
+    public TextMeshProUGUI ResolutionStateInfoText { get { return resolutionStateInfoText; } }
 
     [SerializeField] TextMeshProUGUI m_RewardText;
     public TextMeshProUGUI RewardText { get { return m_RewardText; } }
@@ -47,9 +48,17 @@ public struct UIElements
     [SerializeField] TextMeshProUGUI m_ScoreText;
     public TextMeshProUGUI ScoreText { get { return m_ScoreText; } }
 
+    [SerializeField] CanvasGroup rewardIconCanvasGroup;
+    public CanvasGroup RewardIconCanvasGroup { get { return rewardIconCanvasGroup; } }
+
+    [SerializeField] TextMeshProUGUI rewardIconText;
+    public TextMeshProUGUI RewardIconText { get { return rewardIconText; } }
+
+
     [Space]
     [SerializeField] CanvasGroup mainCanvasGroup;
     public CanvasGroup MainCanvasGroup { get { return mainCanvasGroup; } }
+
 }
 
 
@@ -60,6 +69,11 @@ public class UIManager : MonoBehaviour
     [Header("References")]
     [SerializeField] GameEvents events = null;
 
+    [Header("LeaderBoard")]
+    [SerializeField] LeaderBoardInfo leaderBoardInfoPrefab = null;
+    List<LeaderBoardInfo> leaderBoard = new List<LeaderBoardInfo>();
+    [SerializeField] RectTransform itemContentArea;
+    [SerializeField] float marginsLeaderBoard = 40f;
 
     [Header("UI Elements(Prefabs)")]
     [SerializeField] AnswerData answerPrefab = null;
@@ -79,6 +93,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] CanvasGroup handCanvasGroup;
     [SerializeField] CanvasGroup sequenceCanvasGroup;
     [SerializeField] CanvasGroup popUpRun;
+    [SerializeField] CanvasGroup settingsCanvasGroup;
+    [SerializeField] CanvasGroup globalTimerCanvasGroup;
+    [SerializeField] CanvasGroup finishCanvasGroup;
     [SerializeField] GameObject buttonDebug;
     [SerializeField] GameObject buttonRun;
 
@@ -179,16 +196,20 @@ public class UIManager : MonoBehaviour
         switch(type)
         {
             case ResolutionScreenType.Correct:
-                uIElements.ResolutionBG.color = parameters.CorrectBGColor;
-                uIElements.ResolutionStateInfoText.text = "¡Correcto!";
+                uIElements.ResolutionStateInfoText.text = "Respuesta \n Correcta";
+                uIElements.RewardIconCanvasGroup.alpha = 1f;
+                uIElements.RewardIconText.text = $"+{count}";
+                uIElements.ResolutionBG.sprite = parameters.CorrectGradient;
                 uIElements.RewardText.alpha = 1f;
                 uIElements.RewardText.text = $"+ {count} Digipasos";
+
 
                 break;
             case ResolutionScreenType.Incorrect:
                 uIElements.RewardText.alpha = 0f;
-                uIElements.ResolutionBG.color = parameters.IncorrectBGColor;
-                uIElements.ResolutionStateInfoText.text = "¡Incorrecto!";
+                uIElements.RewardIconCanvasGroup.alpha = 0f;
+                uIElements.ResolutionBG.sprite = parameters.IncorrectGradient;
+                uIElements.ResolutionStateInfoText.text = "Respuesta \n Incorrecta";
                 break;
         }
     }
@@ -242,6 +263,8 @@ public class UIManager : MonoBehaviour
         questionCard.blocksRaycasts = true;
         buttonPreguntas.SetActive(false);
         buttonProgramar.SetActive(false);
+        globalTimerCanvasGroup.alpha = 0f;
+        globalTimerCanvasGroup.blocksRaycasts = false;
         // playerinfoCanvasGroup.alpha = 0.0f;
         // playerinfoCanvasGroup.blocksRaycasts = false;
     }
@@ -304,6 +327,9 @@ public class UIManager : MonoBehaviour
 
         CopilotoInfoCanvasGroup.alpha = 1.0f;
         CopilotoInfoCanvasGroup.blocksRaycasts = true;
+
+        globalTimerCanvasGroup.alpha = 1f;
+        globalTimerCanvasGroup.blocksRaycasts = true;
     }
 
     public void ShowCanvas()
@@ -414,4 +440,37 @@ public class UIManager : MonoBehaviour
         transform.GetComponent<TutorialManager>().p_Animator.SetBool("isPilot", pilot);
         transform.GetComponent<TutorialManager>().p_Animator.SetBool("isCopilot", copilot);
     }
+
+    public void OnClickSettings()
+    {
+        settingsCanvasGroup.alpha = 1f;
+        settingsCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void OnClickCloseSettings()
+    {
+        settingsCanvasGroup.alpha = 0f;
+        settingsCanvasGroup.blocksRaycasts = false;
+    }
+
+    public void AddScore(string teamName, string timeScore)
+    {
+        float offset = 0 - marginsLeaderBoard;
+        LeaderBoardInfo newLeaderBoardItem = (LeaderBoardInfo)Instantiate(leaderBoardInfoPrefab, itemContentArea);
+        newLeaderBoardItem.SetAttributes(teamName, timeScore);
+        newLeaderBoardItem.Rect.anchoredPosition = new Vector2(0, offset);
+        offset -= (newLeaderBoardItem.Rect.sizeDelta.y + marginsLeaderBoard);
+        itemContentArea.sizeDelta = new Vector2(itemContentArea.sizeDelta.x, offset * -1);
+        leaderBoard.Add(newLeaderBoardItem);
+    }
+
+    public void DisplayFinish()
+    {
+        uIElements.MainCanvasGroup.alpha = 0f;
+        uIElements.MainCanvasGroup.blocksRaycasts = false;
+
+        finishCanvasGroup.alpha = 1f;
+        finishCanvasGroup.blocksRaycasts = true;
+    }
+        
 }

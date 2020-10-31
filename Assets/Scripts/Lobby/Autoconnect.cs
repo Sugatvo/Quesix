@@ -14,6 +14,8 @@ public class Autoconnect : MonoBehaviour
         if (!Application.isBatchMode) 
         {
             Debug.Log("=== Client connecting ===");
+
+            networkManager.networkAddress = "25.90.9.119";
             networkManager.StartClient();
         }
         else
@@ -23,7 +25,7 @@ public class Autoconnect : MonoBehaviour
     }
     public void JoinLocal()
     {
-        networkManager.networkAddress = "localhost";
+        networkManager.networkAddress = "25.90.9.119";
         networkManager.StartClient();
     }
 }

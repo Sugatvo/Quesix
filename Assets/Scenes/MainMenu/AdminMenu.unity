@@ -1614,7 +1614,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 61307583}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.75000006
+  m_Size: 0.74999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3216,7 +3216,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1396147587}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.75
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4823,7 +4823,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.000015258789}
-  m_SizeDelta: {x: 0, y: 100}
+  m_SizeDelta: {x: 0, y: 76.9}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1392726851
 GameObject:
@@ -5243,7 +5243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1464546681
@@ -6335,7 +6335,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844813049}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

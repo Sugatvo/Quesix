@@ -948,6 +948,7 @@ GameObject:
   - component: {fileID: -8468528080753893035}
   - component: {fileID: 6084385643226150900}
   - component: {fileID: 1056454365014403611}
+  - component: {fileID: 1068236335205244452}
   m_Layer: 0
   m_Name: CameraPlayer
   m_TagString: Player
@@ -1092,3 +1093,15 @@ MonoBehaviour:
   currentCardInMovement: {fileID: 0}
   ownerID: -1
   teammateID: -1
+--- !u!114 &1068236335205244452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084385643226150902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f8031c552018c4084c201fdc29ba54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
