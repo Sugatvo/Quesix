@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 [Serializable()]
 public struct UIManagerParameters
@@ -103,12 +104,13 @@ public class UIManager : MonoBehaviour
 
     private bool isAllowTo = false;
 
-    private bool firstProgramming = true;
+    private bool firstProgramming = false;
 
     List<AnswerData> currentAnswers = new List<AnswerData>();
     public List<AnswerData> CurrentAnswers { get { return currentAnswers; } }
 
     private int resStateParaHash = 0;
+    float offset = -25;
 
     private IEnumerator IE_DisplayTimedResolution = null;
 
@@ -128,6 +130,14 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         resStateParaHash = Animator.StringToHash("ScreenState");
+        if (TutorialManager.Instance.isTutorial)
+        {
+            firstProgramming = true;
+        }
+        else
+        {
+            firstProgramming = false;
+        }
     }
 
     void UpdateQuestionCardUI(QuestionCard card)
@@ -265,8 +275,6 @@ public class UIManager : MonoBehaviour
         buttonProgramar.SetActive(false);
         globalTimerCanvasGroup.alpha = 0f;
         globalTimerCanvasGroup.blocksRaycasts = false;
-        // playerinfoCanvasGroup.alpha = 0.0f;
-        // playerinfoCanvasGroup.blocksRaycasts = false;
     }
 
 
@@ -307,8 +315,6 @@ public class UIManager : MonoBehaviour
         programmingCanvasGroup.blocksRaycasts = false;
         buttonsCanvasGroup.alpha = 0.0f;
         buttonsCanvasGroup.blocksRaycasts = false;
-        // playerinfoCanvasGroup.alpha = 0.0f;
-        // playerinfoCanvasGroup.blocksRaycasts = false;
     }
 
     public void ShowInterface()
@@ -372,8 +378,6 @@ public class UIManager : MonoBehaviour
         handCanvasGroup.interactable = true;
         handCanvasGroup.blocksRaycasts = true;
         sequenceCanvasGroup.blocksRaycasts = true;
-
-        // Tutorial copiloto
     }
 
     public void OnProgrammingWithoutAuthority()
@@ -383,8 +387,6 @@ public class UIManager : MonoBehaviour
         handCanvasGroup.interactable = false;
         handCanvasGroup.blocksRaycasts = false;
         sequenceCanvasGroup.blocksRaycasts = false;
-
-        // Tutorial piloto
     }
 
     public void DisabledButtonDebug()
@@ -455,14 +457,15 @@ public class UIManager : MonoBehaviour
 
     public void AddScore(string teamName, string timeScore)
     {
-        float offset = 0 - marginsLeaderBoard;
+        offset -= marginsLeaderBoard;
         LeaderBoardInfo newLeaderBoardItem = (LeaderBoardInfo)Instantiate(leaderBoardInfoPrefab, itemContentArea);
         newLeaderBoardItem.SetAttributes(teamName, timeScore);
         newLeaderBoardItem.Rect.anchoredPosition = new Vector2(0, offset);
-        offset -= (newLeaderBoardItem.Rect.sizeDelta.y + marginsLeaderBoard);
+        offset -= (newLeaderBoardItem.Rect.sizeDelta.y);
         itemContentArea.sizeDelta = new Vector2(itemContentArea.sizeDelta.x, offset * -1);
         leaderBoard.Add(newLeaderBoardItem);
     }
+
 
     public void DisplayFinish()
     {
@@ -472,5 +475,16 @@ public class UIManager : MonoBehaviour
         finishCanvasGroup.alpha = 1f;
         finishCanvasGroup.blocksRaycasts = true;
     }
-        
+
+    public void HideFinish()
+    {
+        finishCanvasGroup.alpha = 0f;
+        finishCanvasGroup.blocksRaycasts = false;
+    }
+
+    public void GoBackToLobby()
+    {
+        events.GoBackToLobby();
+    }
+       
 }

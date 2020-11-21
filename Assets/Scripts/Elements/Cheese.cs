@@ -32,7 +32,7 @@ public class Cheese : NetworkBehaviour
             if (LogFilter.Debug) Debug.LogFormat("Scored {0} points", points);
 
             // award the points via SyncVar on the PlayerController
-            player.GetComponent<PlayerScoreQuesix>().AddScore(points);
+            player.transform.parent.GetComponent<PlayerScoreQuesix>().AddScore(points, player.transform.parent.gameObject);
 
             spawner.SpawnCheese();
 

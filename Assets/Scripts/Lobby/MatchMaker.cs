@@ -11,14 +11,15 @@ using UnityEngine.SceneManagement;
 public class Match
 {
     public string matchID;
-    public int MaxTime;
+    public int Time;
     public bool isStarted;
+    public Scene sceneReference;
     public SyncListGameObject players = new SyncListGameObject();
 
     public Match(string matchID, GameObject player, int mt, bool statement)
     {
         this.matchID = matchID;
-        this.MaxTime = mt;
+        this.Time = mt;
         this.isStarted = statement;
         players.Add(player);
     }
@@ -62,6 +63,7 @@ public class MatchMaker : NetworkBehaviour
 
     private int group_index = 1;
 
+    [SyncVar]
     private int sceneIndex = 1;
 
     private Transform startPos = null;
@@ -121,7 +123,6 @@ public class MatchMaker : NetworkBehaviour
 
     public void BeginGame(string _matchID)
     {
-
         for (int i = 0; i < matches.Count; i++)
         {
             if (matches[i].matchID == _matchID)
@@ -137,11 +138,14 @@ public class MatchMaker : NetworkBehaviour
     IEnumerator LoadScene(Match _match) {
         yield return SceneManager.LoadSceneAsync(gameScene, new LoadSceneParameters { loadSceneMode = LoadSceneMode.Additive, localPhysicsMode = LocalPhysicsMode.Physics3D });
         subScenes.Add(SceneManager.GetSceneAt(sceneIndex));
+        _match.sceneReference = SceneManager.GetSceneAt(sceneIndex);
+        group_index = 1;
+
 
         foreach (var player in _match.players)
         {
             NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
-            OnServerReady(player.GetComponent<NetworkIdentity>().connectionToClient, sceneIndex);
+            OnServerReady(player.GetComponent<NetworkIdentity>().connectionToClient, sceneIndex, _match.matchID, _player.playerIndex);
             _player.StartGame();
         }
         _match.isStarted = true;
@@ -170,7 +174,7 @@ public class MatchMaker : NetworkBehaviour
         return _id;
     }
 
-    public void OnServerReady(NetworkConnection conn, int sceneIndex)
+    public void OnServerReady(NetworkConnection conn, int sceneIndex, string _matchID, int _playerIndex)
     {
         Debug.Log("OnServerReady NetworkQuesixManager");
         if (conn.identity == null)
@@ -193,6 +197,7 @@ public class MatchMaker : NetworkBehaviour
             // if null or not a room player, dont replace it
             if (networkPlayer != null && networkPlayer.GetComponent<NetworkPlayer>() != null)
             {
+                Debug.Log("conn is not null, have network identity and have de component NetworkPlayer");
 
                 if (networkPlayer.GetComponent<NetworkPlayer>().id_team == 0)
                 {
@@ -203,15 +208,17 @@ public class MatchMaker : NetworkBehaviour
 
                 if (team_ids.Count == 2)
                 {
+                    Debug.Log("Spawning robo-raton..");
                     GameObject gp = SceneLoadedForPlayer(conn, networkPlayer);
 
                     for (int i = 0; i < 2; i++)
                     {
+                        Debug.Log("Spawning cameraPlayer...");
                         GameObject cameraPlayer = Instantiate(cameraPrefab, Vector3.zero, Quaternion.identity);
 
                         cameraPlayer.GetComponent<CameraController>().teamObject = gp;
                         cameraPlayer.GetComponent<TeamManager>().teamObject = gp;
-
+                        cameraPlayer.GetComponent<TeamManager>().matchID = _matchID;
                         if (i == 0)
                         {
                             cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[1];
@@ -226,6 +233,9 @@ public class MatchMaker : NetworkBehaviour
                             cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[0];
                             cameraPlayer.GetComponent<CameraController>().type = 2;
                         }
+                        cameraPlayer.GetComponent<TeamManager>().lobbyPlayer = team_aux[i].gameObject;
+
+                        Debug.Log("ReplacePlayerForConnection...");
                         NetworkServer.ReplacePlayerForConnection(team_aux[i].connectionToClient, cameraPlayer, true);
                         SceneManager.MoveGameObjectToScene(cameraPlayer, subScenes[sceneIndex-1]);
                     }
@@ -236,6 +246,14 @@ public class MatchMaker : NetworkBehaviour
                 }
 
             }
+            else
+            {
+                Debug.Log("Networkplayer component or object is null");
+            }
+        }
+        else
+        {
+            Debug.Log("conn or conn.identity are null");
         }
     }
     GameObject SceneLoadedForPlayer(NetworkConnection conn, GameObject networkPlayer)
@@ -290,11 +308,6 @@ public class MatchMaker : NetworkBehaviour
         playerScore.id_team = networkPlayer.GetComponent<NetworkPlayer>().id_team;
         playerScore.equipo = new List<NetworkIdentity>(team_aux);
 
-        Vector2 st_pos;
-        st_pos.x = networkPlayer.transform.position.x;
-        st_pos.y = networkPlayer.transform.position.y;
-        playerScore.start_pos = st_pos;
-
         Debug.Log("networkPlayer.id_team = " + networkPlayer.GetComponent<NetworkPlayer>().id_team);
 
         if (playerScore.id_team == 1)
@@ -323,25 +336,51 @@ public class MatchMaker : NetworkBehaviour
 
     IEnumerator StartGlobalTimer(Match _match)
     {
-        while (_match.isStarted && _match.MaxTime > 0)
+        // Setting Max Time of the Match
+        foreach (var player in _match.players)
+        {
+            if (player != null && player.GetComponent<NetworkIdentity>() != null)
+            {
+                if (player.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject.GetComponent<GlobalTimer>() != null)
+                {
+                    player.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject.GetComponent<GlobalTimer>().MaxTime = _match.Time;
+                    TargetSetMaxTime(player.GetComponent<NetworkIdentity>().connectionToClient, _match.Time);
+                }
+            }
+
+        }
+        while (_match.isStarted && _match.Time > 0)
         {
             int contador = 0;
             foreach (var player in _match.players)
             {
-                if (player.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject.GetComponent<GlobalTimer>().isReady)
+                if(player != null && player.GetComponent<NetworkIdentity>() != null)
                 {
-                    contador++;
+                    if (player.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject.GetComponent<GlobalTimer>() != null)
+                    {
+                        if (player.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject.GetComponent<GlobalTimer>().isReady)
+                        {
+                            contador++;
+                        }
+                    }
                 }
+               
             }
             // Verify all players are ready
             if (contador == _match.players.Count)
             {
                 foreach (var player in _match.players)
                 {
-                    TargetLocalGlobalTime(player.GetComponent<NetworkIdentity>().connectionToClient, _match.MaxTime);
+                    if (player != null && player.GetComponent<NetworkIdentity>() != null)
+                    {
+                        if (player.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject.GetComponent<GlobalTimer>() != null)
+                        {
+                            player.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject.GetComponent<GlobalTimer>().CurrentTime = _match.Time;
+                            TargetLocalGlobalTime(player.GetComponent<NetworkIdentity>().connectionToClient, _match.Time);
+                        }
+                    }
                 }
-
-                _match.MaxTime--;
+                _match.Time--;
             }
             
             yield return new WaitForSeconds(1.0f);
@@ -354,8 +393,163 @@ public class MatchMaker : NetworkBehaviour
     [TargetRpc]
     public void TargetLocalGlobalTime(NetworkConnection target, int mt)
     {
-        target.identity.gameObject.GetComponent<GlobalTimer>().SetMaxTime(mt);
+        target.identity.gameObject.GetComponent<GlobalTimer>().SetTime(mt);
     }
+
+    [TargetRpc]
+    public void TargetSetMaxTime(NetworkConnection target, int mt)
+    {
+        target.identity.gameObject.GetComponent<GlobalTimer>().MaxTime = mt;
+    }
+
+
+    public void BeginTutorial(string _matchID)
+    {
+        for (int i = 0; i < matches.Count; i++)
+        {
+            if (matches[i].matchID == _matchID)
+            {
+                StartCoroutine(LoadSceneTutorial(matches[i]));
+                break;
+            }
+        }
+    }
+
+    IEnumerator LoadSceneTutorial(Match _match)
+    {
+        yield return SceneManager.LoadSceneAsync(gameScene, new LoadSceneParameters { loadSceneMode = LoadSceneMode.Additive, localPhysicsMode = LocalPhysicsMode.Physics3D });
+        subScenes.Add(SceneManager.GetSceneAt(sceneIndex));
+        group_index = 1;
+        _match.sceneReference = SceneManager.GetSceneAt(sceneIndex);
+
+        foreach (var player in _match.players)
+        {
+            NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
+            OnServerReadyTutorial(player.GetComponent<NetworkIdentity>().connectionToClient, sceneIndex);
+        }
+        _match.isStarted = true;
+        sceneIndex++;
+        SyncGlobalTimer(_match);
+    }
+
+    public void OnServerReadyTutorial(NetworkConnection conn, int sceneIndex)
+    {
+        Debug.Log("OnServerReady NetworkQuesixManager");
+        if (conn.identity == null)
+        {
+            Debug.Log("Ready with no player object");
+        }
+
+        Debug.Log("SubScenes");
+        foreach (var item in subScenes)
+        {
+            Debug.Log(item);
+        }
+
+        conn.Send(new SceneMessage { sceneName = gameScene, sceneOperation = SceneOperation.LoadAdditive });
+
+        if (conn != null && conn.identity != null)
+        {
+            GameObject networkPlayer = conn.identity.gameObject;
+
+            // if null or not a room player, dont replace it
+            if (networkPlayer != null && networkPlayer.GetComponent<NetworkPlayer>() != null)
+            {
+
+                if (networkPlayer.GetComponent<NetworkPlayer>().id_team == 0)
+                {
+                    networkPlayer.GetComponent<NetworkPlayer>().id_team = group_index;
+                }
+
+                GameObject gp = SceneLoadedForPlayer(conn, networkPlayer);
+
+                GameObject cameraPlayer = Instantiate(cameraPrefab, Vector3.zero, Quaternion.identity);
+
+                cameraPlayer.GetComponent<CameraController>().teamObject = gp;
+                cameraPlayer.GetComponent<TeamManager>().teamObject = gp;
+                cameraPlayer.GetComponent<TeamManager>().ownerID = conn.connectionId;
+                cameraPlayer.GetComponent<CameraController>().type = 1;
+                cameraPlayer.GetComponent<GlobalTimer>().isTutorial = true;
+
+                NetworkServer.ReplacePlayerForConnection(conn, cameraPlayer, true);
+
+                SceneManager.MoveGameObjectToScene(cameraPlayer, subScenes[sceneIndex - 1]);
+                SceneManager.MoveGameObjectToScene(gp, subScenes[sceneIndex - 1]);
+
+                TargetSetTutorial(conn, cameraPlayer);
+            }
+        }
+    }
+
+    [TargetRpc]
+    public void TargetSetTutorial(NetworkConnection target, GameObject _cameraPlayer)
+    {
+        _cameraPlayer.GetComponent<GlobalTimer>().SetTutorial(true);
+    }
+
+    public void PlayerDisconnect(GameObject player, string _matchID)
+    {
+        for (int i = 0; i < matches.Count; i++)
+        {
+            if (matches[i].matchID == _matchID)
+            {
+                int playerIndex = matches[i].players.IndexOf(player);
+                matches[i].players.RemoveAt(playerIndex);
+                Debug.Log($"Player disconnected from match {_matchID} | {matches[i].players.Count} PlayerScoreQuesix remaining");
+
+                if (matches[i].players.Count == 0)
+                {
+                    if (matches[i].sceneReference != null)
+                    {
+                        StartCoroutine(UnloadScene(matches[i].sceneReference.path));
+                        sceneIndex--;
+                        matches[i].isStarted = false;
+                    }
+
+                    Debug.Log($"No more players in Match. Terminating");
+                    matches.RemoveAt(i);
+                    matchIDs.Remove(_matchID); 
+                   
+                }
+                UILobby.instance.Show();
+                break;
+            }
+        }
+
+    }
+
+
+    public void PlayerDisconnectFromGame(GameObject networkPlayer, string _matchID, GameObject cameraPlayer)
+    {
+        Debug.Log("PlayerDisconnectFromGame");
+        Debug.Log(networkPlayer);
+        Debug.Log(_matchID);
+        Debug.Log(cameraPlayer);
+
+        NetworkIdentity networkIdentity = cameraPlayer.gameObject.GetComponent<NetworkIdentity>(); 
+
+        if(NetworkServer.ReplacePlayerForConnection(cameraPlayer.GetComponent<NetworkIdentity>().connectionToClient, networkPlayer, true))
+        {
+            Debug.Log("ReplacePlayerForConnection is true");
+        }
+        else
+        {
+            Debug.Log("ReplacePlayerForConnection is false");
+        }
+        
+        NetworkServer.SendToClientOfPlayer(networkIdentity, new SceneMessage { sceneName = gameScene, sceneOperation = SceneOperation.UnloadAdditive });
+    }
+
+    IEnumerator UnloadScene(string scenePath)
+    {
+        subScenes.Remove(SceneManager.GetSceneByPath(scenePath));
+        if (SceneManager.GetSceneByPath(scenePath).IsValid())
+        {
+            yield return SceneManager.UnloadSceneAsync(SceneManager.GetSceneByPath(scenePath));
+            Debug.Log("Server UnloadScene completed");
+        }
+    }
+
 
 }
 

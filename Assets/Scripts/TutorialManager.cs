@@ -8,8 +8,9 @@ public class TutorialManager : MonoBehaviour
     public Animator p_Animator;
 
     private bool m_pilot = false;
-    private bool m_copilot = false;
+    private bool m_copilot = false; 
 
+    public bool isTutorial = false;
 
     private static TutorialManager _instance;
     public static TutorialManager Instance { get { return _instance; } }
@@ -30,6 +31,7 @@ public class TutorialManager : MonoBehaviour
     {
         m_pilot = m_Animator.GetBool("isPilot");
         m_copilot = m_Animator.GetBool("isCopilot");
+        isTutorial = m_Animator.GetBool("isTutorial");
     }
 
 

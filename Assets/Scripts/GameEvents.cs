@@ -69,4 +69,8 @@ public class GameEvents : ScriptableObject
 
     public delegate void PlayerIsMovingCallback(bool statement);
     public PlayerIsMovingCallback PlayerIsMoving;
+
+
+    public delegate void GoBackToLobbyCallback();
+    public GoBackToLobbyCallback GoBackToLobby;
 }

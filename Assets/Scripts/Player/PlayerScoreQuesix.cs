@@ -26,9 +26,6 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
     public List<NetworkIdentity> equipo;
 
-    [SyncVar]
-    public Vector2 start_pos;
-
     private GUIStyle white;
     private GUIStyle grey;
     private GUIStyle black;
@@ -86,15 +83,15 @@ public class PlayerScoreQuesix : NetworkBehaviour
     public override void OnStartClient()
     {
 
-        Transform ratonTransform = transform.GetChild(0).transform.Find("Raton");
+        Transform ratonTransform = transform.GetChild(1).transform.Find("Raton");
         ratonTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", objectColor);
         ratonTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_EmissionColor", emissionColor);
 
-        Transform orejasTransform = transform.GetChild(0).transform.Find("Cube.009");
+        Transform orejasTransform = transform.GetChild(1).transform.Find("Cube.009");
         orejasTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", objectColor);
         orejasTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_EmissionColor", emissionColor);
 
-        Transform narizTransform = transform.GetChild(0).transform.Find("Cube.005");
+        Transform narizTransform = transform.GetChild(1).transform.Find("Cube.005");
         narizTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", objectColor);
         narizTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_EmissionColor", emissionColor);
 
@@ -125,7 +122,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
     }
 
 
-    public void AddScore(int reward)
+    public void AddScore(int reward, GameObject roboticMouse)
     {
         score += reward;
         foreach (var item in equipo)
@@ -136,33 +133,32 @@ public class PlayerScoreQuesix : NetworkBehaviour
         // Termino de juego
         if(score == 2)
         {
+            GameObject cameraPlayer = roboticMouse.GetComponent<NetworkIdentity>().connectionToClient.identity.gameObject;
+            int time = cameraPlayer.GetComponent<GlobalTimer>().MaxTime - cameraPlayer.GetComponent<GlobalTimer>().CurrentTime;
+            Debug.Log("AddScore -> Time " + time);
+
+            RpcScoreUp(score, time);
+
             foreach (var item in equipo)
             {
                 TargetFinishGame(item.connectionToClient);
             }
+
+            NetworkServer.Destroy(roboticMouse);
         }
     }
 
-    [TargetRpc]
-    public void TargetUpdateScore(NetworkConnection target, int newScore)
+    [ClientRpc]
+    public void RpcScoreUp(int score, int time)
     {
-        score = newScore;
-        uiManager.SetScoreText(score.ToString());
-    }
-
-
-    [TargetRpc]
-    public void TargetFinishGame(NetworkConnection target)
-    {
-        Debug.Log("FinishGame");
+        Debug.Log("RpcScoreUp -> Score " + score.ToString());
+        Debug.Log("RpcScoreUp -> Time " + time);
         string auxMinutes;
         string auxSeconds;
-            
-        var time = target.identity.gameObject.GetComponent<GlobalTimer>().MaxTime;
 
         var minutes = Mathf.Floor(time / 60);
 
-        if(minutes < 10)
+        if (minutes < 10)
         {
             auxMinutes = "0" + minutes.ToString();
         }
@@ -182,6 +178,20 @@ public class PlayerScoreQuesix : NetworkBehaviour
         }
 
         uiManager.AddScore("Equipo " + id_team.ToString(), auxMinutes + ":" + auxSeconds);
+    }
+
+
+    [TargetRpc]
+    public void TargetUpdateScore(NetworkConnection target, int newScore)
+    {
+        score = newScore;
+        uiManager.SetScoreText(score.ToString());
+    }
+
+
+    [TargetRpc]
+    public void TargetFinishGame(NetworkConnection target)
+    {
         uiManager.DisplayFinish();
             
     }

@@ -22,6 +22,10 @@ public struct AnswerID
 
 public class TeamManager : NetworkBehaviour
 {
+    [Header("Owner Information")]
+    public GameObject lobbyPlayer;
+
+
     [Header("Team Information")]
     [SyncVar]
     public GameObject teamObject;
@@ -30,6 +34,8 @@ public class TeamManager : NetworkBehaviour
     public NetworkIdentity teammate;
 
     private PlayerController3D playerController;
+
+    public string matchID;
 
     [Header("UI Elements(Prefabs)")]
     [SerializeField] MovCardData cardPrefab = null;
@@ -92,8 +98,8 @@ public class TeamManager : NetworkBehaviour
     [SyncVar]
     public int teammateID = -1;
 
-    private bool isFirstQuestion = false;
-    private bool isFirstProgramming = true;
+    public bool isFirstQuestion = false;
+    public bool isFirstProgramming = false;
 
     void OnEnable()
     {
@@ -149,12 +155,24 @@ public class TeamManager : NetworkBehaviour
         events.SynchronizeOnDrag += SynchronizeOnDrag;
         events.SynchronizeOnDrop += SynchronizeOnDrop;
         events.SynchronizeOnEndDrag += SynchronizeOnEndDrag;
+        events.GoBackToLobby += ReturnToLobby;
         responder.onClick.AddListener(() => AcceptForTeam());
 
         GetComponent<CameraController>().teamObject = teamObject;
         playerController = teamObject.GetComponent<PlayerController3D>();
 
-        isFirstQuestion = true;
+        if (GetComponent<GlobalTimer>().isTutorial)
+        {
+            TutorialManager.Instance.m_Animator.SetBool("isTutorial", true);
+            isFirstQuestion = true;
+            isFirstProgramming = true;
+        }
+        else
+        {
+            isFirstQuestion = false;
+            isFirstProgramming = false;
+        }
+
 
         if (!teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
@@ -201,6 +219,7 @@ public class TeamManager : NetworkBehaviour
         events.SynchronizeOnDrag -= SynchronizeOnDrag;
         events.SynchronizeOnDrop -= SynchronizeOnDrop;
         events.SynchronizeOnEndDrag -= SynchronizeOnEndDrag;
+        events.GoBackToLobby -= ReturnToLobby;
         responder.onClick.RemoveListener(() => AcceptForTeam());
     }
 
@@ -240,9 +259,9 @@ public class TeamManager : NetworkBehaviour
     {
         if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
-                CmdHideUI();
-                IE_Ejecutar = Sequence();
-                StartCoroutine(IE_Ejecutar);
+            CmdHideUI();
+            IE_Ejecutar = Sequence();
+            StartCoroutine(IE_Ejecutar);
         }
     }
 
@@ -265,7 +284,7 @@ public class TeamManager : NetworkBehaviour
             UptadeTimerProgramming(false);
         }
         IE_HideAndShow = HideAndShow();
-        StartCoroutine(IE_HideAndShow);  
+        StartCoroutine(IE_HideAndShow);
     }
 
     public void AddCard()
@@ -293,7 +312,7 @@ public class TeamManager : NetworkBehaviour
         }
         else if (randomIndex == 1)
         {
-           fowardCountText.text = (int.Parse(fowardCountText.text) + 1).ToString();
+            fowardCountText.text = (int.Parse(fowardCountText.text) + 1).ToString();
         }
         else if (randomIndex == 2)
         {
@@ -318,7 +337,7 @@ public class TeamManager : NetworkBehaviour
         if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             CmdCreateCardInstance(cardPrefabIndex);
-        }   
+        }
     }
 
     [Command]
@@ -439,7 +458,7 @@ public class TeamManager : NetworkBehaviour
                 events.ReassignCard(3);
             }
             Destroy(dropZone.currentMovement.gameObject);
-        } 
+        }
         d.parentToReturnTo = dropZone.transform;
         d.droppedOnSlot = true;
         dropZone.currentMovement = d.gameObject.GetComponent<MovCardData>();
@@ -480,7 +499,7 @@ public class TeamManager : NetworkBehaviour
     public void TargetSynchronizeOnEndDrag(NetworkConnection target, int cardIndex)
     {
         Debug.Log("TargetSynchronizeOnEndDrag");
-       
+
         Draggable d = teamObject.GetComponent<PlayerScoreQuesix>().Cards[cardIndex].GetComponent<Draggable>();
 
         Debug.Log("Card: " + d);
@@ -704,7 +723,7 @@ public class TeamManager : NetworkBehaviour
     void CmdDisplayQuestion(int randInt)
     {
         TargetClient(connectionToClient, randInt);
-        TargetClient(teammate.connectionToClient, randInt);   
+        TargetClient(teammate.connectionToClient, randInt);
     }
 
     [TargetRpc]
@@ -751,7 +770,7 @@ public class TeamManager : NetworkBehaviour
         {
             UptadeTimerProgramming(true);
         }
-        
+
     }
 
     public void Debugging()
@@ -788,7 +807,7 @@ public class TeamManager : NetworkBehaviour
             foreach (Transform movement in sequence)
             {
                 GameObject m_checkAnswer = movement.transform.GetChild(2).gameObject;
-                if(movement.transform.GetChild(0).childCount > 0)
+                if (movement.transform.GetChild(0).childCount > 0)
                 {
                     movement.transform.GetChild(0).GetChild(0).GetComponent<Draggable>().enabled = false;
                     m_checkAnswer.GetComponent<CanvasGroup>().alpha = 1.0f;
@@ -934,7 +953,7 @@ public class TeamManager : NetworkBehaviour
                 Debug.Log("isFirstQuestion: " + isFirstQuestion);
                 // Si es la primera vez, mostrar tutorial y luego iniciar cronometro
                 Animator tutorialAnimator = uiManager.transform.GetComponent<TutorialManager>().m_Animator;
-                if(tutorialAnimator != null)
+                if (tutorialAnimator != null)
                 {
                     tutorialAnimator.SetBool("isFirstQuestion", true);
                 }
@@ -942,7 +961,7 @@ public class TeamManager : NetworkBehaviour
                 {
                     Debug.Log("tutorialAnimator is null");
                 }
-                
+
                 UptadeTimerFirstTime(pregunta.UseTimer);
                 Debug.Log("UpdateTimerFirstTime");
                 isFirstQuestion = false;
@@ -966,7 +985,7 @@ public class TeamManager : NetworkBehaviour
         {
             UptadeTimer(false);
         }
-        
+
         int CountCorrectAnswers = teamObject.GetComponent<PlayerScoreQuesix>().CompareAnswers();
         teamObject.GetComponent<PlayerScoreQuesix>().FinishedQuestions.Add(teamObject.GetComponent<PlayerScoreQuesix>().CurrentQuestion);
 
@@ -1191,10 +1210,10 @@ public class TeamManager : NetworkBehaviour
         }
         uiManager.OnClickEjecutar();
     }
-   
 
 
-IEnumerator WaitTillNextRound()
+
+    IEnumerator WaitTillNextRound()
     {
         yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);
         // Mostrar ui denuevo
@@ -1208,27 +1227,39 @@ IEnumerator WaitTillNextRound()
         {
             Transform placeHolder = movement.transform.GetChild(0);
 
-            if(placeHolder.childCount > 0)
+            if (placeHolder.childCount > 0)
             {
                 MovCardData card = placeHolder.GetChild(0).GetComponent<MovCardData>();
-                if (card.CardAction.Equals("Avanzar"))
+
+                if (!teamObject.GetComponent<PlayerController3D>().restartPosition)
                 {
-                    teamObject.GetComponent<PlayerController3D>().Avanzar();
-                }
-                else if (card.CardAction.Equals("Retroceder"))
-                {
-                    teamObject.GetComponent<PlayerController3D>().Retroceder();
-                }
-                else if (card.CardAction.Equals("Izquierda"))
-                {
-                    teamObject.GetComponent<PlayerController3D>().GirarIzquierda();
+                    if (card.CardAction.Equals("Avanzar"))
+                    {
+                        teamObject.GetComponent<PlayerController3D>().Avanzar();
+                    }
+                    else if (card.CardAction.Equals("Retroceder"))
+                    {
+                        teamObject.GetComponent<PlayerController3D>().Retroceder();
+                    }
+                    else if (card.CardAction.Equals("Izquierda"))
+                    {
+                        teamObject.GetComponent<PlayerController3D>().GirarIzquierda();
+                    }
+                    else
+                    {
+                        teamObject.GetComponent<PlayerController3D>().GirarDerecha();
+                    }
+                    yield return new WaitForSeconds(1.2f);
                 }
                 else
                 {
-                    teamObject.GetComponent<PlayerController3D>().GirarDerecha();
+                    break;
                 }
-                yield return new WaitForSeconds(1.2f);
             }
+        }
+        while (teamObject.GetComponent<PlayerController3D>().restartPosition)
+        {
+            yield return new WaitForSeconds(1f);
         }
         CmdBorrarCartas();
         CmdCambiarAutoridad();
@@ -1272,10 +1303,6 @@ IEnumerator WaitTillNextRound()
                 m_checkAnswer.GetComponent<CanvasGroup>().alpha = 0.0f;
                 m_checkAnswer.GetComponent<CanvasGroup>().blocksRaycasts = false;
             }
-
-           
-            
-
         }
 
         // Remover cartas destruidas
@@ -1293,7 +1320,7 @@ IEnumerator WaitTillNextRound()
 
     IEnumerator HideAndShow()
     {
-        
+
         uiManager.HideAll();
         events.PlayerIsMoving(true);
         yield return new WaitForSeconds(1.0f);
@@ -1302,14 +1329,27 @@ IEnumerator WaitTillNextRound()
         {
             Transform placeHolder = movement.transform.GetChild(0);
 
-            if (placeHolder.childCount > 0)
+            if (!teamObject.GetComponent<PlayerController3D>().restartPosition)
             {
-                yield return new WaitForSeconds(1.0f);
+                if (placeHolder.childCount > 0)
+                {
+                    yield return new WaitForSeconds(1.0f);
+                }
+            }
+            else
+            {
+                break;
             }
         }
-        yield return new WaitForSeconds(1.0f);
+
+        while (teamObject.GetComponent<PlayerController3D>().restartPosition)
+        {
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        yield return new WaitForSeconds(1f);
         events.PlayerIsMoving(false);
-        uiManager.ShowInterface();   
+        uiManager.ShowInterface();
     }
 
 
@@ -1326,5 +1366,30 @@ IEnumerator WaitTillNextRound()
         _movimientos = _movimientos.Select(r => (r as MovementCard)).Where(r => r != null).OrderBy(t => t.ID).ToArray<MovementCard>();
     }
 
+    void ReturnToLobby()
+    {
+        if (isLocalPlayer)
+        {
+            Debug.Log("ReturnToLobby");
+            CmdGoBackToLobby();
+        }
+    }
+
+    [Command]
+    void CmdGoBackToLobby()
+    {
+        Debug.Log("CmdGoBackToLobby");
+        MatchMaker.instance.PlayerDisconnectFromGame(lobbyPlayer, matchID, this.gameObject);
+        TargetRpcShowLobby(connectionToClient);
+        
+    }
+
+    [TargetRpc]
+    void TargetRpcShowLobby(NetworkConnection target)
+    {
+        Debug.Log("TargetRpcShowLobby");
+        UILobby.instance.Show();
+        UILobby.instance.DisconnectLobby();
+    }
 
 }

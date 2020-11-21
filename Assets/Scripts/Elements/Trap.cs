@@ -18,7 +18,7 @@ public class Trap : NetworkBehaviour
         }
     }
 
-    public void FallIntoTrap(GameObject player)
+    public void FallIntoTrap(GameObject playerBody)
     {
         if (available)
         {
@@ -26,9 +26,11 @@ public class Trap : NetworkBehaviour
             // First hit turns it off, pending the object being destroyed a few frames later.
             available = false;
 
+            playerBody.transform.parent.GetComponent<PlayerController3D>().restartPosition = true;
+            playerBody.transform.parent.GetComponent<PlayerController3D>().m_Animator.SetBool("isRestartingPosition", true);
+
             // destroy this one
             NetworkServer.Destroy(gameObject);
         }
     }
-
 }
