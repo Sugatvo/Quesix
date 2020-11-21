@@ -1036,7 +1036,7 @@ MonoBehaviour:
   onlineScene: Assets/Scenes/Lobby.unity
   transport: {fileID: 1333427232}
   networkAddress: 25.90.9.119
-  maxConnections: 4
+  maxConnections: 30
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}

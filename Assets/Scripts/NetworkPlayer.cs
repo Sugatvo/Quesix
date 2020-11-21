@@ -15,26 +15,82 @@ public class NetworkPlayer : NetworkBehaviour
 
     NetworkMatchChecker networkMatchChecker;
 
+    GameObject playerLobbyUI;
+
     [Scene]
     [Tooltip("Assign the gameScene to load for a match")]
     public string gameScene;
 
-    private void Start()
+    private void Awake()
     {
-        networkMatchChecker = GetComponent<NetworkMatchChecker>();
+        networkMatchChecker = GetComponent<NetworkMatchChecker>();  
+    }
 
+    public override void OnStartClient()
+    {
         if (isLocalPlayer)
         {
             localPlayer = this;
         }
         else
         {
-            UILobby.instance.SpawnPlayerUIPrefab(this);
+            Debug.Log("Spawning other player UI");
+            playerLobbyUI = UILobby.instance.SpawnPlayerUIPrefab(this);
         }
     }
 
-    // HOST GAME
+    public override void OnStopClient()
+    {
+        Debug.Log("Client stopped");
+        ClientDisconnect();
+    }
 
+    public override void OnStopServer()
+    {
+        Debug.Log("Client stopped on server");
+        ServerDisconnect();
+    }
+
+    // HOST TUTORIAL
+    public void StartTutorial()
+    {
+        string matchID = MatchMaker.GetRandomMatchID();
+        CmdStartTutorial(matchID);
+    }
+
+
+    [Command]
+    void CmdStartTutorial(string _matchID)
+    {
+        matchID = _matchID;
+        if (MatchMaker.instance.HostGame(_matchID, gameObject, out playerIndex))
+        {
+            Debug.Log($"Game hosted successfully");
+            networkMatchChecker.matchId = _matchID.ToGuid();
+            TargetStartTutorial(true, _matchID, playerIndex);
+
+
+            MatchMaker.instance.BeginTutorial(matchID);
+            Debug.Log($"Game starting...");
+        }
+        else
+        {
+            Debug.Log($"Game hosted failed");
+            TargetStartTutorial(false, _matchID, playerIndex);
+        }
+    }
+
+    [TargetRpc]
+    void TargetStartTutorial(bool success, string _matchID, int _playerIndex)
+    {
+        playerIndex = _playerIndex;
+        matchID = _matchID;
+        Debug.Log($"MatchID: {matchID} == {_matchID}");
+        UILobby.instance.TutorialSuccess(success);
+    }
+
+
+    // HOST GAME
     public void HostGame()
     {
         string matchID = MatchMaker.GetRandomMatchID();
@@ -103,7 +159,6 @@ public class NetworkPlayer : NetworkBehaviour
 
 
     // BEGIN GAME
-
     public void BeginGame()
     {
         CmdBeginGame();
@@ -128,8 +183,40 @@ public class NetworkPlayer : NetworkBehaviour
     {
         Debug.Log($"MatchID: {matchID} | Starting");
         UILobby.instance.Hide();
-        //Camera.main.gameObject.SetActive(false);
-        //SceneManager.LoadSceneAsync(gameScene, LoadSceneMode.Additive);
+    }
+
+    // Disconnect Match
+    public void DisconnectGame()
+    {
+        CmdDisconnectGame();
+    }
+
+    [Command]
+    void CmdDisconnectGame()
+    {
+        ServerDisconnect();
+    }
+
+    void ServerDisconnect()
+    {
+        MatchMaker.instance.PlayerDisconnect(this.gameObject, matchID);
+        networkMatchChecker.matchId = string.Empty.ToGuid();
+        id_team = 0;
+        playerIndex = 0;
+        matchID = string.Empty;
+        RpcDisconnectGame();
+    }
+
+
+    [ClientRpc]
+    void RpcDisconnectGame()
+    {
+        ClientDisconnect();
+    }
+
+    void ClientDisconnect()
+    {
+        if (playerLobbyUI != null) Destroy(playerLobbyUI);
     }
 
 
