@@ -15,6 +15,6 @@ public class UIPlayer : MonoBehaviour
     public void SetPlayer(NetworkPlayer player)
     {
         this.player = player;
-        playerName.text = "Player " + player.playerIndex.ToString();
+        playerName.text = player.nombre + " " + player.apellido;
     }
 }

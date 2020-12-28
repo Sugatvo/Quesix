@@ -12,7 +12,7 @@ public class GameEvents : ScriptableObject
     public delegate void UpdateQuestionCardAnswerCallback(AnswerData pickedAnswer);
     public UpdateQuestionCardAnswerCallback UpdateQuestionCardAnswer;
 
-    public delegate void DisplayResolutionScreenCallback(UIManager.ResolutionScreenType type, int count);
+    public delegate void DisplayResolutionScreenCallback(UIManager.ResolutionScreenType type, int count, string text);
     public DisplayResolutionScreenCallback DisplayResolutionScreen;
 
     public delegate void DisplayQuestionCallback();
@@ -27,7 +27,6 @@ public class GameEvents : ScriptableObject
     public delegate void AcceptAnswerCallback();
     public AcceptAnswerCallback AcceptAnswer;
 
-
     public delegate void ShowQuestionCallback(int rand);
     public ShowQuestionCallback ShowQuestion;
 
@@ -37,15 +36,6 @@ public class GameEvents : ScriptableObject
     public delegate void DebugCallback();
     public DebugCallback Debug;
 
-    public delegate void RefreshCallback();
-    public RefreshCallback RefreshUsers;
-
-    public delegate void RefreshReassignCallback();
-    public RefreshReassignCallback RefreshReassign;
-
-    public delegate void SelectCursoCallback(string[] students, int id_curso);
-    public SelectCursoCallback SelectCurso;
-
     public delegate void AssignCardCallback(int index);
     public AssignCardCallback AssignCard;
 
@@ -53,7 +43,7 @@ public class GameEvents : ScriptableObject
     public ReassignCardCallback ReassignCard;
 
     public delegate void CreateCardInstanceCallback(int indexPrefab);
-    public CreateCardInstanceCallback CreteCardInstance;
+    public CreateCardInstanceCallback CreateCardInstance;
 
     public delegate void SynchronizeOnBeginDragCallback(int index);
     public SynchronizeOnBeginDragCallback SynchronizeOnBeginDrag;
@@ -69,7 +59,6 @@ public class GameEvents : ScriptableObject
 
     public delegate void PlayerIsMovingCallback(bool statement);
     public PlayerIsMovingCallback PlayerIsMoving;
-
 
     public delegate void GoBackToLobbyCallback();
     public GoBackToLobbyCallback GoBackToLobby;

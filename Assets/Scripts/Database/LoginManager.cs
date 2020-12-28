@@ -7,10 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class LoginManager : MonoBehaviour
 {
-
-    [SerializeField] CanvasGroup registerForm;
-    [SerializeField] CanvasGroup loginForm;
     [SerializeField] CanvasGroup mainMenu;
+    [SerializeField] CanvasGroup loginForm;
+    [SerializeField] CanvasGroup registerForm;
+
+    [Space]
+
+    [Header("Login")]
+    public TMP_InputField usernameFieldLogin;
+    public TMP_InputField passwordFieldLogin;
+    [SerializeField] Button entrarButton;
 
     [Space]
 
@@ -25,13 +31,11 @@ public class LoginManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI usernameInfo;
     [SerializeField] Button crearButton;
 
-    [Space]
-
-    [Header("Login")]
-    public TMP_InputField usernameFieldLogin;
-    public TMP_InputField passwordFieldLogin;
-    [SerializeField] Button entrarButton;
-
+    [Header("Canvases")]
+    [SerializeField] Canvas loginCanvas;
+    [SerializeField] Canvas adminCanvas;
+    [SerializeField] Canvas teacherCanvas;
+    [SerializeField] Canvas studentCanvas;
 
     private bool usernameFlag = false;
 
@@ -55,25 +59,32 @@ public class LoginManager : MonoBehaviour
 
         if (www.text[0] == '0')
         {
-            DBManager.username = usernameFieldLogin.text;
-            DBManager.nombre = www.text.Split('\t')[1];
-            DBManager.apellido = www.text.Split('\t')[2];
-            DBManager.rol = www.text.Split('\t')[3];
-            DBManager.id_user = www.text.Split('\t')[4];
+            NetworkPlayer.localPlayer.username = usernameFieldLogin.text;
+            NetworkPlayer.localPlayer.nombre = www.text.Split('\t')[1];
+            NetworkPlayer.localPlayer.apellido = www.text.Split('\t')[2];
+            NetworkPlayer.localPlayer.rol = www.text.Split('\t')[3];
+            NetworkPlayer.localPlayer.id_user = www.text.Split('\t')[4];
 
-            if (DBManager.rol.Equals("Administrador"))
+            if (NetworkPlayer.localPlayer.rol.Equals("Administrador"))
             {
-                SceneManager.LoadScene(1);
+                loginCanvas.gameObject.SetActive(false);
+                adminCanvas.gameObject.SetActive(true);
+
             }
-            else if (DBManager.rol.Equals("Estudiante"))
+            else if (NetworkPlayer.localPlayer.rol.Equals("Estudiante"))
             {
-                SceneManager.LoadScene(2);
+                loginCanvas.gameObject.SetActive(false);
+                studentCanvas.gameObject.SetActive(true);
             }
-            else if (DBManager.rol.Equals("Profesor"))
+            else if (NetworkPlayer.localPlayer.rol.Equals("Profesor"))
             {
-                SceneManager.LoadScene(3);
+                loginCanvas.gameObject.SetActive(false);
+                teacherCanvas.gameObject.SetActive(true);
             }
-            
+
+            usernameFieldLogin.text = string.Empty;
+            passwordFieldLogin.text = string.Empty;
+            ShowMainMenu();
         }
         else
         {

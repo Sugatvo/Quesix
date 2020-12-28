@@ -10,10 +10,6 @@ public class CursoData : MonoBehaviour
     [SerializeField] TextMeshProUGUI nombreCurso = null;
     [SerializeField] TextMeshProUGUI cantidadUsuarios = null;
 
-    [Header("References")]
-    [SerializeField] GameEvents events = null;
-
-
     private RectTransform _rect = null;
     public RectTransform Rect
     {
@@ -54,8 +50,6 @@ public class CursoData : MonoBehaviour
         id_curso = curso_id;
         StartCoroutine(GetStudents(id_curso));
     }
-
-
 
     public IEnumerator GetUsers(string id_curso)
     {
@@ -136,7 +130,13 @@ public class CursoData : MonoBehaviour
 
     public void OnClick()
     {
-        events.SelectCurso(usersClassroom, _cursoIndex);
+        if(TeacherManager.Instance != null) TeacherManager.Instance.SelectCurso(usersClassroom, _cursoIndex, int.Parse(id_curso));
+        else if(AdminManager.Instance != null) AdminManager.Instance.SelectCurso(usersClassroom, _cursoIndex, int.Parse(id_curso));
+        else
+        {
+            Debug.Log("Error al seleccionar un curso");
+        }
+
     }
 
 }

@@ -92,11 +92,19 @@ public class TeamManager : NetworkBehaviour
     public GameObject currentCardInMovement;
 
     [Space]
+
     [SyncVar]
     public int ownerID = -1;
 
     [SyncVar]
     public int teammateID = -1;
+
+
+    [SyncVar] public string nombre_owner;
+    [SyncVar] public string apellido_owner;
+
+    [SyncVar] public string nombre_teammate;
+    [SyncVar] public string apellido_teammate;
 
     public bool isFirstQuestion = false;
     public bool isFirstProgramming = false;
@@ -150,7 +158,7 @@ public class TeamManager : NetworkBehaviour
         events.Debug += Debugging;
         events.AssignCard += AssignCard;
         events.ReassignCard += ReassignCard;
-        events.CreteCardInstance += CreateCardInstance;
+        events.CreateCardInstance += CreateCardInstance;
         events.SynchronizeOnBeginDrag += SynchronizeOnBeginDrag;
         events.SynchronizeOnDrag += SynchronizeOnDrag;
         events.SynchronizeOnDrop += SynchronizeOnDrop;
@@ -171,35 +179,43 @@ public class TeamManager : NetworkBehaviour
         {
             isFirstQuestion = false;
             isFirstProgramming = false;
+            TutorialManager.Instance.m_Animator.enabled = false;
+            TutorialManager.Instance.p_Animator.enabled = false;
         }
 
 
         if (!teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             uiManager.DisableButtons();
-            uiManager.SetRol(false, true);
-            uiManager.SetRolProgramming(false, true);
-            JugadorCoText.text = "*Jugador " + ownerID.ToString();
+            if (GetComponent<GlobalTimer>().isTutorial)
+            {
+                uiManager.SetRol(false, true);
+                uiManager.SetRolProgramming(false, true);
+            }
+            JugadorCoText.text = nombre_owner + " " + apellido_owner;
             JugadorCoText.fontSize += 5;
-            JugadorCoPoText.text = "*Jugador " + ownerID.ToString();
+            JugadorCoPoText.text = nombre_owner + " " + apellido_owner;
             JugadorCoPoText.fontSize += 5;
 
-            JugadorPiText.text = "Jugador " + teammateID.ToString();
-            JugadorPiPoText.text = "Jugador " + teammateID.ToString();
+            JugadorPiText.text = nombre_teammate + " " + apellido_teammate;
+            JugadorPiPoText.text = nombre_teammate + " " + apellido_teammate;
 
         }
         else
         {
             uiManager.EnableButtons();
-            uiManager.SetRol(true, false);
-            uiManager.SetRolProgramming(true, false);
-            JugadorPiText.text = "*Jugador " + ownerID.ToString();
+            if (GetComponent<GlobalTimer>().isTutorial)
+            {
+                uiManager.SetRol(true, false);
+                uiManager.SetRolProgramming(true, false);
+            }
+            JugadorPiText.text = nombre_owner + " " + apellido_owner;
             JugadorPiText.fontSize += 5;
-            JugadorPiPoText.text = "*Jugador " + ownerID.ToString();
+            JugadorPiPoText.text = nombre_owner + " " + apellido_owner;
             JugadorPiPoText.fontSize += 5;
 
-            JugadorCoText.text = "Jugador " + teammateID.ToString();
-            JugadorCoPoText.text = "Jugador " + teammateID.ToString();
+            JugadorCoText.text = nombre_teammate + " " + apellido_teammate;
+            JugadorCoPoText.text = nombre_teammate + " " + apellido_teammate;
         }
     }
 
@@ -214,7 +230,7 @@ public class TeamManager : NetworkBehaviour
         events.Ejecutar -= MovePlayer;
         events.AssignCard -= AssignCard;
         events.ReassignCard -= ReassignCard;
-        events.CreteCardInstance -= CreateCardInstance;
+        events.CreateCardInstance -= CreateCardInstance;
         events.SynchronizeOnBeginDrag -= SynchronizeOnBeginDrag;
         events.SynchronizeOnDrag -= SynchronizeOnDrag;
         events.SynchronizeOnDrop -= SynchronizeOnDrop;
@@ -334,10 +350,7 @@ public class TeamManager : NetworkBehaviour
     public void CreateCardInstance(int cardPrefabIndex)
     {
         Debug.Log("CreateCardInstance");
-        if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
-        {
-            CmdCreateCardInstance(cardPrefabIndex);
-        }
+        CmdCreateCardInstance(cardPrefabIndex);
     }
 
     [Command]
@@ -383,6 +396,7 @@ public class TeamManager : NetworkBehaviour
     [Command]
     void CmdSynchronizeOnBeginDrag(int cardIndex)
     {
+
         Debug.Log("CmdSynchronizeOnBeginDrag");
         TargetSynchronizeOnBeginDrag(connectionToClient, cardIndex);
         TargetSynchronizeOnBeginDrag(teammate.connectionToClient, cardIndex);
@@ -400,6 +414,7 @@ public class TeamManager : NetworkBehaviour
     {
         Debug.Log("SynchronizeOnDrag");
         CmdSynchronizeOnDrag(cardIndex, position, oldX, oldY);
+        
     }
 
     [Command]
@@ -609,7 +624,6 @@ public class TeamManager : NetworkBehaviour
 
         }
     }
-
 
 
     public void AssignCard(int index)
@@ -987,22 +1001,33 @@ public class TeamManager : NetworkBehaviour
         }
 
         int CountCorrectAnswers = teamObject.GetComponent<PlayerScoreQuesix>().CompareAnswers();
+        string correctAnswerText = teamObject.GetComponent<PlayerScoreQuesix>().GetCorrectAnswer();
         teamObject.GetComponent<PlayerScoreQuesix>().FinishedQuestions.Add(teamObject.GetComponent<PlayerScoreQuesix>().CurrentQuestion);
 
-        bool isCorrect;
         if (CountCorrectAnswers > 0)
         {
             for (int i = 0; i < CountCorrectAnswers; i++)
             {
                 AddCard();
             }
-            isCorrect = true;
         }
-        else isCorrect = false;
 
-        var type = (isCorrect) ? UIManager.ResolutionScreenType.Correct : UIManager.ResolutionScreenType.Incorrect;
+        UIManager.ResolutionScreenType type;
+        
+        if (CountCorrectAnswers == 2)
+        {
+            type = UIManager.ResolutionScreenType.Correct;
+        }
+        else if (CountCorrectAnswers == 1)
+        {
+            type = UIManager.ResolutionScreenType.Half;
+        }
+        else
+        {
+            type = UIManager.ResolutionScreenType.Incorrect;
+        }
 
-        events.DisplayResolutionScreen(type, CountCorrectAnswers);
+        events.DisplayResolutionScreen(type, CountCorrectAnswers, correctAnswerText);
 
         if (type != UIManager.ResolutionScreenType.Finish)
         {
@@ -1111,9 +1136,6 @@ public class TeamManager : NetworkBehaviour
         }
         Accept();
     }
-
-
-
 
 
     void UptadeTimerProgramming(bool state)

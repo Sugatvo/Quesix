@@ -24,7 +24,7 @@ public class SpawnOnDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
         if(int.Parse(cardCount.text) > 0 && transform.childCount == 2)
         {
             // Crear prefab en los dos integrantes del equipo
-            events.CreteCardInstance(indexPrefab);
+            events.CreateCardInstance(indexPrefab);
             instantiatedChild = transform.GetChild(1).gameObject;
           
         }

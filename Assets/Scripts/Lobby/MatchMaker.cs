@@ -6,6 +6,7 @@ using System;
 using System.Text;
 using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Match
@@ -15,13 +16,15 @@ public class Match
     public bool isStarted;
     public Scene sceneReference;
     public SyncListGameObject players = new SyncListGameObject();
+    public GameObject teacher;
 
-    public Match(string matchID, GameObject player, int mt, bool statement)
+    public Match(string matchID, GameObject _teacher, int mt, bool statement)
     {
         this.matchID = matchID;
         this.Time = mt;
         this.isStarted = statement;
-        players.Add(player);
+        teacher = _teacher;
+        // players.Add(player);
     }
 
     public Match() { }
@@ -45,7 +48,8 @@ public class MatchMaker : NetworkBehaviour
 
     readonly List<Scene> subScenes = new List<Scene>();
 
-    [SerializeField] GameObject turnManagerPrefab;
+    [SerializeField] private CanvasGroup loadingScreenCanvasGroup;
+    [SerializeField] private Image _progressBar;
 
     [Scene]
     public string gameScene;
@@ -60,10 +64,11 @@ public class MatchMaker : NetworkBehaviour
 
     public List<int> team_ids = new List<int>();
     public List<NetworkIdentity> team_aux = new List<NetworkIdentity>();
+    public List<string> nombres = new List<string>();
+    public List<string> apellidos = new List<string>();
 
     private int group_index = 1;
 
-    [SyncVar]
     private int sceneIndex = 1;
 
     private Transform startPos = null;
@@ -76,15 +81,13 @@ public class MatchMaker : NetworkBehaviour
         instance = this;
     }
 
-    public bool HostGame(string _matchID, GameObject _player, out int playerIndex)
+    public bool HostGame(string _matchID, GameObject _player)
     {
-        playerIndex = -1;
         if (!matchIDs.Contains(_matchID))
         {
             matchIDs.Add(_matchID);
             matches.Add(new Match(_matchID, _player, 900, false));
             Debug.Log($"Match generated");
-            playerIndex = 1;
             return true;
         }
         else
@@ -136,7 +139,26 @@ public class MatchMaker : NetworkBehaviour
 
 
     IEnumerator LoadScene(Match _match) {
-        yield return SceneManager.LoadSceneAsync(gameScene, new LoadSceneParameters { loadSceneMode = LoadSceneMode.Additive, localPhysicsMode = LocalPhysicsMode.Physics3D });
+
+        // Loading 
+        foreach (var player in _match.players)
+        {
+            NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
+            TargetShowLoadingScreen(_player.connectionToClient);
+           
+        }
+        AsyncOperation loadingMatch = SceneManager.LoadSceneAsync(gameScene, new LoadSceneParameters { loadSceneMode = LoadSceneMode.Additive, localPhysicsMode = LocalPhysicsMode.Physics3D });
+        
+        while(loadingMatch.progress < 1)
+        {
+            foreach (var player in _match.players)
+            {
+                NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
+                TargetFillLoadingScreen(_player.connectionToClient, loadingMatch.progress);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("sceneIndex = " + sceneIndex);
         subScenes.Add(SceneManager.GetSceneAt(sceneIndex));
         _match.sceneReference = SceneManager.GetSceneAt(sceneIndex);
         group_index = 1;
@@ -147,10 +169,33 @@ public class MatchMaker : NetworkBehaviour
             NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
             OnServerReady(player.GetComponent<NetworkIdentity>().connectionToClient, sceneIndex, _match.matchID, _player.playerIndex);
             _player.StartGame();
+            TargetHideLoadingScreen(_player.connectionToClient);
         }
+        yield return new WaitForEndOfFrame();
+
         _match.isStarted = true;
         sceneIndex ++;
         SyncGlobalTimer(_match);
+    }
+
+
+    [TargetRpc]
+    void TargetShowLoadingScreen(NetworkConnection target)
+    {
+        loadingScreenCanvasGroup.alpha = 1f;
+    }
+
+
+    [TargetRpc]
+    void TargetFillLoadingScreen(NetworkConnection target, float value)
+    {
+        _progressBar.fillAmount = value;
+    }
+
+    [TargetRpc]
+    void TargetHideLoadingScreen(NetworkConnection target)
+    {
+        loadingScreenCanvasGroup.alpha = 0f;
     }
 
     public static string GetRandomMatchID()
@@ -204,6 +249,8 @@ public class MatchMaker : NetworkBehaviour
                     networkPlayer.GetComponent<NetworkPlayer>().id_team = group_index;
                     team_ids.Add(conn.connectionId);
                     team_aux.Add(conn.identity);
+                    nombres.Add(networkPlayer.GetComponent<NetworkPlayer>().nombre);
+                    apellidos.Add(networkPlayer.GetComponent<NetworkPlayer>().apellido);
                 }
 
                 if (team_ids.Count == 2)
@@ -221,6 +268,10 @@ public class MatchMaker : NetworkBehaviour
                         cameraPlayer.GetComponent<TeamManager>().matchID = _matchID;
                         if (i == 0)
                         {
+                            cameraPlayer.GetComponent<TeamManager>().nombre_owner = nombres[0];
+                            cameraPlayer.GetComponent<TeamManager>().apellido_owner = apellidos[0];
+                            cameraPlayer.GetComponent<TeamManager>().nombre_teammate = nombres[1];
+                            cameraPlayer.GetComponent<TeamManager>().apellido_teammate = apellidos[1];
                             cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[1];
                             cameraPlayer.GetComponent<TeamManager>().ownerID = team_ids[0];
                             cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[1];
@@ -228,6 +279,10 @@ public class MatchMaker : NetworkBehaviour
                         }
                         else
                         {
+                            cameraPlayer.GetComponent<TeamManager>().nombre_owner = nombres[1];
+                            cameraPlayer.GetComponent<TeamManager>().apellido_owner = apellidos[1];
+                            cameraPlayer.GetComponent<TeamManager>().nombre_teammate = nombres[0];
+                            cameraPlayer.GetComponent<TeamManager>().apellido_teammate = apellidos[0];
                             cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[0];
                             cameraPlayer.GetComponent<TeamManager>().ownerID = team_ids[1];
                             cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[0];
@@ -242,6 +297,8 @@ public class MatchMaker : NetworkBehaviour
                     SceneManager.MoveGameObjectToScene(gp, subScenes[sceneIndex - 1]);
                     team_ids = new List<int>();
                     team_aux = new List<NetworkIdentity>();
+                    nombres = new List<string>();
+                    apellidos = new List<string>();
                     group_index += 1;
                 }
 
@@ -307,6 +364,7 @@ public class MatchMaker : NetworkBehaviour
         PlayerScoreQuesix playerScore = teamGameObject.GetComponent<PlayerScoreQuesix>();
         playerScore.id_team = networkPlayer.GetComponent<NetworkPlayer>().id_team;
         playerScore.equipo = new List<NetworkIdentity>(team_aux);
+        playerScore.clase_id = networkPlayer.GetComponent<NetworkPlayer>().clase_id;
 
         Debug.Log("networkPlayer.id_team = " + networkPlayer.GetComponent<NetworkPlayer>().id_team);
 
@@ -502,7 +560,6 @@ public class MatchMaker : NetworkBehaviour
                     if (matches[i].sceneReference != null)
                     {
                         StartCoroutine(UnloadScene(matches[i].sceneReference.path));
-                        sceneIndex--;
                         matches[i].isStarted = false;
                     }
 
@@ -547,7 +604,10 @@ public class MatchMaker : NetworkBehaviour
         {
             yield return SceneManager.UnloadSceneAsync(SceneManager.GetSceneByPath(scenePath));
             Debug.Log("Server UnloadScene completed");
+            sceneIndex--;
+            Debug.Log("SceneIndex = " + sceneIndex);
         }
+        
     }
 
 

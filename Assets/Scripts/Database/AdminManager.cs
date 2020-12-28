@@ -10,27 +10,30 @@ using System.ComponentModel;
 public class AdminManager : MonoBehaviour
 {
 
-    [SerializeField] Button clasesButton;
-    [SerializeField] Button perfilButton;
-    [SerializeField] Button logoutButton;
-
+    [Header("Player information")]
     [SerializeField] TextMeshProUGUI playerInfo;
     [SerializeField] TextMeshProUGUI rolInfo;
 
-    [SerializeField] CanvasGroup adminMenu;
-    [SerializeField] CanvasGroup assignMenu;
-    [SerializeField] CanvasGroup cursosMenu;
-    [SerializeField] CanvasGroup studentsInfo;
+    [Header("Menus")]
+    [SerializeField] CanvasGroup mainMenu;
+    [SerializeField] CanvasGroup unassignMenu;
+    [SerializeField] CanvasGroup classMenu;
+    [SerializeField] CanvasGroup classUsersMenu;
 
+    [Header("Content Area")]
+    [SerializeField] RectTransform unassignContentArea;
+    [SerializeField] RectTransform classContentArea;
+    [SerializeField] RectTransform classUsersContentArea;
     [SerializeField] float margins;
-    [SerializeField] RectTransform userContentArea;
-    [SerializeField] RectTransform cursoContentArea;
-    [SerializeField] RectTransform userClassroomContentArea;
 
+    [Header("Prefabs")]
     [SerializeField] UserData userPrefab = null;
     [SerializeField] CursoData cursoPrefab = null;
     [SerializeField] UserData userClassroomPrefab = null;
 
+    [Header("Canvases")]
+    [SerializeField] Canvas loginCanvas;
+    [SerializeField] Canvas adminCanvas;
 
     List<UserData> currentUsers = new List<UserData>();
     List<CursoData> currentCursos = new List<CursoData>();
@@ -40,20 +43,29 @@ public class AdminManager : MonoBehaviour
     public string[] cursos;
     private int refreshID;
 
-    [SerializeField] GameEvents events = null;
+    private static AdminManager _instance;
+    public static AdminManager Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        if(DBManager.LoggedIn)
+        if(NetworkPlayer.localPlayer.LoggedIn)
         {
-            playerInfo.text = "BIENVENIDO - " + DBManager.nombre + " " + DBManager.apellido;
-            rolInfo.text = DBManager.rol;
+            playerInfo.text = "BIENVENIDO - " + NetworkPlayer.localPlayer.nombre + " " + NetworkPlayer.localPlayer.apellido;
+            rolInfo.text = NetworkPlayer.localPlayer.rol;
         }
-
-        events.RefreshUsers += CallAssign;
-        events.SelectCurso += ShowUsersClassroom;
-        events.RefreshReassign += RefreshUsersClassroom;
 
         //Obtener cursos
         StartCoroutine(GetCursos());
@@ -84,7 +96,7 @@ public class AdminManager : MonoBehaviour
         }
     }
 
-    public void CallAssign()
+    public void RefreshUsers()
     {
         StartCoroutine(GetUsers());
     }
@@ -106,7 +118,7 @@ public class AdminManager : MonoBehaviour
                 Debug.Log(System.String.Format("There are {0} users.", users.Length - 1));
 
                 CreateUsers(users);
-                ShowAssign();
+                ShowUnassignMenu();
             }
         }
     }
@@ -120,14 +132,14 @@ public class AdminManager : MonoBehaviour
         {
             string [] data = result[i].Split('\t');
 
-            UserData user = (UserData)Instantiate(userPrefab, userContentArea);
+            UserData user = (UserData)Instantiate(userPrefab, unassignContentArea);
             user.UpdateDataNoAssign(data[0], data[1], data[2], i);
             user.UpdateCursos(cursos);
             user.UpdateRoles();
             user.Rect.anchoredPosition = new Vector2(0, offset);
 
             offset -= (user.Rect.sizeDelta.y + margins);
-            userContentArea.sizeDelta = new Vector2(userContentArea.sizeDelta.x, offset * -1);
+            unassignContentArea.sizeDelta = new Vector2(unassignContentArea.sizeDelta.x, offset * -1);
 
             currentUsers.Add(user);
         }
@@ -152,12 +164,12 @@ public class AdminManager : MonoBehaviour
         {
             string[] data = cursos[i].Split('\t');
 
-            CursoData curso = (CursoData)Instantiate(cursoPrefab, cursoContentArea);
+            CursoData curso = (CursoData)Instantiate(cursoPrefab, classContentArea);
             curso.UpdateData(data[0], data[1], i);
             curso.Rect.anchoredPosition = new Vector2(0, offset);
 
             offset -= (curso.Rect.sizeDelta.y + margins);
-            cursoContentArea.sizeDelta = new Vector2(cursoContentArea.sizeDelta.x, offset * -1);
+            classContentArea.sizeDelta = new Vector2(classContentArea.sizeDelta.x, offset * -1);
 
             currentCursos.Add(curso);
         }
@@ -183,13 +195,13 @@ public class AdminManager : MonoBehaviour
             string[] data = result[i].Split('\t');
 
             Debug.Log(data[0] + data[1] + data[2] + data[3] + data[4]);
-            UserData user = (UserData)Instantiate(userClassroomPrefab, userClassroomContentArea);
+            UserData user = (UserData)Instantiate(userClassroomPrefab, classUsersContentArea);
             user.UpdateData(data[0], data[1], data[2], data[3], data[4], i);
             user.UpdateCursos(cursos);
             user.Rect.anchoredPosition = new Vector2(0, offset);
 
             offset -= (user.Rect.sizeDelta.y + margins);
-            userClassroomContentArea.sizeDelta = new Vector2(userClassroomContentArea.sizeDelta.x, offset * -1);
+            classUsersContentArea.sizeDelta = new Vector2(classUsersContentArea.sizeDelta.x, offset * -1);
 
             currentUsersInClassroom.Add(user);
         }
@@ -205,36 +217,36 @@ public class AdminManager : MonoBehaviour
     }
 
 
-    public void ShowAssign()
+    public void ShowUnassignMenu()
     {
-        cursosMenu.alpha = 0.0f;
-        cursosMenu.blocksRaycasts = false;
-        studentsInfo.alpha = 0.0f;
-        studentsInfo.blocksRaycasts = false;
-        assignMenu.alpha = 1.0f;
-        assignMenu.blocksRaycasts = true;
+        classMenu.alpha = 0.0f;
+        classMenu.blocksRaycasts = false;
+        classUsersMenu.alpha = 0.0f;
+        classUsersMenu.blocksRaycasts = false;
+        unassignMenu.alpha = 1.0f;
+        unassignMenu.blocksRaycasts = true;
     }
 
     public void ShowCursos()
     {
         CreateCursos();
-        assignMenu.alpha = 0.0f;
-        assignMenu.blocksRaycasts = false;
-        studentsInfo.alpha = 0.0f;
-        studentsInfo.blocksRaycasts = false;
-        cursosMenu.alpha = 1.0f;
-        cursosMenu.blocksRaycasts = true; 
+        unassignMenu.alpha = 0.0f;
+        unassignMenu.blocksRaycasts = false;
+        classUsersMenu.alpha = 0.0f;
+        classUsersMenu.blocksRaycasts = false;
+        classMenu.alpha = 1.0f;
+        classMenu.blocksRaycasts = true; 
     }
 
-    public void ShowUsersClassroom(string[] result, int cursoIndex)
+    public void SelectCurso(string[] result, int cursoIndex, int id_curso)
     {
         CreateUsersInClassroom(result);
-        assignMenu.alpha = 0.0f;
-        assignMenu.blocksRaycasts = false;
-        cursosMenu.alpha = 0.0f;
-        cursosMenu.blocksRaycasts = false;
-        studentsInfo.alpha = 1.0f;
-        studentsInfo.blocksRaycasts = true;
+        unassignMenu.alpha = 0.0f;
+        unassignMenu.blocksRaycasts = false;
+        classMenu.alpha = 0.0f;
+        classMenu.blocksRaycasts = false;
+        classUsersMenu.alpha = 1.0f;
+        classUsersMenu.blocksRaycasts = true;
         refreshID = cursoIndex;
     }
 
@@ -246,14 +258,18 @@ public class AdminManager : MonoBehaviour
 
     public void Logout()
     {
-        DBManager.LogOut();
-        SceneManager.LoadScene(0);
+
+        unassignMenu.alpha = 0.0f;
+        classMenu.alpha = 0.0f;
+        classUsersMenu.alpha = 0.0f;
+
+        unassignMenu.blocksRaycasts = false;
+        classMenu.blocksRaycasts = false;
+        classUsersMenu.blocksRaycasts = false;
+
+        NetworkPlayer.localPlayer.LogOut();
+        loginCanvas.gameObject.SetActive(true);
+        adminCanvas.gameObject.SetActive(false);
     }
 
-
-    private void OnDestroy()
-    {
-        events.RefreshUsers -= CallAssign;
-        events.SelectCurso -= ShowUsersClassroom;
-    }
 }

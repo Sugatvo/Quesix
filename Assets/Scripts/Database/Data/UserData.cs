@@ -13,10 +13,6 @@ public class UserData : MonoBehaviour
 
     Dictionary<string, string> cursos = new Dictionary<string, string>();
 
-    [Header("References")]
-    [SerializeField] GameEvents events = null;
-
-
     private RectTransform _rect = null;
     public RectTransform Rect
     {
@@ -133,7 +129,7 @@ public class UserData : MonoBehaviour
         if (www.text == "0")
         {
             Debug.Log("User assign successfully.");
-            events.RefreshUsers();
+            AdminManager.Instance.RefreshUsers();
         }
         else
         {
@@ -156,7 +152,7 @@ public class UserData : MonoBehaviour
         if (www.text == "0")
         {
             Debug.Log("User assign successfully.");
-            events.RefreshUsers();
+            AdminManager.Instance.RefreshUsers();
         }
         else
         {
@@ -196,7 +192,7 @@ public class UserData : MonoBehaviour
         if (www.text == "0")
         {
             Debug.Log("User reassign successfully.");
-            events.RefreshReassign();
+            AdminManager.Instance.RefreshUsersClassroom();
         }
         else
         {
@@ -220,7 +216,7 @@ public class UserData : MonoBehaviour
         if (www.text == "0")
         {
             Debug.Log("User reassign successfully.");
-            events.RefreshReassign();
+            AdminManager.Instance.RefreshUsersClassroom();
         }
         else
         {
