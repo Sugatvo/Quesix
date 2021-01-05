@@ -1038,7 +1038,8 @@ MonoBehaviour:
   events: {fileID: 11400000, guid: 43c1160ed6b600b4d8db67ff8e074f99, type: 2}
   teamObject: {fileID: 0}
   type: 0
-  isMoving: 1
+  rol: 
+  isMoving: 0
   m_animator: {fileID: 0}
 --- !u!114 &1056454365014403611
 MonoBehaviour:
@@ -1054,8 +1055,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  lobbyPlayer: {fileID: 0}
   teamObject: {fileID: 0}
   teammate: {fileID: 0}
+  matchID: 
   cardPrefab: {fileID: 1268712523725957868, guid: c6efa94951f4413449db8d4af70fbf4a,
     type: 3}
   handContentArea: {fileID: 0}
@@ -1093,6 +1096,12 @@ MonoBehaviour:
   currentCardInMovement: {fileID: 0}
   ownerID: -1
   teammateID: -1
+  nombre_owner: 
+  apellido_owner: 
+  nombre_teammate: 
+  apellido_teammate: 
+  isFirstQuestion: 0
+  isFirstProgramming: 0
 --- !u!114 &1068236335205244452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,3 +1114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f8031c552018c4084c201fdc29ba54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  MaxTime: 0
+  CurrentTime: 0
+  isReady: 0
+  isTutorial: 0

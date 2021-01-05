@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Izquierda
   m_EditorClassIdentifier: 
   titulo: Izquierda
-  arrow: {fileID: 3414444923487824010, guid: 06b7280e9229fc241957f91737c75c43, type: 3}
+  arrow: {fileID: -6691468337737947087, guid: 66e0f2f44b290124cbea8bf3bfebb54f, type: 3}
   id: 3

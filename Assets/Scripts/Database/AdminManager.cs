@@ -9,7 +9,6 @@ using System.ComponentModel;
 
 public class AdminManager : MonoBehaviour
 {
-
     [Header("Player information")]
     [SerializeField] TextMeshProUGUI playerInfo;
     [SerializeField] TextMeshProUGUI rolInfo;
@@ -34,6 +33,9 @@ public class AdminManager : MonoBehaviour
     [Header("Canvases")]
     [SerializeField] Canvas loginCanvas;
     [SerializeField] Canvas adminCanvas;
+
+    [Header("Settings")]
+    [SerializeField] CanvasGroup settingsCanvasGroup;
 
     List<UserData> currentUsers = new List<UserData>();
     List<CursoData> currentCursos = new List<CursoData>();
@@ -73,7 +75,7 @@ public class AdminManager : MonoBehaviour
 
     public IEnumerator GetCursos()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://localhost/quesix/admin/cursos.php"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://25.90.9.119/quesix/admin/cursos.php"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -102,7 +104,7 @@ public class AdminManager : MonoBehaviour
     }
     public IEnumerator GetUsers()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://localhost/quesix/admin/information.php"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://25.90.9.119/quesix/admin/information.php"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -271,5 +273,18 @@ public class AdminManager : MonoBehaviour
         loginCanvas.gameObject.SetActive(true);
         adminCanvas.gameObject.SetActive(false);
     }
+
+    public void OnClickSettings()
+    {
+        settingsCanvasGroup.alpha = 1f;
+        settingsCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void OnClickCloseSettings()
+    {
+        settingsCanvasGroup.alpha = 0f;
+        settingsCanvasGroup.blocksRaycasts = false;
+    }
+
 
 }

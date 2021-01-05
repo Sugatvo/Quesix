@@ -39,6 +39,7 @@ public class Spawner : NetworkBehaviour
         cheese.spawner = this;
         NetworkServer.Spawn(newCheese);
         SceneManager.MoveGameObjectToScene(newCheese, gameObject.scene);
+        RemoveSpawnPoint(spawnPoint);
     }
 
     public void SpawnTrap()
@@ -51,5 +52,6 @@ public class Spawner : NetworkBehaviour
         trap.spawner = this;
         NetworkServer.Spawn(newTrap);
         SceneManager.MoveGameObjectToScene(newTrap, gameObject.scene);
+        RemoveSpawnPoint(spawnPoint);
     }
 }

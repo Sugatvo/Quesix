@@ -20,6 +20,8 @@ public class CameraController : NetworkBehaviour
     [SyncVar]
     public int type = 0;
 
+    [SyncVar]
+    public string rol = string.Empty;
 
     float offset;
 
@@ -33,8 +35,6 @@ public class CameraController : NetworkBehaviour
     {
         StateDrivenCamera.gameObject.SetActive(true);
         m_animator = StateDrivenCamera.GetComponent<Animator>();
-
-        events.PlayerIsMoving += Move;
 
         foreach (CinemachineVirtualCamera virtualCamera in StateDrivenCamera.ChildCameras)
         {
@@ -60,29 +60,39 @@ public class CameraController : NetworkBehaviour
             }
         }
 
-        if (teamObject.transform.position.z == 9)
+        if (rol.Equals("Profesor"))
         {
-            Debug.Log("teamObject is on left");
-            // Left
             m_animator.SetBool("backToLeft", true);
-        }
-        else if (teamObject.transform.position.z == -9)
-        {
-            Debug.Log("teamObject is on Right");
-            // Right
-            m_animator.SetBool("backToRight", true);
-        }
-        else if (teamObject.transform.position.x == -9)
-        {
-            Debug.Log("teamObject is on Bot");
-            // Bot
-            m_animator.SetBool("backToBottom", true);
+            UIManager.Instance.HideForTeacher();
         }
         else
         {
-            Debug.Log("teamObject is on Top");
-            // Top
-            m_animator.SetBool("backToUp", true);
+            events.PlayerIsMoving += Move;
+
+            if (teamObject.transform.position.z == 9)
+            {
+                Debug.Log("teamObject is on left");
+                // Left
+                m_animator.SetBool("backToLeft", true);
+            }
+            else if (teamObject.transform.position.z == -9)
+            {
+                Debug.Log("teamObject is on Right");
+                // Right
+                m_animator.SetBool("backToRight", true);
+            }
+            else if (teamObject.transform.position.x == -9)
+            {
+                Debug.Log("teamObject is on Bot");
+                // Bot
+                m_animator.SetBool("backToBottom", true);
+            }
+            else
+            {
+                Debug.Log("teamObject is on Top");
+                // Top
+                m_animator.SetBool("backToUp", true);
+            }
         }
 
         enabled = true;

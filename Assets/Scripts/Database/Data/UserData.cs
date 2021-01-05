@@ -120,7 +120,7 @@ public class UserData : MonoBehaviour
         form.AddField("usuario_id", u);
         form.AddField("curso_id", c);
 
-        WWW www = new WWW("http://localhost/quesix/admin/teacher.php", form);
+        WWW www = new WWW("http://25.90.9.119/quesix/admin/teacher.php", form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -143,7 +143,7 @@ public class UserData : MonoBehaviour
         form.AddField("usuario_id", u);
         form.AddField("curso_id", c);
 
-        WWW www = new WWW("http://localhost/quesix/admin/student.php", form);
+        WWW www = new WWW("http://25.90.9.119/quesix/admin/student.php", form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -183,7 +183,7 @@ public class UserData : MonoBehaviour
         form.AddField("id_alumno", u);
         form.AddField("curso_id", c);
 
-        WWW www = new WWW("http://localhost/quesix/admin/updatestudent.php", form);
+        WWW www = new WWW("http://25.90.9.119/quesix/admin/updatestudent.php", form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -207,7 +207,7 @@ public class UserData : MonoBehaviour
         form.AddField("id_profesor", u);
         form.AddField("curso_id", c);
 
-        WWW www = new WWW("http://localhost/quesix/admin/updateteacher.php", form);
+        WWW www = new WWW("http://25.90.9.119/quesix/admin/updateteacher.php", form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))

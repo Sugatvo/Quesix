@@ -53,10 +53,11 @@ public class CursoData : MonoBehaviour
 
     public IEnumerator GetUsers(string id_curso)
     {
+        Debug.Log("GetUsers()");
         WWWForm form = new WWWForm();
         form.AddField("id_curso", id_curso);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/admin/usersincourse.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/admin/usersincourse.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -69,7 +70,6 @@ public class CursoData : MonoBehaviour
                 Debug.Log("Received: " + webRequest.downloadHandler.text);
                 string fulldata = webRequest.downloadHandler.text;
                 usersClassroom = fulldata.Split(new string[] { "<br>" }, System.StringSplitOptions.None);
-
                 cantidadUsuarios.text = (usersClassroom.Length - 1).ToString() + " Usuarios";
             }
         }
@@ -80,7 +80,7 @@ public class CursoData : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_curso", id_curso);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/studentsincourse.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/studentsincourse.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -103,7 +103,7 @@ public class CursoData : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_curso", id_curso);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/admin/usersincourse.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/admin/usersincourse.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -130,8 +130,8 @@ public class CursoData : MonoBehaviour
 
     public void OnClick()
     {
-        if(TeacherManager.Instance != null) TeacherManager.Instance.SelectCurso(usersClassroom, _cursoIndex, int.Parse(id_curso));
-        else if(AdminManager.Instance != null) AdminManager.Instance.SelectCurso(usersClassroom, _cursoIndex, int.Parse(id_curso));
+        if(TeacherManager.Instance != null && TeacherManager.Instance.isActiveAndEnabled) TeacherManager.Instance.SelectCurso(usersClassroom, _cursoIndex, int.Parse(id_curso));
+        else if(AdminManager.Instance != null && AdminManager.Instance.isActiveAndEnabled) AdminManager.Instance.SelectCurso(usersClassroom, _cursoIndex, int.Parse(id_curso));
         else
         {
             Debug.Log("Error al seleccionar un curso");

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Retroceder
   m_EditorClassIdentifier: 
   titulo: Retroceder
-  arrow: {fileID: -1376108466972693246, guid: 06b7280e9229fc241957f91737c75c43, type: 3}
+  arrow: {fileID: 6701492650188371750, guid: 66e0f2f44b290124cbea8bf3bfebb54f, type: 3}
   id: 4

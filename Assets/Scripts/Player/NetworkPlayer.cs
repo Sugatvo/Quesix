@@ -18,7 +18,11 @@ public class NetworkPlayer : NetworkBehaviour
     public string username;
     [SyncVar] public string nombre;
     [SyncVar] public string apellido;
-    public string rol;
+    [SyncVar] public string rol;
+
+    [SyncVar] public string id_admin = string.Empty;
+    [SyncVar] public string id_teacher = string.Empty;
+    [SyncVar] public string id_student = string.Empty;
 
     public bool LoggedIn { get { return username != null; } }
 
@@ -29,6 +33,9 @@ public class NetworkPlayer : NetworkBehaviour
         nombre = null;
         apellido = null;
         rol = null;
+        id_admin = string.Empty;
+        id_teacher = string.Empty;
+        id_student = string.Empty;
     }
 
 
@@ -59,8 +66,9 @@ public class NetworkPlayer : NetworkBehaviour
             }
             else if (rol.Equals("Estudiante"))
             {
-                Debug.Log("Spawning other player UI");
-                playerLobbyUI = UILobby.instance.SpawnPlayerUIPrefab(this);
+                Debug.Log("Spawning other player UI");         
+                UILobby.instance.SetStatus(this);
+               //playerLobbyUI = UILobby.instance.SpawnPlayerUIPrefab(this);
             }
             else
             {
@@ -164,40 +172,40 @@ public class NetworkPlayer : NetworkBehaviour
         }
         
         Debug.Log($"MatchID: {matchID} == {_matchID}");
-        UILobby.instance.HostSuccess(success, _matchID, id_clase, selectMethod);
+        UILobby.instance.HostSuccess(success, _matchID, id_clase, selectMethod, this);
     }
 
     // JOIN GAME
     public void JoinGame(string matchID, int id_clase)
     {
-        CmdJoinGame(matchID, nombre, apellido, rol, id_clase);
+        CmdJoinGame(matchID, nombre, apellido, rol, id_clase, id_student);
     }
 
 
     [Command]
-    void CmdJoinGame(string _matchID, string _nombre, string _apellido, string _rol, int id_clase)
+    void CmdJoinGame(string _matchID, string _nombre, string _apellido, string _rol, int id_clase, string _id_alumno)
     {
         matchID = _matchID;
         nombre = _nombre;
         apellido = _apellido;
         rol = _rol;
         clase_id = id_clase;
-
+        id_student = _id_alumno;
         if (MatchMaker.instance.JoinGame(_matchID, gameObject, out playerIndex))
         {
             Debug.Log($"Game joined successfully");
             networkMatchChecker.matchId = _matchID.ToGuid();
-            TargetJoinGame(true, _matchID, playerIndex, nombre, apellido, rol, id_clase);
+            TargetJoinGame(true, _matchID, playerIndex, nombre, apellido, rol, id_clase, _id_alumno);
         }
         else
         {
             Debug.Log($"Game joined failed");
-            TargetJoinGame(false, _matchID, playerIndex, nombre, apellido, rol, id_clase);
+            TargetJoinGame(false, _matchID, playerIndex, nombre, apellido, rol, id_clase, _id_alumno);
         }
     }
 
     [TargetRpc]
-    void TargetJoinGame(bool success, string _matchID, int _playerIndex, string _nombre, string _apellido, string _rol, int id_clase)
+    void TargetJoinGame(bool success, string _matchID, int _playerIndex, string _nombre, string _apellido, string _rol, int id_clase, string _id_alumno)
     {
         if (success)
         {
@@ -207,9 +215,10 @@ public class NetworkPlayer : NetworkBehaviour
             apellido = _apellido;
             clase_id = id_clase;
             rol = _rol;
+            id_student = _id_alumno;
         }   
         Debug.Log($"MatchID: {matchID} == {_matchID}");
-        UILobby.instance.JoinSuccess(success, _matchID);
+        UILobby.instance.JoinSuccess(success, _matchID, id_clase, this);
     }
 
 

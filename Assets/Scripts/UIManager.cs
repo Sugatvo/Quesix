@@ -108,8 +108,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] CanvasGroup settingsCanvasGroup;
     [SerializeField] CanvasGroup globalTimerCanvasGroup;
     [SerializeField] CanvasGroup finishCanvasGroup;
+    [SerializeField] CanvasGroup marcoQuesoCanvasGroup;
+    [SerializeField] CanvasGroup marcoMovCanvasGroup;
     [SerializeField] GameObject buttonDebug;
     [SerializeField] GameObject buttonRun;
+    [SerializeField] Animator finishAnimator;
 
     public bool isCheck = false;
 
@@ -124,6 +127,22 @@ public class UIManager : MonoBehaviour
     float offset = -25;
 
     private IEnumerator IE_DisplayTimedResolution = null;
+
+    private static UIManager _instance;
+    public static UIManager Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
 
     void OnEnable()
     {
@@ -294,6 +313,7 @@ public class UIManager : MonoBehaviour
         else
         {
             events.Ejecutar();
+            isCheck = false;
         }
     }
 
@@ -524,6 +544,7 @@ public class UIManager : MonoBehaviour
 
         finishCanvasGroup.alpha = 1f;
         finishCanvasGroup.blocksRaycasts = true;
+        finishAnimator.SetBool("isFinished", true);
     }
 
     public void HideFinish()
@@ -536,5 +557,26 @@ public class UIManager : MonoBehaviour
     {
         events.GoBackToLobby();
     }
-       
+    
+    public void HideForTeacher()
+    {
+        Debug.Log("HideForTeacher()");
+        TutorialManager.Instance.m_Animator.enabled = false;
+        TutorialManager.Instance.p_Animator.enabled = false;
+        buttonsCanvasGroup.alpha = 0f;
+        buttonsCanvasGroup.blocksRaycasts = false;
+
+        PilotoInfoCanvasGroup.alpha = 0f;
+        PilotoInfoCanvasGroup.blocksRaycasts = false;
+
+        CopilotoInfoCanvasGroup.alpha = 0f;
+        CopilotoInfoCanvasGroup.blocksRaycasts = false;
+
+        marcoQuesoCanvasGroup.alpha = 0f;
+        marcoQuesoCanvasGroup.blocksRaycasts = false;
+
+        marcoMovCanvasGroup.alpha = 0f;
+        marcoMovCanvasGroup.blocksRaycasts = false;
+
+    }
 }

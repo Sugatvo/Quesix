@@ -70,7 +70,6 @@ public class PlayerScoreQuesix : NetworkBehaviour
         Debug.Log("OnEnable: PlayerScoreQuesix");
         uiManager = GameObject.Find("Managers").GetComponent<UIManager>();
         LoadQuestionCards();
-
         white = new GUIStyle();
         white.normal.textColor = Color.white;
 
@@ -84,7 +83,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
     public override void OnStartClient()
     {
-
+        LoadQuestionCards();
         Transform ratonTransform = transform.GetChild(1).transform.Find("Raton");
         ratonTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", objectColor);
         ratonTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_EmissionColor", emissionColor);
@@ -111,7 +110,8 @@ public class PlayerScoreQuesix : NetworkBehaviour
         Cards.Add(initialRightCard);
         initialRightCard.GetComponent<Draggable>().index = Cards.IndexOf(initialRightCard);
 
-        var Objects=  Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "PlaceHolder");
+        var Objects= Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "PlaceHolder");
+        Objects.OrderBy(x => x.name);
 
         int i = 0;
         foreach (var item in Objects)
@@ -269,7 +269,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
         WWWForm form = new WWWForm();
         form.AddField("clase_id", clase_id);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/student/getquestions.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/student/getquestions.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -283,7 +283,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
                 string[] stringQuestion = fulldata.Split(new string[] { "<br>" }, System.StringSplitOptions.RemoveEmptyEntries);
                 _preguntas = new QuestionCard[stringQuestion.Length];
 
-                for (int i = 0; i < stringQuestion.Length; i++)
+                for (int i = 0; i < stringQuestion.Length-1; i++)
                 {
                     string[] data = stringQuestion[i].Split('\t');
 
@@ -299,7 +299,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
                     WWWForm form2 = new WWWForm();
                     form2.AddField("pregunta_id", data[2]);
 
-                    using (UnityWebRequest webRequest2 = UnityWebRequest.Post("http://localhost/quesix/student/getanswers.php", form2))
+                    using (UnityWebRequest webRequest2 = UnityWebRequest.Post("http://25.90.9.119/quesix/student/getanswers.php", form2))
                     {
                         // Request and wait for the desired page.
                         yield return webRequest2.SendWebRequest();

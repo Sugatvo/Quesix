@@ -31,6 +31,9 @@ public class StudentManager : MonoBehaviour
     [SerializeField] Canvas studentCanvas;
     [SerializeField] Canvas lobbyUI;
 
+    [Header("Settings")]
+    [SerializeField] CanvasGroup settingsCanvasGroup;
+
     private string[] clases;
     List<ClasesData> currentClases = new List<ClasesData>();
 
@@ -77,7 +80,7 @@ public class StudentManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_usuario", NetworkPlayer.localPlayer.id_user);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/student/getcurso.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/student/getcurso.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -105,7 +108,7 @@ public class StudentManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("curso_id", curso_id);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/getclases.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/getclases.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -174,5 +177,18 @@ public class StudentManager : MonoBehaviour
         loginCanvas.gameObject.SetActive(true);
         studentCanvas.gameObject.SetActive(false);
     }
+
+    public void OnClickSettings()
+    {
+        settingsCanvasGroup.alpha = 1f;
+        settingsCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void OnClickCloseSettings()
+    {
+        settingsCanvasGroup.alpha = 0f;
+        settingsCanvasGroup.blocksRaycasts = false;
+    }
+
 
 }

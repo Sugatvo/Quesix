@@ -10,16 +10,9 @@ public class UILobby : MonoBehaviour
 {
     public static UILobby instance;
 
-    /*
-    [Header("Host/Join")]
-    [SerializeField] TMP_InputField joinMatchInput;
-    [SerializeField] Button joinButton;
-    [SerializeField] Button hostButton;
-    [SerializeField] Canvas lobbyCanvas;*/
-
-
     [Header("Lobby")]
     [SerializeField] Transform UITeamsParent;
+    [SerializeField] UITeam UITeamPrefab;
     [SerializeField] GameObject UIPlayerPrefab;
     [SerializeField] TextMeshProUGUI matchIDText;
     [SerializeField] GameObject beginGameButton;
@@ -37,6 +30,13 @@ public class UILobby : MonoBehaviour
 
 
     private string matchID;
+    private string[] teams;
+    List<UITeam> currentTeams = new List<UITeam>();
+
+    public List<Color> team_colors = new List<Color>{
+        new Color32(56, 162, 251, 255), new Color32(207, 30, 114, 255),
+        new Color32(65, 197, 32, 255), new Color32(253, 198, 3, 255)
+    };
 
     private void Start()
     {
@@ -76,14 +76,14 @@ public class UILobby : MonoBehaviour
         NetworkPlayer.localPlayer.HostGame(id_clase, selectMethod);
     }
 
-    public void HostSuccess(bool success, string matchID, int id_clase, int selectMethod)
+    public void HostSuccess(bool success, string matchID, int id_clase, int selectMethod, NetworkPlayer player)
     {
         if (success)
         {
             matchIDText.text = matchID;
             beginGameButton.SetActive(true);
             StartCoroutine(UpdateMatchID(id_clase, matchID));
-            StartCoroutine(TeamCreator(id_clase, selectMethod));
+            StartCoroutine(TeamCreator(id_clase, player));
         }
         else
         {
@@ -97,7 +97,7 @@ public class UILobby : MonoBehaviour
         form.AddField("id_clase", id_clase);
         form.AddField("matchID", _matchID);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/playclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/playclass.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -117,16 +117,13 @@ public class UILobby : MonoBehaviour
         }
     }
 
-    public IEnumerator TeamCreator(int id_clase, int selectMethod)
+    public IEnumerator TeamCreator(int id_clase, NetworkPlayer player)
     {
-        Debug.Log("TeamCreator");
-        Debug.Log("id_clase = " + id_clase);
-        Debug.Log("selectMethod = "+ selectMethod);
+        Debug.Log("TeamCreator()");
         WWWForm form = new WWWForm();
         form.AddField("id_clase", id_clase);
-        form.AddField("selectMethod", selectMethod);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/createteams.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/general/getequipos.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -137,14 +134,64 @@ public class UILobby : MonoBehaviour
             else
             {
                 Debug.Log("Received: " + webRequest.downloadHandler.text);
-                if (webRequest.downloadHandler.text.Equals("0"))
+
+                EraseTeamUI();
+                teams = webRequest.downloadHandler.text.Split(new string[] { ";" }, System.StringSplitOptions.RemoveEmptyEntries);
+                int team_count = 1;
+                foreach (var team in teams)
                 {
-                    Debug.Log("Equipos creados correctamente");
+                    string[] team_information = team.Split(new string[] { "<br>" }, System.StringSplitOptions.RemoveEmptyEntries);
+
+                    UITeam UIteam = (UITeam)Instantiate(UITeamPrefab, UITeamsParent);
+                    UIteam.transform.SetSiblingIndex(team_count - 1);
+                    for (int i = 0; i < team_information.Length; i++)
+                    {
+                        if (i == 0)
+                        {
+                            UIteam.SetID(int.Parse(team_information[i]));
+                            UIteam.SetTeamName("Equipo " + team_count.ToString());
+
+                            int randomIndex = Random.Range(0, team_colors.Count);
+                            UIteam.SetTeamColor(team_colors[randomIndex]);
+                            team_count++;
+                            team_colors.RemoveAt(randomIndex);
+                        }
+                        else if (i == 1)
+                        {
+                            string[] data = team_information[i].Split('\t');
+                            UIteam.SetPlayer1(int.Parse(data[0]), data[1], data[2]);
+                        }
+                        else if (i == 2)
+                        {
+                            string[] data = team_information[i].Split('\t');
+                            UIteam.SetPlayer2(int.Parse(data[0]), data[1], data[2]);
+                        }
+                        else
+                        {
+                            Debug.Log("Error team creator");
+                        }
+                    }
+                    currentTeams.Add(UIteam);
                 }
 
+                if (player.rol.Equals("Estudiante"))
+                {
+                    SetStatus(player);
+                }
+                
             }
         }
     }
+    void EraseTeamUI()
+    {
+        foreach (var student in currentTeams)
+        {
+            Destroy(student.gameObject);
+        }
+        currentTeams.Clear();
+    }
+
+
 
     public void Join(int id_clase)
     {
@@ -157,7 +204,7 @@ public class UILobby : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_clase", id_clase);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/student/getmatchid.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/student/getmatchid.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -174,13 +221,12 @@ public class UILobby : MonoBehaviour
         }
     }
 
-    public void JoinSuccess(bool success, string matchID)
+    public void JoinSuccess(bool success, string matchID, int id_clase, NetworkPlayer player)
     {
         if (success)
         {
             beginGameButton.SetActive(false);
-            if (playerLobbyUI != null) Destroy(playerLobbyUI);
-            playerLobbyUI = SpawnPlayerUIPrefab(NetworkPlayer.localPlayer);
+            StartCoroutine(TeamCreator(id_clase, player));
             matchIDText.text = matchID;
         }
         else
@@ -188,6 +234,26 @@ public class UILobby : MonoBehaviour
             // Volver a student canvas
         }
     }
+
+    public void SetStatus(NetworkPlayer player)
+    {
+        StartCoroutine(WaitForTeamCreation(player));
+    }
+    public IEnumerator WaitForTeamCreation(NetworkPlayer player)
+    {
+        while(currentTeams.Count < 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        foreach (var team in currentTeams)
+        {
+            if (team.isMember(player))
+            {
+                team.SetPlayerStatus(player);
+            }
+        }
+    }
+
 
     public GameObject SpawnPlayerUIPrefab(NetworkPlayer player)
     {
@@ -241,5 +307,10 @@ public class UILobby : MonoBehaviour
         */
 
         // Volver a student or teacher canvas
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

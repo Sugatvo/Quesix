@@ -1,0 +1,803 @@
+fileFormatVersion: 2
+guid: da8b3d24ab782f24899fce04284b6073
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4389351464863662232
+    second: Buttons@2_0
+  - first:
+      213: -4748400720245282080
+    second: Buttons@2_1
+  - first:
+      213: 4456708285594367695
+    second: Buttons@2_2
+  - first:
+      213: 8135073944974178151
+    second: Buttons@2_3
+  - first:
+      213: -6818165206080716828
+    second: Buttons@2_4
+  - first:
+      213: 4730944456394917614
+    second: Buttons@2_5
+  - first:
+      213: 4040468837437026442
+    second: Primario_activo
+  - first:
+      213: -1670275305792867426
+    second: Secundario_activo
+  - first:
+      213: -5738339998692163078
+    second: Aceptar_activo
+  - first:
+      213: 6069693540457097621
+    second: Peligro_activo
+  - first:
+      213: -6538437921460465482
+    second: Primario_presionado
+  - first:
+      213: -3227651601904558671
+    second: Secundario_presionado
+  - first:
+      213: 2391188797163562776
+    second: Aceptar_presionado
+  - first:
+      213: -5295157950315187670
+    second: Peligro_presionado
+  - first:
+      213: 93143102903389774
+    second: Primario_focus
+  - first:
+      213: 4209958967544791793
+    second: Secundario_focus
+  - first:
+      213: 7374149725818265942
+    second: Aceptar_focus
+  - first:
+      213: -1306987876431078088
+    second: Peligro_focus
+  - first:
+      213: -3371152914675229152
+    second: Primario_hover
+  - first:
+      213: -5901030386742728487
+    second: Secundario_hover
+  - first:
+      213: -2594822175290321426
+    second: Aceptar_hover
+  - first:
+      213: 4126200612293831192
+    second: Peligro_hover
+  - first:
+      213: -8156002854486360229
+    second: Buttons@2_22
+  - first:
+      213: -488529970918632239
+    second: Disabled
+  - first:
+      213: -8207155753682387437
+    second: Buttons@2_24
+  - first:
+      213: 5021445764442379602
+    second: Buttons@2_25
+  - first:
+      213: 6553040818239130904
+    second: Buttons@2_26
+  - first:
+      213: 6889027921308708971
+    second: Buttons@2_27
+  - first:
+      213: -692688006066111343
+    second: Buttons@2_28
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Buttons@2_0
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 1841
+        width: 256
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 39, z: 32, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8900a89c6eb1aec30800000000000000
+      internalID: 4389351464863662232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_1
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 1841
+        width: 257
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 39, z: 32, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ea229af3ba4a1eb0800000000000000
+      internalID: -4748400720245282080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_2
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 1841
+        width: 257
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 39, z: 32, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc67466b29869dd30800000000000000
+      internalID: 4456708285594367695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_3
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 1841
+        width: 257
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 39, z: 32, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 767b8b7c6a695e070800000000000000
+      internalID: 8135073944974178151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_4
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 1841
+        width: 257
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 39, z: 32, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ef71a78ed20161a0800000000000000
+      internalID: -6818165206080716828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_5
+      rect:
+        serializedVersion: 2
+        x: 1594
+        y: 1841
+        width: 257
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 39, z: 32, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee6c58fdae0b7a140800000000000000
+      internalID: 4730944456394917614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Primario_activo
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1604
+        width: 442
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8038751001a21830800000000000000
+      internalID: 4040468837437026442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Secundario_activo
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 1604
+        width: 440
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e93fb19757df1d8e0800000000000000
+      internalID: -1670275305792867426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aceptar_activo
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 1604
+        width: 442
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af1c9899c225d50b0800000000000000
+      internalID: -5738339998692163078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peligro_activo
+      rect:
+        serializedVersion: 2
+        x: 1534
+        y: 1604
+        width: 442
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 599ad6ecd12eb3450800000000000000
+      internalID: 6069693540457097621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Primario_presionado
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1462
+        width: 442
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b0d7614a5dc245a0800000000000000
+      internalID: -6538437921460465482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Secundario_presionado
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 1458
+        width: 440
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bd12c908f31533d0800000000000000
+      internalID: -3227651601904558671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aceptar_presionado
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 1458
+        width: 442
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 817e3ddba853f2120800000000000000
+      internalID: 2391188797163562776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peligro_presionado
+      rect:
+        serializedVersion: 2
+        x: 1534
+        y: 1458
+        width: 442
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a22b0ed26e1d386b0800000000000000
+      internalID: -5295157950315187670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Primario_focus
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 1310
+        width: 454
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 56, z: 56, w: 56}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4e85d99829ea4100800000000000000
+      internalID: 93143102903389774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Secundario_focus
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 1306
+        width: 454
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 56, z: 56, w: 56}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f24a7b2067cc6a30800000000000000
+      internalID: 4209958967544791793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aceptar_focus
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 1306
+        width: 453
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 56, z: 56, w: 56}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65121ff0b1e365660800000000000000
+      internalID: 7374149725818265942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peligro_focus
+      rect:
+        serializedVersion: 2
+        x: 1528
+        y: 1306
+        width: 454
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 56, z: 56, w: 56}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d559b7375acdde0800000000000000
+      internalID: -1306987876431078088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Primario_hover
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1158
+        width: 442
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02e924509424731d0800000000000000
+      internalID: -3371152914675229152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Secundario_hover
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 1158
+        width: 440
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d8e965d0245b1ea0800000000000000
+      internalID: -5901030386742728487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aceptar_hover
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 1158
+        width: 442
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee59382caf65dfbd0800000000000000
+      internalID: -2594822175290321426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Peligro_hover
+      rect:
+        serializedVersion: 2
+        x: 1534
+        y: 1158
+        width: 442
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ae5c76895334930800000000000000
+      internalID: 4126200612293831192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_22
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 1001
+        width: 441
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5fb44fbd9e00de80800000000000000
+      internalID: -8156002854486360229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Disabled
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 1001
+        width: 443
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d4534d64946839f0800000000000000
+      internalID: -488529970918632239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_24
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 855
+        width: 441
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31e357d43535a1e80800000000000000
+      internalID: -8207155753682387437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_25
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 855
+        width: 443
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2555a786152cfa540800000000000000
+      internalID: 5021445764442379602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_26
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 703
+        width: 454
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 56, z: 56, w: 56}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81d47c997e311fa50800000000000000
+      internalID: 6553040818239130904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons@2_27
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 556
+        width: 441
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b607a51156eba9f50800000000000000
+      internalID: 6889027921308708971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

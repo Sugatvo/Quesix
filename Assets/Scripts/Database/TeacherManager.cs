@@ -59,6 +59,9 @@ public class TeacherManager : MonoBehaviour
     [Header("Placeholders")]
     [SerializeField] CanvasGroup emptyClases;
 
+    [Header("Settings")]
+    [SerializeField] CanvasGroup settingsCanvasGroup;
+
     List<CursoData> currentCursos = new List<CursoData>();
     List<StudentData> currentStudents = new List<StudentData>();
     List<ToggleData> currentToggles = new List<ToggleData>();
@@ -138,7 +141,7 @@ public class TeacherManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_usuario", NetworkPlayer.localPlayer.id_user);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/teachercourses.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/teachercourses.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -163,7 +166,7 @@ public class TeacherManager : MonoBehaviour
 
     public IEnumerator GetToggles()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://localhost/quesix/teacher/information.php"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://25.90.9.119/quesix/teacher/information.php"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -292,7 +295,7 @@ public class TeacherManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("curso_id", curso_id);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/getclases.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/getclases.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -555,7 +558,7 @@ public class TeacherManager : MonoBehaviour
         form.AddField("tiempo_maximo", maxTimeField.text);
         form.AddField("fecha", yearField.text + "/" + monthField.text + "/" + dayField.text);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/createclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/createclass.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -654,7 +657,7 @@ public class TeacherManager : MonoBehaviour
         form.AddField("tiempo_maximo", maxTimeField.text);
         form.AddField("fecha", yearField.text + "/" + monthField.text + "/" + dayField.text);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/editclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/editclass.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -756,5 +759,18 @@ public class TeacherManager : MonoBehaviour
     {
         EraseToggles();
     }
+
+    public void OnClickSettings()
+    {
+        settingsCanvasGroup.alpha = 1f;
+        settingsCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void OnClickCloseSettings()
+    {
+        settingsCanvasGroup.alpha = 0f;
+        settingsCanvasGroup.blocksRaycasts = false;
+    }
+
 
 }

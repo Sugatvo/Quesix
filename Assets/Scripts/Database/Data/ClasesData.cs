@@ -99,7 +99,7 @@ public class ClasesData : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         form.AddField("id_clase", id_clase);
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/getmaterias.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/getmaterias.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -129,7 +129,7 @@ public class ClasesData : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_clase", id_clase);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/deleteclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/deleteclass.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();

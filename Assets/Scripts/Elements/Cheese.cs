@@ -33,10 +33,10 @@ public class Cheese : NetworkBehaviour
 
             // award the points via SyncVar on the PlayerController
             player.transform.parent.GetComponent<PlayerScoreQuesix>().AddScore(points, player.transform.parent.gameObject);
-
             spawner.SpawnCheese();
 
             // destroy this one
+            Spawner.AddSpawnPoint(this.transform);
             NetworkServer.Destroy(gameObject);
         }
     }

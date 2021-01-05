@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Derecha
   m_EditorClassIdentifier: 
   titulo: Derecha
-  arrow: {fileID: -1768721900537316193, guid: 06b7280e9229fc241957f91737c75c43, type: 3}
+  arrow: {fileID: 7617414438769998590, guid: 66e0f2f44b290124cbea8bf3bfebb54f, type: 3}
   id: 2

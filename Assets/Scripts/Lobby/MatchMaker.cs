@@ -59,6 +59,10 @@ public class MatchMaker : NetworkBehaviour
     protected GameObject cameraPrefab;
 
     [SerializeField]
+    [Tooltip("Prefab to use for the teacher player game object")]
+    protected GameObject teacherPrefab;
+
+    [SerializeField]
     [Tooltip("Prefab to use for the camera player game object")]
     protected GameObject teamPrefab;
 
@@ -140,7 +144,11 @@ public class MatchMaker : NetworkBehaviour
 
     IEnumerator LoadScene(Match _match) {
 
-        // Loading 
+        // Loading for teacher
+        NetworkPlayer _teacher = _match.teacher.GetComponent<NetworkPlayer>();
+        TargetShowLoadingScreen(_teacher.connectionToClient);
+
+        // Loading for students
         foreach (var player in _match.players)
         {
             NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
@@ -151,6 +159,8 @@ public class MatchMaker : NetworkBehaviour
         
         while(loadingMatch.progress < 1)
         {
+            TargetFillLoadingScreen(_teacher.connectionToClient, loadingMatch.progress);
+
             foreach (var player in _match.players)
             {
                 NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
@@ -164,10 +174,14 @@ public class MatchMaker : NetworkBehaviour
         group_index = 1;
 
 
+        OnServerReady(_teacher.GetComponent<NetworkIdentity>().connectionToClient, sceneIndex, _match.matchID);
+        _teacher.StartGame();
+        TargetHideLoadingScreen(_teacher.connectionToClient);
+
         foreach (var player in _match.players)
         {
             NetworkPlayer _player = player.GetComponent<NetworkPlayer>();
-            OnServerReady(player.GetComponent<NetworkIdentity>().connectionToClient, sceneIndex, _match.matchID, _player.playerIndex);
+            OnServerReady(player.GetComponent<NetworkIdentity>().connectionToClient, sceneIndex, _match.matchID);
             _player.StartGame();
             TargetHideLoadingScreen(_player.connectionToClient);
         }
@@ -219,7 +233,7 @@ public class MatchMaker : NetworkBehaviour
         return _id;
     }
 
-    public void OnServerReady(NetworkConnection conn, int sceneIndex, string _matchID, int _playerIndex)
+    public void OnServerReady(NetworkConnection conn, int sceneIndex, string _matchID)
     {
         Debug.Log("OnServerReady NetworkQuesixManager");
         if (conn.identity == null)
@@ -244,62 +258,82 @@ public class MatchMaker : NetworkBehaviour
             {
                 Debug.Log("conn is not null, have network identity and have de component NetworkPlayer");
 
-                if (networkPlayer.GetComponent<NetworkPlayer>().id_team == 0)
+                if (networkPlayer.GetComponent<NetworkPlayer>().rol.Equals("Profesor"))
                 {
-                    networkPlayer.GetComponent<NetworkPlayer>().id_team = group_index;
-                    team_ids.Add(conn.connectionId);
-                    team_aux.Add(conn.identity);
-                    nombres.Add(networkPlayer.GetComponent<NetworkPlayer>().nombre);
-                    apellidos.Add(networkPlayer.GetComponent<NetworkPlayer>().apellido);
+                    Debug.Log("Spawning cameraPlayer...");
+                    GameObject teacherPlayer = Instantiate(teacherPrefab, Vector3.zero, Quaternion.identity);
+
+                    teacherPlayer.GetComponent<CameraController>().rol = networkPlayer.GetComponent<NetworkPlayer>().rol;
+    
+                    Debug.Log("ReplacePlayerForConnection...");
+                    NetworkServer.ReplacePlayerForConnection(conn.identity.connectionToClient, teacherPlayer, true);
+                    SceneManager.MoveGameObjectToScene(teacherPlayer, subScenes[sceneIndex - 1]);
+
                 }
-
-                if (team_ids.Count == 2)
+                else if (networkPlayer.GetComponent<NetworkPlayer>().rol.Equals("Estudiante"))
                 {
-                    Debug.Log("Spawning robo-raton..");
-                    GameObject gp = SceneLoadedForPlayer(conn, networkPlayer);
-
-                    for (int i = 0; i < 2; i++)
+                    if (networkPlayer.GetComponent<NetworkPlayer>().id_team == 0)
                     {
-                        Debug.Log("Spawning cameraPlayer...");
-                        GameObject cameraPlayer = Instantiate(cameraPrefab, Vector3.zero, Quaternion.identity);
-
-                        cameraPlayer.GetComponent<CameraController>().teamObject = gp;
-                        cameraPlayer.GetComponent<TeamManager>().teamObject = gp;
-                        cameraPlayer.GetComponent<TeamManager>().matchID = _matchID;
-                        if (i == 0)
-                        {
-                            cameraPlayer.GetComponent<TeamManager>().nombre_owner = nombres[0];
-                            cameraPlayer.GetComponent<TeamManager>().apellido_owner = apellidos[0];
-                            cameraPlayer.GetComponent<TeamManager>().nombre_teammate = nombres[1];
-                            cameraPlayer.GetComponent<TeamManager>().apellido_teammate = apellidos[1];
-                            cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[1];
-                            cameraPlayer.GetComponent<TeamManager>().ownerID = team_ids[0];
-                            cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[1];
-                            cameraPlayer.GetComponent<CameraController>().type = 1;
-                        }
-                        else
-                        {
-                            cameraPlayer.GetComponent<TeamManager>().nombre_owner = nombres[1];
-                            cameraPlayer.GetComponent<TeamManager>().apellido_owner = apellidos[1];
-                            cameraPlayer.GetComponent<TeamManager>().nombre_teammate = nombres[0];
-                            cameraPlayer.GetComponent<TeamManager>().apellido_teammate = apellidos[0];
-                            cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[0];
-                            cameraPlayer.GetComponent<TeamManager>().ownerID = team_ids[1];
-                            cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[0];
-                            cameraPlayer.GetComponent<CameraController>().type = 2;
-                        }
-                        cameraPlayer.GetComponent<TeamManager>().lobbyPlayer = team_aux[i].gameObject;
-
-                        Debug.Log("ReplacePlayerForConnection...");
-                        NetworkServer.ReplacePlayerForConnection(team_aux[i].connectionToClient, cameraPlayer, true);
-                        SceneManager.MoveGameObjectToScene(cameraPlayer, subScenes[sceneIndex-1]);
+                        networkPlayer.GetComponent<NetworkPlayer>().id_team = group_index;
+                        team_ids.Add(conn.connectionId);
+                        team_aux.Add(conn.identity);
+                        nombres.Add(networkPlayer.GetComponent<NetworkPlayer>().nombre);
+                        apellidos.Add(networkPlayer.GetComponent<NetworkPlayer>().apellido);
                     }
-                    SceneManager.MoveGameObjectToScene(gp, subScenes[sceneIndex - 1]);
-                    team_ids = new List<int>();
-                    team_aux = new List<NetworkIdentity>();
-                    nombres = new List<string>();
-                    apellidos = new List<string>();
-                    group_index += 1;
+
+                    if (team_ids.Count == 2)
+                    {
+                        Debug.Log("Spawning robo-raton..");
+                        GameObject gp = SceneLoadedForPlayer(conn, networkPlayer);
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            Debug.Log("Spawning cameraPlayer...");
+                            GameObject cameraPlayer = Instantiate(cameraPrefab, Vector3.zero, Quaternion.identity);
+
+                            cameraPlayer.GetComponent<CameraController>().teamObject = gp;
+                            cameraPlayer.GetComponent<TeamManager>().teamObject = gp;
+                            cameraPlayer.GetComponent<TeamManager>().matchID = _matchID;
+                            if (i == 0)
+                            {
+                                cameraPlayer.GetComponent<TeamManager>().nombre_owner = nombres[0];
+                                cameraPlayer.GetComponent<TeamManager>().apellido_owner = apellidos[0];
+                                cameraPlayer.GetComponent<TeamManager>().nombre_teammate = nombres[1];
+                                cameraPlayer.GetComponent<TeamManager>().apellido_teammate = apellidos[1];
+                                cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[1];
+                                cameraPlayer.GetComponent<TeamManager>().ownerID = team_ids[0];
+                                cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[1];
+                                cameraPlayer.GetComponent<CameraController>().type = 1;
+                            }
+                            else
+                            {
+                                cameraPlayer.GetComponent<TeamManager>().nombre_owner = nombres[1];
+                                cameraPlayer.GetComponent<TeamManager>().apellido_owner = apellidos[1];
+                                cameraPlayer.GetComponent<TeamManager>().nombre_teammate = nombres[0];
+                                cameraPlayer.GetComponent<TeamManager>().apellido_teammate = apellidos[0];
+                                cameraPlayer.GetComponent<TeamManager>().teammate = team_aux[0];
+                                cameraPlayer.GetComponent<TeamManager>().ownerID = team_ids[1];
+                                cameraPlayer.GetComponent<TeamManager>().teammateID = team_ids[0];
+                                cameraPlayer.GetComponent<CameraController>().type = 2;
+                            }
+                            cameraPlayer.GetComponent<TeamManager>().lobbyPlayer = team_aux[i].gameObject;
+
+                            Debug.Log("ReplacePlayerForConnection...");
+                            NetworkServer.ReplacePlayerForConnection(team_aux[i].connectionToClient, cameraPlayer, true);
+                            SceneManager.MoveGameObjectToScene(cameraPlayer, subScenes[sceneIndex - 1]);
+                        }
+                        SceneManager.MoveGameObjectToScene(gp, subScenes[sceneIndex - 1]);
+                        team_ids = new List<int>();
+                        team_aux = new List<NetworkIdentity>();
+                        nombres = new List<string>();
+                        apellidos = new List<string>();
+                        group_index += 1;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Error in rol of networkPlayer");
+                    Debug.Log("rol = " + networkPlayer.GetComponent<NetworkPlayer>().rol);
                 }
 
             }

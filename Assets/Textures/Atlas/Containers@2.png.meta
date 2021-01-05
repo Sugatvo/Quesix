@@ -1,0 +1,1895 @@
+fileFormatVersion: 2
+guid: 43d7b1909bb62884d9e8c826a0be5259
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 941178553837909108
+    second: Containers@2_0
+  - first:
+      213: -1510676457150511187
+    second: Containers@2_1
+  - first:
+      213: -5171739966662639281
+    second: Containers@2_2
+  - first:
+      213: 509738181206133831
+    second: Containers@2_3
+  - first:
+      213: -3346517760229428907
+    second: Containers@2_4
+  - first:
+      213: 1130566435570891925
+    second: Containers@2_5
+  - first:
+      213: 3366479867001537273
+    second: Containers@2_6
+  - first:
+      213: 5372636435324007180
+    second: Containers@2_7
+  - first:
+      213: -3982558102830320339
+    second: Containers@2_8
+  - first:
+      213: 9153949578118824552
+    second: Containers@2_9
+  - first:
+      213: -5399950982775047159
+    second: Containers@2_10
+  - first:
+      213: 3414538597853313821
+    second: Containers@2_11
+  - first:
+      213: -6607519361155727930
+    second: Containers@2_12
+  - first:
+      213: -7290686809085363284
+    second: Containers@2_13
+  - first:
+      213: -326075188529819382
+    second: Containers@2_14
+  - first:
+      213: -1761886320127267112
+    second: Containers@2_15
+  - first:
+      213: 8111589883417436775
+    second: Containers@2_16
+  - first:
+      213: -4873546674870284365
+    second: Containers@2_17
+  - first:
+      213: -3382444696087658761
+    second: Containers@2_18
+  - first:
+      213: -5429886570832776161
+    second: Containers@2_19
+  - first:
+      213: 3927708794000202336
+    second: Containers@2_20
+  - first:
+      213: -9110403215264219612
+    second: Containers@2_21
+  - first:
+      213: 7884002928346594966
+    second: Containers@2_22
+  - first:
+      213: -6811862860717672816
+    second: Containers@2_23
+  - first:
+      213: -592652280984166112
+    second: Containers@2_24
+  - first:
+      213: -741962213530034700
+    second: Containers@2_25
+  - first:
+      213: 8517798458197466618
+    second: Containers@2_26
+  - first:
+      213: -1352219696357537594
+    second: Containers@2_27
+  - first:
+      213: 3061900753383729352
+    second: Containers@2_28
+  - first:
+      213: 7526094931691745705
+    second: Containers@2_29
+  - first:
+      213: 6369706766643255681
+    second: Containers@2_30
+  - first:
+      213: 916042181212333272
+    second: Containers@2_31
+  - first:
+      213: 8461076591074815746
+    second: Containers@2_32
+  - first:
+      213: -515144159548482842
+    second: Containers@2_33
+  - first:
+      213: 4190458489338512297
+    second: Containers@2_34
+  - first:
+      213: -7804319358502629014
+    second: Containers@2_35
+  - first:
+      213: 2934671283092182204
+    second: Containers@2_36
+  - first:
+      213: 69940608690830583
+    second: Containers@2_37
+  - first:
+      213: 2717839822611441669
+    second: Containers@2_38
+  - first:
+      213: 4384971449663973998
+    second: Containers@2_39
+  - first:
+      213: -4907090302624207484
+    second: Containers@2_40
+  - first:
+      213: -95875198093643695
+    second: Containers@2_41
+  - first:
+      213: 4830290454624854315
+    second: Containers@2_42
+  - first:
+      213: -5300252009798017594
+    second: Containers@2_43
+  - first:
+      213: -638839312433847910
+    second: Containers@2_44
+  - first:
+      213: 2215029798021673750
+    second: Containers@2_45
+  - first:
+      213: 2878673340161995499
+    second: Containers@2_46
+  - first:
+      213: -5566562669898489758
+    second: Containers@2_47
+  - first:
+      213: 6396137024854684041
+    second: Containers@2_48
+  - first:
+      213: -5352568273426565594
+    second: Containers@2_49
+  - first:
+      213: -2695602674108286731
+    second: Containers@2_50
+  - first:
+      213: -3047572389356699777
+    second: Containers@2_51
+  - first:
+      213: -1375369997137898627
+    second: Containers@2_52
+  - first:
+      213: -8101530473970231835
+    second: Containers@2_53
+  - first:
+      213: 2922495860893305804
+    second: Containers@2_54
+  - first:
+      213: -2776304135045072493
+    second: Containers@2_55
+  - first:
+      213: -6060697279842208578
+    second: Borde_blanco_1
+  - first:
+      213: -2369898531204289146
+    second: Containers@2_57
+  - first:
+      213: 8650891337742432342
+    second: Containers@2_58
+  - first:
+      213: -1512221803003327674
+    second: Containers@2_59
+  - first:
+      213: 2320870535008247843
+    second: Containers@2_60
+  - first:
+      213: -6255486114821228275
+    second: Containers@2_61
+  - first:
+      213: 4805461691745378897
+    second: Containers@2_62
+  - first:
+      213: -7594872504667044207
+    second: Containers@2_63
+  - first:
+      213: 8478913409727998638
+    second: Containers@2_64
+  - first:
+      213: -1069794779475459518
+    second: Containers@2_65
+  - first:
+      213: 5576328687405538927
+    second: Containers@2_66
+  - first:
+      213: -6307558828457897236
+    second: Containers@2_67
+  - first:
+      213: 8219116380042138228
+    second: Containers@2_68
+  - first:
+      213: -2163808454236747845
+    second: Containers@2_69
+  - first:
+      213: -3282650707595149556
+    second: Containers@2_70
+  - first:
+      213: -3771211364932284102
+    second: Containers@2_71
+  - first:
+      213: -1805752775667760540
+    second: Containers@2_72
+  - first:
+      213: -5755710382174846220
+    second: Containers@2_73
+  - first:
+      213: -4731490195786832873
+    second: Containers@2_74
+  - first:
+      213: 6815302854143593040
+    second: Containers@2_75
+  - first:
+      213: -7098626596222240752
+    second: Containers@2_76
+  - first:
+      213: 5259633651500223303
+    second: Containers@2_77
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Containers@2_0
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 3741
+        width: 258
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 80, y: 80, z: 80, w: 80}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47479bb78ecbf0d00800000000000000
+      internalID: 941178553837909108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_1
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 3741
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da78ff024cff80be0800000000000000
+      internalID: -1510676457150511187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_2
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 3906
+        width: 614
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 12, z: 45, w: 43}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f410260c6e94a38b0800000000000000
+      internalID: -5171739966662639281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_3
+      rect:
+        serializedVersion: 2
+        x: 1414
+        y: 3032
+        width: 658
+        height: 978
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 64, z: 45, w: 12}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74cce33dc24f21700800000000000000
+      internalID: 509738181206133831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_4
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 3593
+        width: 438
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5513df2e3d7ce81d0800000000000000
+      internalID: -3346517760229428907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_5
+      rect:
+        serializedVersion: 2
+        x: 2615
+        y: 3837
+        width: 176
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59cbe23ee2490bf00800000000000000
+      internalID: 1130566435570891925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_6
+      rect:
+        serializedVersion: 2
+        x: 2831
+        y: 3837
+        width: 176
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f281284a9328be20800000000000000
+      internalID: 3366479867001537273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_7
+      rect:
+        serializedVersion: 2
+        x: 3107
+        y: 3749
+        width: 264
+        height: 262
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c03feca5f507f8a40800000000000000
+      internalID: 5372636435324007180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_8
+      rect:
+        serializedVersion: 2
+        x: 3501
+        y: 3849
+        width: 162
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 36, z: 36, w: 36}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d25f177818c1bb8c0800000000000000
+      internalID: -3982558102830320339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_9
+      rect:
+        serializedVersion: 2
+        x: 3725
+        y: 3909
+        width: 344
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 36, z: 36, w: 36}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8620c9f34ac590f70800000000000000
+      internalID: 9153949578118824552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_10
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 3400
+        width: 614
+        height: 478
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 64, z: 45, w: 12}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90cfb2bf0358f05b0800000000000000
+      internalID: -5399950982775047159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_11
+      rect:
+        serializedVersion: 2
+        x: 3725
+        y: 3787
+        width: 344
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 36, z: 36, w: 36}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1b38e483c0e26f20800000000000000
+      internalID: 3414538597853313821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_12
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 3457
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 80, y: 80, z: 80, w: 80}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cdfbcf26206d44a0800000000000000
+      internalID: -6607519361155727930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_13
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 3457
+        width: 256
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cab37df89f642da90800000000000000
+      internalID: -7290686809085363284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_14
+      rect:
+        serializedVersion: 2
+        x: 2625
+        y: 3639
+        width: 712
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 29, z: 32, w: 29}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a019c99f75c897bf0800000000000000
+      internalID: -326075188529819382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_15
+      rect:
+        serializedVersion: 2
+        x: 3501
+        y: 3651
+        width: 162
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dea13a0ab58c87e0800000000000000
+      internalID: -1761886320127267112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_16
+      rect:
+        serializedVersion: 2
+        x: 3929
+        y: 3614
+        width: 145
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 24, z: 24, w: 24}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 762afbc9508229070800000000000000
+      internalID: 8111589883417436775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_17
+      rect:
+        serializedVersion: 2
+        x: 2639
+        y: 3569
+        width: 680
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 15, z: 24, w: 15}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bf0210de1fad5cb0800000000000000
+      internalID: -4873546674870284365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_18
+      rect:
+        serializedVersion: 2
+        x: 3501
+        y: 3495
+        width: 162
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fe7a4948742f01d0800000000000000
+      internalID: -3382444696087658761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_19
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 3487
+        width: 438
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 34, z: 32, w: 34}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1439debeea25a4b0800000000000000
+      internalID: -5429886570832776161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_20
+      rect:
+        serializedVersion: 2
+        x: 2639
+        y: 3493
+        width: 680
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 15, z: 24, w: 15}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06a5f879656028630800000000000000
+      internalID: 3927708794000202336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_21
+      rect:
+        serializedVersion: 2
+        x: 3883
+        y: 3459
+        width: 186
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 54, z: 56, w: 54}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42e79917b88519180800000000000000
+      internalID: -9110403215264219612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_22
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 3173
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 80, y: 80, z: 80, w: 80}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69efc3064ea996d60800000000000000
+      internalID: 7884002928346594966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_23
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 3173
+        width: 256
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0963f38a1d66771a0800000000000000
+      internalID: -6811862860717672816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_24
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 3393
+        width: 438
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 34, z: 32, w: 34}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0212d94f3e976c7f0800000000000000
+      internalID: -592652280984166112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_25
+      rect:
+        serializedVersion: 2
+        x: 2641
+        y: 3417
+        width: 676
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 15, z: 24, w: 15}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fd97c14c4504b5f0800000000000000
+      internalID: -741962213530034700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_26
+      rect:
+        serializedVersion: 2
+        x: 3884
+        y: 3317
+        width: 182
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 54, z: 56, w: 54}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afdda39819c453670800000000000000
+      internalID: 8517798458197466618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_27
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 3293
+        width: 616
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 41, z: 45, w: 41}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c8825cb953fb3de0800000000000000
+      internalID: -1352219696357537594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_28
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 3299
+        width: 438
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 34, z: 32, w: 34}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c820f6338e0e7a20800000000000000
+      internalID: 3061900753383729352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_29
+      rect:
+        serializedVersion: 2
+        x: 2935
+        y: 3285
+        width: 250
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 24, z: 24, w: 24}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a1ba55277f027860800000000000000
+      internalID: 7526094931691745705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_30
+      rect:
+        serializedVersion: 2
+        x: 3211
+        y: 3279
+        width: 84
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1895c2d5e8eb56850800000000000000
+      internalID: 6369706766643255681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_31
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 3045
+        width: 616
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 55, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d46f6aa28f66bc00800000000000000
+      internalID: 916042181212333272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_32
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 3205
+        width: 438
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 34, z: 32, w: 34}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f2364b458cb6570800000000000000
+      internalID: 8461076591074815746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_33
+      rect:
+        serializedVersion: 2
+        x: 2887
+        y: 3161
+        width: 408
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 24, z: 24, w: 24}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eadef1cd17d9d8f0800000000000000
+      internalID: -515144159548482842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_34
+      rect:
+        serializedVersion: 2
+        x: 3885
+        y: 3082
+        width: 174
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 87, y: 87, z: 87, w: 87}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a3ca074bcf772a30800000000000000
+      internalID: 4190458489338512297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_35
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 2891
+        width: 258
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 80, y: 80, z: 80, w: 80}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a611fba74ec71b390800000000000000
+      internalID: -7804319358502629014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_36
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 2891
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb4df31cbfb0ab820800000000000000
+      internalID: 2934671283092182204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_37
+      rect:
+        serializedVersion: 2
+        x: 2115
+        y: 3051
+        width: 222
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fc3460fc9a78f000800000000000000
+      internalID: 69940608690830583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_38
+      rect:
+        serializedVersion: 2
+        x: 2341
+        y: 3055
+        width: 104
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5086a2f3be4b7b520800000000000000
+      internalID: 2717839822611441669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_39
+      rect:
+        serializedVersion: 2
+        x: 2451
+        y: 3055
+        width: 104
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6a63770d4c8adc30800000000000000
+      internalID: 4384971449663973998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_40
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 2891
+        width: 616
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 12, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48de15f5e5386ebb0800000000000000
+      internalID: -4907090302624207484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_41
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 2875
+        width: 664
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 53, z: 56, w: 53}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 150bbdae3026baef0800000000000000
+      internalID: -95875198093643695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_42
+      rect:
+        serializedVersion: 2
+        x: 2133
+        y: 2775
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b21efd59393a80340800000000000000
+      internalID: 4830290454624854315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_43
+      rect:
+        serializedVersion: 2
+        x: 2375
+        y: 2775
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 36, z: 36, w: 36}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cd50f701e8b176b0800000000000000
+      internalID: -5300252009798017594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_44
+      rect:
+        serializedVersion: 2
+        x: 2617
+        y: 2775
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9163d1b7036227f0800000000000000
+      internalID: -638839312433847910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_45
+      rect:
+        serializedVersion: 2
+        x: 2859
+        y: 2775
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 613bcf59ddd5dbe10800000000000000
+      internalID: 2215029798021673750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_46
+      rect:
+        serializedVersion: 2
+        x: 3101
+        y: 2775
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be23eb8a62a13f720800000000000000
+      internalID: 2878673340161995499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_47
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 2613
+        width: 246
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 80, y: 80, z: 80, w: 80}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26020c0aeb89fb2b0800000000000000
+      internalID: -5566562669898489758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_48
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 2613
+        width: 246
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 981ff256cb4a3c850800000000000000
+      internalID: 6396137024854684041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_49
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 2643
+        width: 618
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 56, z: 56, w: 56}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6263262b38bd7b5b0800000000000000
+      internalID: -5352568273426565594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_50
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 1919
+        width: 665
+        height: 923
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 56, y: 56, z: 56, w: 56}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f8be2a56ab479ad0800000000000000
+      internalID: -2695602674108286731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_51
+      rect:
+        serializedVersion: 2
+        x: 2133
+        y: 2493
+        width: 208
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 48, y: 48, z: 48, w: 48}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ffa110f09d4b5d0800000000000000
+      internalID: -3047572389356699777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_52
+      rect:
+        serializedVersion: 2
+        x: 2375
+        y: 2493
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d739ddd4644b9ece0800000000000000
+      internalID: -1375369997137898627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_53
+      rect:
+        serializedVersion: 2
+        x: 2615
+        y: 2493
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e5900a25f4919f80800000000000000
+      internalID: -8101530473970231835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_54
+      rect:
+        serializedVersion: 2
+        x: 2855
+        y: 2493
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccb481e508ace8820800000000000000
+      internalID: 2922495860893305804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_55
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 2552
+        width: 618
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 32, z: 45, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399b03249169879d0800000000000000
+      internalID: -2776304135045072493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_57
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 1839
+        width: 622
+        height: 698
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68d29d597dd6c1fd0800000000000000
+      internalID: -2369898531204289146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_62
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 1751
+        width: 664
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 36, y: 36, z: 36, w: 36}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1522b3eb2fd60b240800000000000000
+      internalID: 4805461691745378897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_64
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 1729
+        width: 622
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 43, z: 45, w: 43}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaa222ca2d62ba570800000000000000
+      internalID: 8478913409727998638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_65
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 1685
+        width: 630
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2424ccae0535721f0800000000000000
+      internalID: -1069794779475459518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_66
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 1627
+        width: 630
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6e90a38569136d40800000000000000
+      internalID: 5576328687405538927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_67
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 407
+        width: 618
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 40, y: 35, z: 40, w: 35}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce253e51aac0778a0800000000000000
+      internalID: -6307558828457897236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_68
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 296
+        width: 618
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 48, y: 35, z: 48, w: 35}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47291080dca201270800000000000000
+      internalID: 8219116380042138228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_69
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 175
+        width: 636
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 48, y: 45, z: 48, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb74b3bdcab98f1e0800000000000000
+      internalID: -2163808454236747845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_70
+      rect:
+        serializedVersion: 2
+        x: 3355
+        y: 2777
+        width: 37
+        height: 661
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 17, y: 24, z: 17, w: 24}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f3b1cd29ea172d0800000000000000
+      internalID: -3282650707595149556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_71
+      rect:
+        serializedVersion: 2
+        x: 3422
+        y: 3335
+        width: 36
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 18, y: 24, z: 18, w: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a319b4c8e37f9abc0800000000000000
+      internalID: -3771211364932284102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_72
+      rect:
+        serializedVersion: 2
+        x: 3422
+        y: 3194
+        width: 36
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 18, y: 24, z: 18, w: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 462c526fa6da0f6e0800000000000000
+      internalID: -1805752775667760540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_73
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 518
+        width: 618
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 40, y: 35, z: 40, w: 35}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f2c07807eb9f10b0800000000000000
+      internalID: -5755710382174846220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_74
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 2272
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 48, y: 48, z: 48, w: 48}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 714e1e54cbe565eb0800000000000000
+      internalID: -4731490195786832873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_75
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 2042
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 48, y: 48, z: 48, w: 48}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05a4fe936d1d49e50800000000000000
+      internalID: 6815302854143593040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_76
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 1812
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 48, y: 48, z: 48, w: 48}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 018780b88bc9c7d90800000000000000
+      internalID: -7098626596222240752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_56
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 2317
+        width: 267
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 43, y: 40, z: 44, w: 48}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb434d75fe314eba0800000000000000
+      internalID: -6060697279842208578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_58
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 2316
+        width: 274
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 88, y: 86, z: 98, w: 69}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65834a856d32e0870800000000000000
+      internalID: 8650891337742432342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

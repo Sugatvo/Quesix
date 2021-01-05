@@ -146,11 +146,11 @@ MonoBehaviour:
   infoTextObject: {fileID: 3485334111014816039}
   checkboxOwner: {fileID: 3121812278143835871}
   checkboxTeammate: {fileID: 1120867926741419238}
-  uncheckedToggle: {fileID: -1344002166743569427, guid: 06b7280e9229fc241957f91737c75c43,
+  uncheckedToggle: {fileID: 4888457379629329662, guid: 66e0f2f44b290124cbea8bf3bfebb54f,
     type: 3}
-  checkedToggleOwner: {fileID: -5729512763155032416, guid: 06b7280e9229fc241957f91737c75c43,
+  checkedToggleOwner: {fileID: 4946959921667143782, guid: 66e0f2f44b290124cbea8bf3bfebb54f,
     type: 3}
-  checkedToggleTeammate: {fileID: 7408754389442677424, guid: 06b7280e9229fc241957f91737c75c43,
+  checkedToggleTeammate: {fileID: -389292731068082688, guid: 66e0f2f44b290124cbea8bf3bfebb54f,
     type: 3}
   events: {fileID: 11400000, guid: 43c1160ed6b600b4d8db67ff8e074f99, type: 2}
   Checked1: 0
@@ -191,8 +191,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -15.5, y: 0}
-  m_SizeDelta: {x: 33, y: 33}
+  m_AnchoredPosition: {x: -22.900024, y: 1}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1120867926741419239
 CanvasRenderer:
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1344002166743569427, guid: 06b7280e9229fc241957f91737c75c43,
+  m_Sprite: {fileID: 4888457379629329662, guid: 66e0f2f44b290124cbea8bf3bfebb54f,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 1
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6281318615283623174, guid: 06b7280e9229fc241957f91737c75c43,
+  m_Sprite: {fileID: 4040468837437026442, guid: da8b3d24ab782f24899fce04284b6073,
     type: 3}
   m_Type: 1
   m_PreserveAspect: 0
@@ -496,8 +496,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 21.8, y: 0}
-  m_SizeDelta: {x: 33, y: 33}
+  m_AnchoredPosition: {x: 14.399963, y: 1}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1162790285814313283
 CanvasRenderer:
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1344002166743569427, guid: 06b7280e9229fc241957f91737c75c43,
+  m_Sprite: {fileID: 4888457379629329662, guid: 66e0f2f44b290124cbea8bf3bfebb54f,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 1

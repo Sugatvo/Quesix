@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 8702046202591188180}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8702046200942176348
 CanvasRenderer:
@@ -63,7 +63,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -4410782164641039334, guid: 66e0f2f44b290124cbea8bf3bfebb54f,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -142,9 +143,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2244396347419686273, guid: 06b7280e9229fc241957f91737c75c43,
+  m_Sprite: {fileID: -7098626596222240752, guid: 43d7b1909bb62884d9e8c826a0be5259,
     type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
@@ -152,7 +153,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5
 --- !u!114 &8702046201404026351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +166,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab6c01335aeec44e9e2c1f1d2d63fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  canvasTransform: {fileID: 0}
+  events: {fileID: 0}
+  cardCount: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  droppedOnSlot: 0
   parentToReturnTo: {fileID: 0}
+  validationParent: {fileID: 0}
+  index: 0
+  type: 0
 --- !u!114 &8702046201404026350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10234b1cee5e1234dad02e8d59049a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 0}
+  cardAction: 
   moveImg: {fileID: 8702046200942176351}
 --- !u!114 &4419241997726938686
 MonoBehaviour:

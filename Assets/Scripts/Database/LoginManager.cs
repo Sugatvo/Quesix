@@ -37,6 +37,9 @@ public class LoginManager : MonoBehaviour
     [SerializeField] Canvas teacherCanvas;
     [SerializeField] Canvas studentCanvas;
 
+    [Header("Settings")]
+    [SerializeField] CanvasGroup settingsCanvasGroup;
+
     private bool usernameFlag = false;
 
     public void CallLogin()
@@ -50,7 +53,7 @@ public class LoginManager : MonoBehaviour
         form.AddField("username", usernameFieldLogin.text);
         form.AddField("password", passwordFieldLogin.text);
 
-        WWW www = new WWW("http://localhost/quesix/login.php", form);
+        WWW www = new WWW("http://25.90.9.119/quesix/login.php", form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -69,17 +72,20 @@ public class LoginManager : MonoBehaviour
             {
                 loginCanvas.gameObject.SetActive(false);
                 adminCanvas.gameObject.SetActive(true);
+                NetworkPlayer.localPlayer.id_admin = www.text.Split('\t')[5];
 
             }
             else if (NetworkPlayer.localPlayer.rol.Equals("Estudiante"))
             {
                 loginCanvas.gameObject.SetActive(false);
                 studentCanvas.gameObject.SetActive(true);
+                NetworkPlayer.localPlayer.id_student = www.text.Split('\t')[5];
             }
             else if (NetworkPlayer.localPlayer.rol.Equals("Profesor"))
             {
                 loginCanvas.gameObject.SetActive(false);
                 teacherCanvas.gameObject.SetActive(true);
+                NetworkPlayer.localPlayer.id_teacher = www.text.Split('\t')[5];
             }
 
             usernameFieldLogin.text = string.Empty;
@@ -111,7 +117,7 @@ public class LoginManager : MonoBehaviour
         form.AddField("password", passwordField.text);
         form.AddField("mail", mailField.text);
 
-        WWW www = new WWW("http://localhost/quesix/register/create.php", form);
+        WWW www = new WWW("http://25.90.9.119/quesix/register/create.php", form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -149,7 +155,7 @@ public class LoginManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", usernameField.text);
 
-        WWW www = new WWW("http://localhost/quesix/register/username_check.php", form);
+        WWW www = new WWW("http://25.90.9.119/quesix/register/username_check.php", form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -216,5 +222,15 @@ public class LoginManager : MonoBehaviour
         registerForm.blocksRaycasts = false;
     }
 
+    public void OnClickSettings()
+    {
+        settingsCanvasGroup.alpha = 1f;
+        settingsCanvasGroup.blocksRaycasts = true;
+    }
 
+    public void OnClickCloseSettings()
+    {
+        settingsCanvasGroup.alpha = 0f;
+        settingsCanvasGroup.blocksRaycasts = false;
+    }
 }

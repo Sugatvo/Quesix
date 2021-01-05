@@ -137,13 +137,14 @@ public class TeamManager : NetworkBehaviour
         rightSpawner = GameObject.Find("RightCards").transform;
 
         timerAnimator_Programming = GameObject.Find("Timer_Programming").GetComponent<Animator>();
-        timerText_Programming = GameObject.Find("ContornoTimerProgramming").transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        timerText_Programming = GameObject.Find("Timer_Programming").transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
 
         timerDefaultColor = timerText.color;
         timerStateParaHash = Animator.StringToHash("TimeState");
 
         var seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         UnityEngine.Random.InitState(seed);
+       
     }
 
     public override void OnStartLocalPlayer()
@@ -256,6 +257,11 @@ public class TeamManager : NetworkBehaviour
         if (teamObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             uiManager.EnableButtons();
+            if(int.Parse(cardCountText.text) >= 5)
+            {
+                uiManager.EnableProgramar();
+            }
+            
         }
         else
         {
