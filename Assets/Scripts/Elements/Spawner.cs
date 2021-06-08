@@ -37,6 +37,7 @@ public class Spawner : NetworkBehaviour
         GameObject newCheese = Instantiate(cheesePrefab.gameObject, spawnPoint.position, spawnPoint.rotation);
         Cheese cheese = newCheese.gameObject.GetComponent<Cheese>();
         cheese.spawner = this;
+        cheese.spawnpoint = spawnPoint;
         NetworkServer.Spawn(newCheese);
         SceneManager.MoveGameObjectToScene(newCheese, gameObject.scene);
         RemoveSpawnPoint(spawnPoint);

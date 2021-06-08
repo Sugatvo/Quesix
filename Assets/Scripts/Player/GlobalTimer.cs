@@ -9,8 +9,6 @@ public class GlobalTimer : NetworkBehaviour
     public int MaxTime;
     public int CurrentTime;
     public bool isReady = false;
-    public bool isTutorial = false;
-    private float waitTime = 46f;
     private TextMeshProUGUI globalTimerText;
 
 
@@ -50,31 +48,8 @@ public class GlobalTimer : NetworkBehaviour
         globalTimerText.text = auxMinutes + ":" + auxSeconds;
     }
 
-    public void SetTutorial(bool statement)
-    {
-        TutorialManager.Instance.m_Animator.SetBool("isTutorial", statement);
-        GetComponent<TeamManager>().isFirstQuestion = statement;
-        GetComponent<TeamManager>().isFirstProgramming = statement;
-    }
-
     private void Update()
     {
-        if (isTutorial)
-        {
-            if (waitTime > 0)
-            {
-                waitTime -= Time.deltaTime;
-            }
-            else
-            {
-                isReady = true;
-            }
-
-        }
-        else
-        {
-            isReady = true;
-        }
-       
+        isReady = true;
     }
 }

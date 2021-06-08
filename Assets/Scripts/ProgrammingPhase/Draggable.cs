@@ -80,13 +80,16 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log("OnDrag Draggable");
         // Send to team manager for synchronize
-        Debug.Log("OnDrag");
-        if (int.Parse(cardCount.text) > 0 || validationParent.GetComponent<DropZone>() != null)
+        if(validationParent != null)
         {
-            float oldX = canvas.GetComponent<RectTransform>().rect.height * canvas.scaleFactor;
-            float oldY = canvas.GetComponent<RectTransform>().rect.width * canvas.scaleFactor;
-            events.SynchronizeOnDrag(index, eventData.position, oldX, oldY);
+            if (int.Parse(cardCount.text) > 0 || validationParent.GetComponent<DropZone>() != null)
+            {
+                float oldX = canvas.GetComponent<RectTransform>().rect.height * canvas.scaleFactor;
+                float oldY = canvas.GetComponent<RectTransform>().rect.width * canvas.scaleFactor;
+                events.SynchronizeOnDrag(index, eventData.position, oldX, oldY);
+            }
         }
     }
 
@@ -110,6 +113,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("OnEndDrag Draggable");
         if (int.Parse(cardCount.text) > 0 || validationParent.GetComponent<DropZone>() != null)
         {
             events.SynchronizeOnEndDrag(index);

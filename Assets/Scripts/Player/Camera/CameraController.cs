@@ -18,9 +18,6 @@ public class CameraController : NetworkBehaviour
     public GameObject teamObject;
 
     [SyncVar]
-    public int type = 0;
-
-    [SyncVar]
     public string rol = string.Empty;
 
     float offset;
@@ -128,7 +125,6 @@ public class CameraController : NetworkBehaviour
             }
         }
     }
-
 
     public void Move(bool state)
     {

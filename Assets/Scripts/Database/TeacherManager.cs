@@ -9,11 +9,12 @@ using TMPro;
 
 public class TeacherManager : MonoBehaviour
 {
-    [Header("Player information")]
+    [Header("Text")]
     [SerializeField] TextMeshProUGUI playerInfo;
-    [SerializeField] TextMeshProUGUI rolInfo;
+    [SerializeField] TextMeshProUGUI actionMenuTitle;
 
     [Header("Menus")]
+    [SerializeField] CanvasGroup mainMenu;
     [SerializeField] CanvasGroup cursosMenu;
     [SerializeField] CanvasGroup actionMenu;
     [SerializeField] CanvasGroup studentsInfo;
@@ -25,11 +26,13 @@ public class TeacherManager : MonoBehaviour
     [SerializeField] RectTransform cursoContentArea;
     [SerializeField] RectTransform studentsContentArea;
     [SerializeField] RectTransform clasesContentArea;
+    [SerializeField] RectTransform breadCrumbsContentArea;
 
     [Header("Prefabs")]
     [SerializeField] CursoData cursoPrefab = null;
     [SerializeField] StudentData studentPrefab = null;
     [SerializeField] ClasesData classesPrefab = null;
+    [SerializeField] GameObject breadCrumbsPrefab = null;
 
     [Header("Canvases")]
     [SerializeField] Canvas loginCanvas;
@@ -66,7 +69,7 @@ public class TeacherManager : MonoBehaviour
     List<StudentData> currentStudents = new List<StudentData>();
     List<ToggleData> currentToggles = new List<ToggleData>();
     List<ClasesData> currentClases = new List<ClasesData>();
-
+    public List<GameObject> currentBreadcrumbs = new List<GameObject>();
 
     private string[] cursos;
     private List<string> materias;
@@ -97,8 +100,12 @@ public class TeacherManager : MonoBehaviour
     {
         if (NetworkPlayer.localPlayer.LoggedIn)
         {
+            EraseBreadCrumbs();
             playerInfo.text = "BIENVENIDO - " + NetworkPlayer.localPlayer.nombre + " " + NetworkPlayer.localPlayer.apellido;
-            rolInfo.text = NetworkPlayer.localPlayer.rol;
+            GameObject initialbreadCrumbs = Instantiate(breadCrumbsPrefab, breadCrumbsContentArea);
+            initialbreadCrumbs.GetComponent<TextMeshProUGUI>().text = NetworkPlayer.localPlayer.rol;
+            initialbreadCrumbs.GetComponent<Button>().onClick.AddListener(() => VolverMainMenu());
+            currentBreadcrumbs.Add(initialbreadCrumbs);
         }
 
         //Obtener cursos del profesor
@@ -130,7 +137,6 @@ public class TeacherManager : MonoBehaviour
         studentsInfo.blocksRaycasts = false;
         classMenu.blocksRaycasts = false;
         createMenu.blocksRaycasts = false;
-
         NetworkPlayer.localPlayer.LogOut();
         loginCanvas.gameObject.SetActive(true);
         teacherCanvas.gameObject.SetActive(false);
@@ -141,7 +147,7 @@ public class TeacherManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_usuario", NetworkPlayer.localPlayer.id_user);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/teachercourses.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/teacher/teachercourses.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -166,7 +172,7 @@ public class TeacherManager : MonoBehaviour
 
     public IEnumerator GetToggles()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://25.90.9.119/quesix/teacher/information.php"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://127.0.0.1/quesix/teacher/information.php"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -218,6 +224,15 @@ public class TeacherManager : MonoBehaviour
     public void ShowCursos()
     {
         CreateCursos();
+
+        if (!currentBreadcrumbs.Find((x) => x.GetComponent<TextMeshProUGUI>().text == " / Mis Cursos / "))
+        {
+            GameObject breadCrumbs = Instantiate(breadCrumbsPrefab, breadCrumbsContentArea);
+            breadCrumbs.GetComponent<TextMeshProUGUI>().text = " / Mis Cursos / ";
+            breadCrumbs.GetComponent<Button>().onClick.AddListener(() => VolverMisCursos());
+            currentBreadcrumbs.Add(breadCrumbs);
+        }
+        
         studentsInfo.alpha = 0.0f;
         studentsInfo.blocksRaycasts = false;
         actionMenu.alpha = 0.0f;
@@ -258,10 +273,20 @@ public class TeacherManager : MonoBehaviour
     }
 
 
-    public void SelectCurso (string[] result, int cursoIndex, int id_curso)
+    public void SelectCurso (string[] result, int cursoIndex, int id_curso, string nombre)
     {
+        if (!currentBreadcrumbs.Find((x) => x.GetComponent<TextMeshProUGUI>().text == " " + nombre + " "))
+        {
+            GameObject breadCrumbs = Instantiate(breadCrumbsPrefab, breadCrumbsContentArea);
+            breadCrumbs.GetComponent<TextMeshProUGUI>().text = " " + nombre + " ";
+            breadCrumbs.GetComponent<Button>().onClick.AddListener(() => VolverCursoSeleccionado());
+            currentBreadcrumbs.Add(breadCrumbs);
+        }
+        actionMenuTitle.text = nombre;
         students = result;
         curso_id = id_curso;
+        mainMenu.alpha = 0.0f;
+        mainMenu.blocksRaycasts = false;
         cursosMenu.alpha = 0.0f;
         cursosMenu.blocksRaycasts = false;
         studentsInfo.alpha = 0.0f;
@@ -273,6 +298,96 @@ public class TeacherManager : MonoBehaviour
     }
 
 
+    void EraseBreadCrumbs()
+    {
+        foreach (var breadcrumb in currentBreadcrumbs)
+        {
+            Destroy(breadcrumb.gameObject);
+        }
+        currentBreadcrumbs.Clear();
+    }
+
+
+    public void VolverMainMenu ()
+    {
+        actionMenuTitle.text = "Opciones";
+        for (int i = currentBreadcrumbs.Count - 1; i > -1; i--)
+        {
+            if (currentBreadcrumbs[i].GetComponent<TextMeshProUGUI>().text.Equals(NetworkPlayer.localPlayer.rol))
+            {
+                break;
+            }
+            else
+            {
+                Destroy(currentBreadcrumbs[i]);
+                currentBreadcrumbs.RemoveAt(i);
+            }
+        }
+        mainMenu.alpha = 1.0f;
+        mainMenu.blocksRaycasts = true;
+        cursosMenu.alpha = 0.0f;
+        cursosMenu.blocksRaycasts = false;
+        studentsInfo.alpha = 0.0f;
+        studentsInfo.blocksRaycasts = false;
+        classMenu.alpha = 0.0f;
+        classMenu.blocksRaycasts = false;
+        actionMenu.alpha = 0.0f;
+        actionMenu.blocksRaycasts = false;
+    }
+
+    public void VolverMisCursos()
+    {
+        actionMenuTitle.text = "Opciones";
+        for (int i = currentBreadcrumbs.Count - 1; i >-1; i--)
+        {
+            if (currentBreadcrumbs[i].GetComponent<TextMeshProUGUI>().text.Equals(" / Mis Cursos / "))
+            {
+                break;
+            }
+            else
+            {
+                Destroy(currentBreadcrumbs[i]);
+                currentBreadcrumbs.RemoveAt(i);
+            }
+        }
+        mainMenu.alpha = 1.0f;
+        mainMenu.blocksRaycasts = true;
+        cursosMenu.alpha = 1.0f;
+        cursosMenu.blocksRaycasts = true;
+        studentsInfo.alpha = 0.0f;
+        studentsInfo.blocksRaycasts = false;
+        classMenu.alpha = 0.0f;
+        classMenu.blocksRaycasts = false;
+        actionMenu.alpha = 0.0f;
+        actionMenu.blocksRaycasts = false;
+    }
+
+    public void VolverCursoSeleccionado()
+    {
+        for (int i = currentBreadcrumbs.Count - 1; i > -1; i--)
+        {
+            if (currentBreadcrumbs[i].GetComponent<TextMeshProUGUI>().text.Equals(" " + actionMenuTitle.text + " "))
+            {
+                break;
+            }
+            else
+            {
+                Destroy(currentBreadcrumbs[i]);
+                currentBreadcrumbs.RemoveAt(i);
+            }
+        }
+        mainMenu.alpha = 0.0f;
+        mainMenu.blocksRaycasts = false;
+        cursosMenu.alpha = 0.0f;
+        cursosMenu.blocksRaycasts = true;
+        studentsInfo.alpha = 0.0f;
+        studentsInfo.blocksRaycasts = false;
+        actionMenu.alpha = 1.0f;
+        actionMenu.blocksRaycasts = true;
+        classMenu.alpha = 0.0f;
+        classMenu.blocksRaycasts = false;
+    }
+
     public void ShowClassMenu()
     {
         StartCoroutine(CreateClases(curso_id));
@@ -280,8 +395,6 @@ public class TeacherManager : MonoBehaviour
         cursosMenu.blocksRaycasts = false;
         studentsInfo.alpha = 0.0f;
         studentsInfo.blocksRaycasts = false;
-        actionMenu.alpha = 0.0f;
-        actionMenu.blocksRaycasts = false;
         classMenu.alpha = 1.0f;
         classMenu.blocksRaycasts = true;
         createMenu.alpha = 0f;
@@ -295,7 +408,7 @@ public class TeacherManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("curso_id", curso_id);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/getclases.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/teacher/getclases.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -356,8 +469,6 @@ public class TeacherManager : MonoBehaviour
         cursosMenu.blocksRaycasts = false;
         classMenu.alpha = 0.0f;
         classMenu.blocksRaycasts = false;
-        actionMenu.alpha = 0.0f;
-        actionMenu.blocksRaycasts = false;
         studentsInfo.alpha = 1.0f;
         studentsInfo.blocksRaycasts = true;
     }
@@ -373,8 +484,6 @@ public class TeacherManager : MonoBehaviour
 
         cursosMenu.alpha = 0.0f;
         cursosMenu.blocksRaycasts = false;
-        actionMenu.alpha = 0.0f;
-        actionMenu.blocksRaycasts = false;
         studentsInfo.alpha = 0.0f;
         studentsInfo.blocksRaycasts = false;
         createMenu.alpha = 1f;
@@ -521,7 +630,7 @@ public class TeacherManager : MonoBehaviour
                     {
                         if (togglesMaterias[i].isOn)
                         {
-                            form.AddField("materia" + contador.ToString(), togglesMaterias[i].GetComponentInChildren<TextMeshProUGUI>().text);
+                            form.AddField("materia" + contador.ToString(), togglesMaterias[i].GetComponentInChildren<TextMeshProUGUI>().text.ToLower());
                             contador++;
                         }   
                     }
@@ -535,7 +644,7 @@ public class TeacherManager : MonoBehaviour
                     {
                         if (togglesMaterias[i].isOn)
                         {
-                            form.AddField("materia" + contador.ToString(), togglesMaterias[i].GetComponentInChildren<TextMeshProUGUI>().text);
+                            form.AddField("materia" + contador.ToString(), togglesMaterias[i].GetComponentInChildren<TextMeshProUGUI>().text.ToLower());
                             contador++;
                         }
                     }
@@ -558,7 +667,7 @@ public class TeacherManager : MonoBehaviour
         form.AddField("tiempo_maximo", maxTimeField.text);
         form.AddField("fecha", yearField.text + "/" + monthField.text + "/" + dayField.text);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/createclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/teacher/createclass.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -657,7 +766,7 @@ public class TeacherManager : MonoBehaviour
         form.AddField("tiempo_maximo", maxTimeField.text);
         form.AddField("fecha", yearField.text + "/" + monthField.text + "/" + dayField.text);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/editclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/teacher/editclass.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -718,8 +827,6 @@ public class TeacherManager : MonoBehaviour
         CleanCreateClassMenu();
         cursosMenu.alpha = 0.0f;
         cursosMenu.blocksRaycasts = false;
-        actionMenu.alpha = 0.0f;
-        actionMenu.blocksRaycasts = false;
         studentsInfo.alpha = 0.0f;
         studentsInfo.blocksRaycasts = false;
         createMenu.alpha = 0f;

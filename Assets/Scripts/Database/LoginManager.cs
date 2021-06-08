@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class LoginManager : MonoBehaviour
@@ -10,6 +11,12 @@ public class LoginManager : MonoBehaviour
     [SerializeField] CanvasGroup mainMenu;
     [SerializeField] CanvasGroup loginForm;
     [SerializeField] CanvasGroup registerForm;
+    [SerializeField] CanvasGroup loadingCircle;
+    [SerializeField] CanvasGroup loginInputs;
+    [SerializeField] CanvasGroup errorPopUp;
+
+    [SerializeField] KeyboardSelectableGroup loginSelectableScript;
+    [SerializeField] KeyboardSelectableGroup registerSelectableScript;
 
     [Space]
 
@@ -17,6 +24,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField usernameFieldLogin;
     public TMP_InputField passwordFieldLogin;
     [SerializeField] Button entrarButton;
+    [SerializeField] TextMeshProUGUI errorText;
 
     [Space]
 
@@ -42,6 +50,22 @@ public class LoginManager : MonoBehaviour
 
     private bool usernameFlag = false;
 
+
+    private static LoginManager _instance;
+    public static LoginManager Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     public void CallLogin()
     {
         StartCoroutine(Login());
@@ -49,54 +73,80 @@ public class LoginManager : MonoBehaviour
 
     IEnumerator Login()
     {
+        WaitingForResponse();
+        yield return new WaitForSeconds(1.0f);
+
         WWWForm form = new WWWForm();
         form.AddField("username", usernameFieldLogin.text);
         form.AddField("password", passwordFieldLogin.text);
 
-        WWW www = new WWW("http://25.90.9.119/quesix/login.php", form);
-        yield return www;
-
-        if (!string.IsNullOrEmpty(www.error))
-            Debug.Log(www.error);
-
-
-        if (www.text[0] == '0')
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/login.php", form))
         {
-            NetworkPlayer.localPlayer.username = usernameFieldLogin.text;
-            NetworkPlayer.localPlayer.nombre = www.text.Split('\t')[1];
-            NetworkPlayer.localPlayer.apellido = www.text.Split('\t')[2];
-            NetworkPlayer.localPlayer.rol = www.text.Split('\t')[3];
-            NetworkPlayer.localPlayer.id_user = www.text.Split('\t')[4];
-
-            if (NetworkPlayer.localPlayer.rol.Equals("Administrador"))
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
             {
-                loginCanvas.gameObject.SetActive(false);
-                adminCanvas.gameObject.SetActive(true);
-                NetworkPlayer.localPlayer.id_admin = www.text.Split('\t')[5];
-
+                Debug.Log("Error: " + webRequest.error);
             }
-            else if (NetworkPlayer.localPlayer.rol.Equals("Estudiante"))
+            else
             {
-                loginCanvas.gameObject.SetActive(false);
-                studentCanvas.gameObject.SetActive(true);
-                NetworkPlayer.localPlayer.id_student = www.text.Split('\t')[5];
-            }
-            else if (NetworkPlayer.localPlayer.rol.Equals("Profesor"))
-            {
-                loginCanvas.gameObject.SetActive(false);
-                teacherCanvas.gameObject.SetActive(true);
-                NetworkPlayer.localPlayer.id_teacher = www.text.Split('\t')[5];
-            }
+                string text_received = webRequest.downloadHandler.text;
+                if (text_received[0] == '0')
+                {
+                    string username = usernameFieldLogin.text;
+                    string nombre = text_received.Split('\t')[1];
+                    string apellido = text_received.Split('\t')[2];
+                    string rol = text_received.Split('\t')[3];
+                    string id_user = text_received.Split('\t')[4];
+                    string id = string.Empty;
+                    string status = text_received.Split('\t')[6];
 
-            usernameFieldLogin.text = string.Empty;
-            passwordFieldLogin.text = string.Empty;
-            ShowMainMenu();
-        }
-        else
-        {
-            Debug.Log("Login failed. Error #" + www.text);
+                    Debug.Log("status = " + status);
+                    if (status.Equals("0"))
+                    {
+                        if (rol.Equals("Administrador"))
+                        {
+                            id = text_received.Split('\t')[5];
+                            NetworkPlayer.localPlayer.CmdSetInformation(username, nombre, apellido, rol, id_user, id);
+                            StartCoroutine(WaitForSyncUserInfo(loginCanvas.gameObject, adminCanvas.gameObject));
+                        }
+                        else if (rol.Equals("Estudiante"))
+                        {
+                            id = text_received.Split('\t')[5];
+                            NetworkPlayer.localPlayer.CmdSetInformation(username, nombre, apellido, rol, id_user, id);
+                            StartCoroutine(WaitForSyncUserInfo(loginCanvas.gameObject, studentCanvas.gameObject));
+
+                        }
+                        else if (rol.Equals("Profesor"))
+                        {
+                            id = text_received.Split('\t')[5];
+                            NetworkPlayer.localPlayer.CmdSetInformation(username, nombre, apellido, rol, id_user, id);
+                            StartCoroutine(WaitForSyncUserInfo(loginCanvas.gameObject, teacherCanvas.gameObject));
+                        }
+                        else
+                        {
+                            Debug.Log("Error user have no rol");
+                        }
+                    }
+                    else
+                    {
+                        errorText.text = "Esta cuenta ya está conectada al servidor. Por favor, intente más tarde.";
+                        errorPopUp.alpha = 1.0f;
+                        ResponseReceived();
+                        Debug.Log("Login failed. Error: User is already online");
+                    }
+                }
+                else
+                {
+                    errorText.text = "Tus credenciales de inicio de sesión no coinciden con ninguna cuenta de nuestro sistema.";
+                    errorPopUp.alpha = 1.0f;
+                    ResponseReceived();
+                    Debug.Log("Login failed. Error #" + text_received);
+                }
+            }
         }
     }
+   
 
     public void VerifyInputsLogin()
     {
@@ -117,21 +167,27 @@ public class LoginManager : MonoBehaviour
         form.AddField("password", passwordField.text);
         form.AddField("mail", mailField.text);
 
-        WWW www = new WWW("http://25.90.9.119/quesix/register/create.php", form);
-        yield return www;
-
-        if (!string.IsNullOrEmpty(www.error))
-            Debug.Log(www.error);
-
-
-        if (www.text == "0")
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/register/create.php", form))
         {
-            Debug.Log("User created successfully.");
-            ShowMainMenu();
-        }
-        else
-        {
-            Debug.Log("User creation failed. Error #" + www.text);
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                string text_received = webRequest.downloadHandler.text;
+                if (text_received == "0")
+                {
+                    Debug.Log("User created successfully.");
+                    ShowMainMenu();
+                }
+                else
+                {
+                    Debug.Log("User creation failed. Error #" + text_received);
+                }
+            }
         }
     }
 
@@ -155,26 +211,32 @@ public class LoginManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", usernameField.text);
 
-        WWW www = new WWW("http://25.90.9.119/quesix/register/username_check.php", form);
-        yield return www;
 
-        if (!string.IsNullOrEmpty(www.error))
-            Debug.Log(www.error);
-
-
-        if (www.text == "0")
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/register/username_check.php", form))
         {
-            usernameInfo.color = new Color32(255, 255, 255, 255);
-            usernameInfo.text = "Puedes utilizar letras y números.";
-            usernameFlag = true;
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                string text_received = webRequest.downloadHandler.text;
+                if (text_received == "0")
+                {
+                    usernameInfo.color = new Color32(255, 255, 255, 255);
+                    usernameInfo.text = "Puedes utilizar letras y números.";
+                    usernameFlag = true;
+                }
+                else
+                {
+                    usernameInfo.color = new Color32(243, 68, 68, 255);
+                    usernameInfo.text = "Ese nombre de usuario ya está en uso. Prueba con otro.";
+                    usernameFlag = false;
+                }
+            }
         }
-        else
-        {
-            usernameInfo.color = new Color32(243, 68, 68, 255);
-            usernameInfo.text = "Ese nombre de usuario ya está en uso. Prueba con otro.";
-            usernameFlag = false;
-        }
-
         VerifyInputs();
     }
 
@@ -195,6 +257,9 @@ public class LoginManager : MonoBehaviour
 
         registerForm.alpha = 0.0f;
         registerForm.blocksRaycasts = false;
+
+        loginSelectableScript.enabled = true;
+        registerSelectableScript.enabled = false;
     }
 
 
@@ -208,6 +273,50 @@ public class LoginManager : MonoBehaviour
 
         registerForm.alpha = 1.0f;
         registerForm.blocksRaycasts = true;
+
+        loginSelectableScript.enabled = false;
+        registerSelectableScript.enabled = true;
+    }
+
+    public IEnumerator WaitForSyncUserInfo(GameObject loginCanvas, GameObject rolCanvas)
+    {
+        yield return new WaitUntil(() => NetworkPlayer.localPlayer.id_user != string.Empty);
+        yield return StartCoroutine(SetStatus(true));
+        ResponseReceived();
+        loginCanvas.SetActive(false);
+        rolCanvas.SetActive(true);
+        // Reset login
+        usernameFieldLogin.text = string.Empty;
+        passwordFieldLogin.text = string.Empty;
+        ShowMainMenu();
+    }
+
+
+    public IEnumerator SetStatus(bool status)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("id_user", NetworkPlayer.localPlayer.id_user);
+        form.AddField("status", status.ToString());
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/general/setstatus.php", form))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                string text_received = webRequest.downloadHandler.text;
+                Debug.Log(text_received);
+                if (text_received == "0")
+                {
+                    Debug.Log("status set to: " + status);
+
+                }
+            }
+        }
     }
 
     public void ShowMainMenu()
@@ -220,6 +329,12 @@ public class LoginManager : MonoBehaviour
 
         registerForm.alpha = 0.0f;
         registerForm.blocksRaycasts = false;
+
+        // Reset login
+        usernameFieldLogin.text = string.Empty;
+        passwordFieldLogin.text = string.Empty;
+
+        HidePopUp();
     }
 
     public void OnClickSettings()
@@ -232,5 +347,31 @@ public class LoginManager : MonoBehaviour
     {
         settingsCanvasGroup.alpha = 0f;
         settingsCanvasGroup.blocksRaycasts = false;
+    }
+
+    public void WaitingForResponse()
+    {
+        entrarButton.interactable = false;
+        loadingCircle.alpha = 1.0f;
+        loginInputs.alpha = 0.0f;
+        loginInputs.blocksRaycasts = false;
+        loginInputs.interactable = false;
+    }
+
+    public void ResponseReceived()
+    {
+        entrarButton.interactable = true;
+        loadingCircle.alpha = 0.0f;
+        loginInputs.alpha = 1.0f;
+        loginInputs.blocksRaycasts = true;
+        loginInputs.interactable = true;
+    }
+
+    public void HidePopUp()
+    {
+        if(errorPopUp.alpha > 0f)
+        {
+            errorPopUp.alpha = 0.0f;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿
+using Mirror;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,11 +34,14 @@ public class PlayerScoreQuesix : NetworkBehaviour
     private GUIStyle black;
 
     // Game Manager 
-    public QuestionCard[] _preguntas = null;
+    private QuestionCard[] _preguntas = null;
     public QuestionCard[] Preguntas { get { return _preguntas; } }
+
+    public bool questions_loading = true;
 
     [SerializeField] GameEvents events = null;
     [SerializeField] UIManager uiManager = null;
+    [SerializeField] Image RatonIcon;
 
     [SerializeField] private List<AnswerID> pickedAnswers = new List<AnswerID>();
     public List<AnswerID> PickedAnswers
@@ -63,13 +67,12 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
     public List<GameObject> Cards;
 
-    public List<DropZone> dropZones;
+    public List<DropZone> dropZones =  new List<DropZone>();
 
     void OnEnable()
     {
         Debug.Log("OnEnable: PlayerScoreQuesix");
         uiManager = GameObject.Find("Managers").GetComponent<UIManager>();
-        LoadQuestionCards();
         white = new GUIStyle();
         white.normal.textColor = Color.white;
 
@@ -78,7 +81,6 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
         black = new GUIStyle();
         black.normal.textColor = Color.black;
-
     }
 
     public override void OnStartClient()
@@ -110,21 +112,18 @@ public class PlayerScoreQuesix : NetworkBehaviour
         Cards.Add(initialRightCard);
         initialRightCard.GetComponent<Draggable>().index = Cards.IndexOf(initialRightCard);
 
-        var Objects= Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "PlaceHolder");
-        Objects.OrderBy(x => x.name);
+        List<DropZone> dropZone = FindObjectsOfType<DropZone>().OrderBy(x => x.gameObject.name).ToList();
 
         int i = 0;
-        foreach (var item in Objects)
+        Debug.Log("Dropzone order");
+        foreach (DropZone dz in dropZone)
         {
-            DropZone dropZone = item.GetComponent<DropZone>();
-            dropZone.index = i;
-            dropZones.Add(dropZone);
+            Debug.Log("dropzone name = " + dz.gameObject.name);
+            dz.index = i;
+            dropZones.Add(dz);
             i += 1;
         }
-
-        LoadQuestionCards();
     }
-
 
     public void AddScore(int reward, GameObject roboticMouse)
     {
@@ -260,6 +259,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
     void LoadQuestionCards()
     {
+        questions_loading = true;
         StartCoroutine(CreateQuestions(clase_id));
     }
 
@@ -269,7 +269,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
         WWWForm form = new WWWForm();
         form.AddField("clase_id", clase_id);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/student/getquestions.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/student/getquestions.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -299,7 +299,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
                     WWWForm form2 = new WWWForm();
                     form2.AddField("pregunta_id", data[2]);
 
-                    using (UnityWebRequest webRequest2 = UnityWebRequest.Post("http://25.90.9.119/quesix/student/getanswers.php", form2))
+                    using (UnityWebRequest webRequest2 = UnityWebRequest.Post("http://127.0.0.1/quesix/student/getanswers.php", form2))
                     {
                         // Request and wait for the desired page.
                         yield return webRequest2.SendWebRequest();
@@ -328,6 +328,7 @@ public class PlayerScoreQuesix : NetworkBehaviour
                     }
                 }
                 _preguntas = _preguntas.Select(r => (r as QuestionCard)).Where(r => r != null).OrderBy(t => t.ID).ToArray<QuestionCard>();
+                questions_loading = false;
             }
         }
     }

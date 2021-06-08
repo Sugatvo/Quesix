@@ -75,7 +75,7 @@ public class AdminManager : MonoBehaviour
 
     public IEnumerator GetCursos()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://25.90.9.119/quesix/admin/cursos.php"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://127.0.0.1/quesix/admin/cursos.php"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -104,7 +104,7 @@ public class AdminManager : MonoBehaviour
     }
     public IEnumerator GetUsers()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://25.90.9.119/quesix/admin/information.php"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://127.0.0.1/quesix/admin/information.php"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -260,7 +260,6 @@ public class AdminManager : MonoBehaviour
 
     public void Logout()
     {
-
         unassignMenu.alpha = 0.0f;
         classMenu.alpha = 0.0f;
         classUsersMenu.alpha = 0.0f;

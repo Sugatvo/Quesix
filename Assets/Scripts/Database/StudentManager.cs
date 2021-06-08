@@ -15,6 +15,7 @@ public class StudentManager : MonoBehaviour
 
     [Header("Menus")]
     [SerializeField] CanvasGroup classMenu;
+    [SerializeField] CanvasGroup tutorialPanel;
 
     [Header("Content Area")]
     [SerializeField] float margins;
@@ -80,7 +81,7 @@ public class StudentManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_usuario", NetworkPlayer.localPlayer.id_user);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/student/getcurso.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/student/getcurso.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -101,6 +102,16 @@ public class StudentManager : MonoBehaviour
         StartCoroutine(CreateClasesUI(curso_id));
         classMenu.alpha = 1.0f;
         classMenu.blocksRaycasts = true;
+        tutorialPanel.alpha = 0f;
+        tutorialPanel.blocksRaycasts = false;
+    }
+
+    public void ShowTutorialPanel()
+    {
+        classMenu.alpha = 0f;
+        classMenu.blocksRaycasts = false;
+        tutorialPanel.alpha = 1.0f;
+        tutorialPanel.blocksRaycasts = true;
     }
 
     public IEnumerator CreateClasesUI(int curso_id)
@@ -108,7 +119,7 @@ public class StudentManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("curso_id", curso_id);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/getclases.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/teacher/getclases.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -172,7 +183,8 @@ public class StudentManager : MonoBehaviour
         clase_id = -1;
         classMenu.alpha = 0.0f;
         classMenu.blocksRaycasts = false;
-
+        tutorialPanel.alpha = 0f;
+        tutorialPanel.blocksRaycasts = false;
         NetworkPlayer.localPlayer.LogOut();
         loginCanvas.gameObject.SetActive(true);
         studentCanvas.gameObject.SetActive(false);
@@ -190,5 +202,14 @@ public class StudentManager : MonoBehaviour
         settingsCanvasGroup.blocksRaycasts = false;
     }
 
+    public void HideStudentCanvas()
+    {
+        studentCanvas.enabled = false;
+    }
+
+    public void ShowStudentCanvas()
+    {
+        studentCanvas.enabled = true;
+    }
 
 }

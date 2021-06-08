@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae442ce89a1bd442b3f0c6051afb2e9, type: 3}
+  m_Name: Pregunta_1
+  m_EditorClassIdentifier: 
+  tema: Tutorial
+  index: 0
+  pregunta: "<size=24>En un asado familiar asisten 30 personas. Si 1/3 de ellas son
+    adultos,</size>\n<align=center>\xBFCu\xE1ntos ni\xF1os(as) asistieron al asado?</align>"
+  _answers:
+  - _info: 10
+    _isCorrect: 0
+  - _info: 15
+    _isCorrect: 0
+  - _info: 20
+    _isCorrect: 1
+  - _info: Ninguno
+    _isCorrect: 0
+  _useTimer: 1
+  _timer: 120
+  _addCards: 1
+  _answerType: 1

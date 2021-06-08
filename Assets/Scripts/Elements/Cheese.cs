@@ -5,6 +5,7 @@ public class Cheese : NetworkBehaviour
 {
     public bool available = true;
     public Spawner spawner = null;
+    public Transform spawnpoint = null;
     int points;
 
     // Only call this on server
@@ -36,7 +37,7 @@ public class Cheese : NetworkBehaviour
             spawner.SpawnCheese();
 
             // destroy this one
-            Spawner.AddSpawnPoint(this.transform);
+            Spawner.AddSpawnPoint(spawnpoint);
             NetworkServer.Destroy(gameObject);
         }
     }

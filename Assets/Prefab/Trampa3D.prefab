@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 781714408822855194}
   - component: {fileID: 781714408822855193}
   - component: {fileID: 7810939147185219845}
-  - component: {fileID: 1352871343}
   m_Layer: 0
   m_Name: Trampa3D
   m_TagString: Untagged
@@ -96,25 +95,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   forceHidden: 0
---- !u!95 &1352871343
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781714408822855196}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 87e1db212099f8941b1195b1d23df4cd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3346589333923552385
 PrefabInstance:
   m_ObjectHideFlags: 0

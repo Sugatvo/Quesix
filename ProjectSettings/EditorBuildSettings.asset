@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: ea80d7caf16e6944da26cd6cc0ed602c
   - enabled: 1
-    path: Assets/Scenes/test3D.unity
+    path: Assets/Scenes/Quesix.unity
     guid: 0a21388738c6e4c48b09f748bf762573
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Primeros pasos.unity
+    guid: 6ccb3253382b33c4495af26008e99d16
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Piloto.unity
+    guid: 977a87dfcd039fc46b8ab806d1860912
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Copiloto.unity
+    guid: ba90f709cc242cd419d45e3493422d30
   m_configObjects: {}

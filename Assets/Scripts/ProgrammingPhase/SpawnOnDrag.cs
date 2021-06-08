@@ -20,13 +20,19 @@ public class SpawnOnDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
     public void OnPointerDown(PointerEventData data)
     {
         Debug.Log("OnPointerDown");
-
+        Debug.Log("int.Parse(cardCount.text) = " + int.Parse(cardCount.text));
+        Debug.Log("transform.childCount = " + transform.childCount);
         if(int.Parse(cardCount.text) > 0 && transform.childCount == 2)
         {
+            Debug.Log("Creando carta y asignando instantiedChild");
             // Crear prefab en los dos integrantes del equipo
             events.CreateCardInstance(indexPrefab);
             instantiatedChild = transform.GetChild(1).gameObject;
           
+        }
+        else
+        {
+            Debug.Log("No hacer nada");
         }
     }
 
@@ -46,6 +52,7 @@ public class SpawnOnDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
     }
     public void OnDrag(PointerEventData data)
     {
+        Debug.Log("OnDrag SpawnOnDrag");
         if (instantiatedChild != null)
         {
             childScript.OnDrag(data);
@@ -53,6 +60,7 @@ public class SpawnOnDrag : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
     }
     public void OnEndDrag(PointerEventData data)
     {
+        Debug.Log("OnEndDrag SpawnOnDrag");
         if (instantiatedChild != null)
         {
             childScript.OnEndDrag(data);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class UserData : MonoBehaviour
 {
@@ -120,20 +121,27 @@ public class UserData : MonoBehaviour
         form.AddField("usuario_id", u);
         form.AddField("curso_id", c);
 
-        WWW www = new WWW("http://25.90.9.119/quesix/admin/teacher.php", form);
-        yield return www;
-
-        if (!string.IsNullOrEmpty(www.error))
-            Debug.Log(www.error);
-
-        if (www.text == "0")
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/admin/teacher.php", form))
         {
-            Debug.Log("User assign successfully.");
-            AdminManager.Instance.RefreshUsers();
-        }
-        else
-        {
-            Debug.Log("User assign failed. Error #" + www.text);
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                string text_received = webRequest.downloadHandler.text;
+                if (text_received == "0")
+                {
+                    Debug.Log("User assign successfully.");
+                    AdminManager.Instance.RefreshUsers();
+                }
+                else
+                {
+                    Debug.Log("User assign failed. Error #" + text_received);
+                }
+            }
         }
     }
 
@@ -143,21 +151,28 @@ public class UserData : MonoBehaviour
         form.AddField("usuario_id", u);
         form.AddField("curso_id", c);
 
-        WWW www = new WWW("http://25.90.9.119/quesix/admin/student.php", form);
-        yield return www;
-
-        if (!string.IsNullOrEmpty(www.error))
-            Debug.Log(www.error);
-
-        if (www.text == "0")
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/admin/student.php", form))
         {
-            Debug.Log("User assign successfully.");
-            AdminManager.Instance.RefreshUsers();
-        }
-        else
-        {
-            Debug.Log("User assign failed. Error #" + www.text);
-        }
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                string text_received = webRequest.downloadHandler.text;
+                if (text_received == "0")
+                {
+                    Debug.Log("User assign successfully.");
+                    AdminManager.Instance.RefreshUsers();
+                }
+                else
+                {
+                    Debug.Log("User assign failed. Error #" + text_received);
+                }
+            }
+        }       
     }
 
 
@@ -180,48 +195,62 @@ public class UserData : MonoBehaviour
     public IEnumerator UpdateStudent(string u, string c)
     {
         WWWForm form = new WWWForm();
-        form.AddField("id_alumno", u);
+        form.AddField("alumno_id", u);
         form.AddField("curso_id", c);
 
-        WWW www = new WWW("http://25.90.9.119/quesix/admin/updatestudent.php", form);
-        yield return www;
-
-        if (!string.IsNullOrEmpty(www.error))
-            Debug.Log(www.error);
-
-        if (www.text == "0")
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/admin/updatestudent.php", form))
         {
-            Debug.Log("User reassign successfully.");
-            AdminManager.Instance.RefreshUsersClassroom();
-        }
-        else
-        {
-            Debug.Log("User reassign failed. Error #" + www.text);
-        }
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                string text_received = webRequest.downloadHandler.text;
+                if (text_received == "0")
+                {
+                    Debug.Log("User reassign successfully.");
+                    AdminManager.Instance.RefreshUsersClassroom();
+                }
+                else
+                {
+                    Debug.Log("User reassign failed. Error #" + text_received);
+                }
+            }
+        }     
     }
 
 
     public IEnumerator UpdateTeacher(string u, string c)
     {
         WWWForm form = new WWWForm();
-        form.AddField("id_profesor", u);
+        form.AddField("profesor_id", u);
         form.AddField("curso_id", c);
 
-        WWW www = new WWW("http://25.90.9.119/quesix/admin/updateteacher.php", form);
-        yield return www;
-
-        if (!string.IsNullOrEmpty(www.error))
-            Debug.Log(www.error);
-
-        if (www.text == "0")
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/admin/updateteacher.php", form))
         {
-            Debug.Log("User reassign successfully.");
-            AdminManager.Instance.RefreshUsersClassroom();
-        }
-        else
-        {
-            Debug.Log("User reassign failed. Error #" + www.text);
-        }
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                string text_received = webRequest.downloadHandler.text;
+                if (text_received == "0")
+                {
+                    Debug.Log("User reassign successfully.");
+                    AdminManager.Instance.RefreshUsersClassroom();
+                }
+                else
+                {
+                    Debug.Log("User reassign failed. Error #" + text_received);
+                }
+            }
+        }       
     }
 
 }

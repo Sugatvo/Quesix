@@ -14,7 +14,4 @@ public class NetworkQuesixManager : NetworkManager
 
     readonly List<Scene> subScenes = new List<Scene>();
 
-
-
-
 }

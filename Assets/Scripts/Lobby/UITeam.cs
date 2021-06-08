@@ -7,19 +7,18 @@ using TMPro;
 public class UITeam : MonoBehaviour
 {
     [Header("Player 1 Information")]
-    public int player1_id_alumno;
+    public string player1_id_alumno;
     [SerializeField] TextMeshProUGUI player1_Name;
     [SerializeField] TextMeshProUGUI player1_Status;
     [SerializeField] Image player1_Status_Icon;
 
     [Header("Player 2 Information")]
-    public int player2_id_alumno;
+    public string player2_id_alumno;
     [SerializeField] TextMeshProUGUI player2_Name;
     [SerializeField] TextMeshProUGUI player2_Status;
     [SerializeField] Image player2_Status_Icon;
 
     [Header("Team Information")]
-    private int id_equipo;
     [SerializeField] TextMeshProUGUI teamName;
     private Color ratonIconColor;
     [SerializeField] Image ratonIcon;
@@ -34,20 +33,15 @@ public class UITeam : MonoBehaviour
         teamName.text = _name;
     }
 
-    public void SetID(int id)
-    {
-        id_equipo = id;
-    }
-
-    public void SetPlayer1(int _id, string nombre, string apellido)
+    public void SetPlayer1(string _id, string nombre)
     {
         player1_id_alumno = _id;
-        player1_Name.text = nombre + " " + apellido;
+        player1_Name.text = nombre;
     }
-    public void SetPlayer2(int _id, string nombre, string apellido)
+    public void SetPlayer2(string _id, string nombre)
     {
         player2_id_alumno = _id;
-        player2_Name.text = nombre + " " + apellido;
+        player2_Name.text = nombre;
     }
 
     public void SetPlayerStatus(NetworkPlayer player)
@@ -67,6 +61,23 @@ public class UITeam : MonoBehaviour
         }
     }
 
+    public void SetPlayerDisconnect(NetworkPlayer player)
+    {
+        if (player1_Name.text.Equals(player.nombre + " " + player.apellido))
+        {
+            player1_Status.text = "Desconectado";
+            player1_Status.color = disconnected;
+            player1_Status_Icon.color = disconnected;
+        }
+
+        if (player2_Name.text.Equals(player.nombre + " " + player.apellido))
+        {
+            player2_Status.text = "Desconectado";
+            player2_Status.color = disconnected;
+            player2_Status_Icon.color = disconnected;
+        }
+    }
+
     public void SetTeamColor(Color _color)
     {
        ratonIcon.color = _color;
@@ -74,7 +85,7 @@ public class UITeam : MonoBehaviour
 
     public bool isMember(NetworkPlayer _player)
     {
-        if(int.Parse(_player.id_student) == player1_id_alumno || int.Parse(_player.id_student) == player2_id_alumno)
+        if (_player.id_student == player1_id_alumno || _player.id_student == player2_id_alumno)
         {
             return true;
         }

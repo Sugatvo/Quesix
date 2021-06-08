@@ -29,9 +29,9 @@ public class Trap : NetworkBehaviour
             playerBody.transform.parent.GetComponent<PlayerController3D>().restartPosition = true;
             playerBody.transform.parent.GetComponent<PlayerController3D>().m_Animator.SetBool("isRestartingPosition", true);
 
-            // destroy this one
+            // Unpspawn this one
             Spawner.AddSpawnPoint(this.transform);
-            NetworkServer.Destroy(gameObject);
+            NetworkServer.UnSpawn(gameObject);
         }
     }
 }

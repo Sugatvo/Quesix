@@ -21,23 +21,24 @@ public class DropZone : MonoBehaviour, IDropHandler
         SpawnOnDrag Spawner = eventData.pointerDrag.GetComponent<SpawnOnDrag>();
         Draggable d = null;
 
-        if (Spawner != null)
+        if (Spawner != null && Spawner.instantiatedChild != null)
         {
             d = Spawner.instantiatedChild.GetComponent<Draggable>();
+            Debug.Log("Draggable from Spawner = " + d);
         }
-        else
+        // Verificar si la eventData contiene un Draggable 
+        else if (eventData.pointerDrag.GetComponent<Draggable>() != null)
         {
             d = eventData.pointerDrag.GetComponent<Draggable>();
+            Debug.Log("Draggable from eventData = " + d);
         }
-       
-        if (d != null) {
-            Debug.Log("Draggable = " + d);
 
-            if(int.Parse(d.cardCount.text) > 0 || d.validationParent.GetComponent<DropZone>() != null)
+        if(d != null)
+        {
+            if (int.Parse(d.cardCount.text) > 0 || d.validationParent.GetComponent<DropZone>() != null)
             {
                 events.SynchronizeOnDrop(d.index, index);
             }
-            
         }
     }
 

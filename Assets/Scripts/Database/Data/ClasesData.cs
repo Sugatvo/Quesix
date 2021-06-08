@@ -15,7 +15,7 @@ public class ClasesData : MonoBehaviour
     [SerializeField] TextMeshProUGUI estadoClase;
     [SerializeField] Button joinButton;
 
-    [Header("Class Data")]
+    [Header("Classes Data")]
     public int id_clase;
     public int curso_id;
     public string fecha;
@@ -99,7 +99,7 @@ public class ClasesData : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         form.AddField("id_clase", id_clase);
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/getmaterias.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/teacher/getmaterias.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -129,7 +129,7 @@ public class ClasesData : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_clase", id_clase);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://25.90.9.119/quesix/teacher/deleteclass.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/teacher/deleteclass.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();

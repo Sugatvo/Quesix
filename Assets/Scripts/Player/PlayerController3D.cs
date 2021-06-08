@@ -24,7 +24,6 @@ public class PlayerController3D : NetworkBehaviour
     public bool restartPosition = false;
     public float aux = 0f;
     public Vector3 velocity;
-    Vector3 direction;
     public float limit = 144f;
 
     private Vector3 startPosition;
@@ -33,6 +32,7 @@ public class PlayerController3D : NetworkBehaviour
     public Vector3 beginPosition;
 
     public float rotation;
+    private float startTime;
 
     float threshold = 10f;
 
@@ -47,45 +47,23 @@ public class PlayerController3D : NetworkBehaviour
         m_Animator = transform.GetChild(1).GetComponent<Animator>();
     }
 
-    private void Update()
-    {
-        if(rb != null)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                Avanzar();
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Retroceder();
-            }
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                GirarIzquierda();
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                GirarDerecha();
-            }
-        }
-    }
-
     void FixedUpdate()
     {
-
-        if (!this.gameObject.GetComponent<NetworkIdentity>().hasAuthority || rb == null)
+        if (rb == null)
             return;
-
 
         if (restartPosition)
         {
-            rb.MovePosition(Vector3.Slerp(transform.position, beginPosition, 1f * Time.deltaTime));
+            rb.MovePosition(Vector3.Slerp(transform.position, beginPosition, Time.deltaTime));
 
-            if (Vector3.Distance(transform.position, beginPosition) < 0.1f)
+            if (Vector3.Distance(transform.position, beginPosition) < 0.2f)
             {
                 rb.MovePosition(beginPosition);
-                restartPosition = false;
-                m_Animator.SetBool("isRestartingPosition", false);
+                if (gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+                {
+                    CmdSetRestartPositionFlag(false);
+                }
+                
             }
         }
 
@@ -96,6 +74,10 @@ public class PlayerController3D : NetworkBehaviour
             aux += 90f * Time.fixedDeltaTime;
             if (aux > 90f)
             {
+                if (gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+                {
+                    CmdNotifyRotationToServer(rb.rotation);
+                }
                 GirarDer = false;
                 aux = 0;
             }
@@ -108,6 +90,10 @@ public class PlayerController3D : NetworkBehaviour
             aux += -90f * Time.fixedDeltaTime;
             if (aux < -90f)
             {
+                if (gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+                {
+                    CmdNotifyRotationToServer(rb.rotation);
+                }
                 GirarIzq = false;
                 aux = 0;
             }
@@ -115,143 +101,72 @@ public class PlayerController3D : NetworkBehaviour
 
         if (Up)
         {
-
-            if (270f - threshold < rotation && rotation < 270f + threshold)
-            {
-                if(transform.position.z > -9)
-                {
-                    direction = new Vector3(0, 0, -1);
-                }
-                else
-                {
-                    Up = false;
-                }
-                
-            }
-            else if (-threshold < rotation && rotation < threshold)
-            {
-                if(transform.position.x > -9)
-                {
-                    direction = new Vector3(-1, 0, 0);
-                }
-                else
-                {
-                    Up = false;
-                }
-                
-            }
-            else if (90f - threshold < rotation && rotation < 90f + threshold)
-            {
-                if(transform.position.z < 9)
-                {
-                    direction = new Vector3(0, 0, 1);
-                }
-                else
-                {
-                    Up = false;
-                }
-            }
-            else
-            {
-                if(transform.position.x < 9)
-                {
-                    direction = new Vector3(1, 0, 0);
-                }
-                else
-                {
-                    Up = false;
-                }
-                
-            }
-
-            Vector3 movePos = transform.position + direction * Time.deltaTime * moveSpeed;
+            float distCovered = (Time.time - startTime);
+            float fractionOfJourney = distCovered / 1;
 
             if (2 > Vector3.Distance(startPosition, transform.position))
             {
-                rb.MovePosition(movePos);   
+                rb.MovePosition(Vector3.Lerp(startPosition, targetPosition, fractionOfJourney));
             }
             else
             {
-                rb.MovePosition(targetPosition);
                 Up = false;
+                if (gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+                {
+                    CmdNotifyPositionToServer(transform.position);
+                }
             }
         }
 
         if (Down)
         {
-            if (270f - threshold < rotation && rotation < 270f + threshold)
-            {
-                if(transform.position.z < 9)
-                {
-                    direction = new Vector3(0, 0, 1);
-                }
-                else
-                {
-                    Down = false;
-                }
+            float distCovered = (Time.time - startTime);
+            float fractionOfJourney = distCovered / 1;
 
-            }
-            else if (-threshold < rotation && rotation < threshold)
+            if (2 > Vector3.Distance(startPosition, transform.position))
             {
-                if(transform.position.x < 9)
-                {
-                    direction = new Vector3(1, 0, 0);
-                }
-                else
-                {
-                    Down = false;
-                }
-                
-            }
-            else if (90f - threshold < rotation && rotation < 90f + threshold)
-            {
-                if(transform.position.z > -9)
-                {
-                    direction = new Vector3(0, 0, -1);
-                }
-                else
-                {
-                    Down = false;
-                }
-                
+                rb.MovePosition(Vector3.Lerp(startPosition, targetPosition, fractionOfJourney));
             }
             else
             {
-                if(transform.position.x > -9)
-                {
-                   direction = new Vector3(-1, 0, 0);
-                }
-                else
-                {
-                    Down = false;
-                }
-                
-            }
-
-
-            Vector3 movePos = transform.position + direction * Time.deltaTime * moveSpeed;
-
-            if (2 > Vector3.Distance(startPosition, rb.position))
-            {
-                rb.MovePosition(movePos);
-            }
-            else
-            {
-                rb.MovePosition(targetPosition);
                 Down = false;
+                if (gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+                {
+                    CmdNotifyPositionToServer(transform.position);
+                }
             }
         }
-
     }
+
+    [Command]
+    public void CmdSetRestartPositionFlag(bool flag)
+    {
+        restartPosition = flag;
+        m_Animator.SetBool("isRestartingPosition", flag);
+    }
+
+    [Command]
+    public void CmdNotifyPositionToServer(Vector3 currentPosition)
+    {
+        rb.position = currentPosition;
+    }
+
+    [Command]
+    public void CmdNotifyRotationToServer(Quaternion currentRotation)
+    {
+        rb.rotation = currentRotation;
+    }
+
 
     public void Avanzar()
     {
+        startTime = Time.time;
         rotation = rb.rotation.eulerAngles.y;
 
         //Get the starting positions, the target position and the offset
         startPosition = rb.position;
 
-        if(270f - threshold < rotation && rotation < 270f + threshold)
+        if (270f - threshold < rotation && rotation < 270f + threshold)
         {
             targetPosition = startPosition + new Vector3(0, 0, -2);
         }
@@ -259,7 +174,7 @@ public class PlayerController3D : NetworkBehaviour
         {
             targetPosition = startPosition + new Vector3(-2, 0, 0);
         }
-        else if(90f - threshold < rotation && rotation < 90f + threshold)
+        else if (90f - threshold < rotation && rotation < 90f + threshold)
         {
             targetPosition = startPosition + new Vector3(0, 0, 2);
         }
@@ -273,6 +188,7 @@ public class PlayerController3D : NetworkBehaviour
 
     public void Retroceder()
     {
+        startTime = Time.time;
         rotation = rb.rotation.eulerAngles.y;
 
         //Get the starting positions, the target position and the offset
@@ -296,8 +212,29 @@ public class PlayerController3D : NetworkBehaviour
             targetPosition = startPosition + new Vector3(-2, 0, 0);
         }
 
+        targetPosition = LimitTargetPosition(targetPosition);
         Down = true;
+    }
 
+    public Vector3 LimitTargetPosition(Vector3 _targetPosition)
+    {
+        if (_targetPosition.x <= -9)
+        {
+            _targetPosition.x = -9;
+        }
+        if (_targetPosition.x >= 9)
+        {
+            _targetPosition.x = 9;
+        }
+        if (_targetPosition.z <= -9)
+        {
+            _targetPosition.z = -9;
+        }
+        if (_targetPosition.z >= 9)
+        {
+            _targetPosition.z = 9;
+        }
+        return _targetPosition;
     }
 
     public void GirarDerecha()
