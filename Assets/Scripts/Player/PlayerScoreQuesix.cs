@@ -1,10 +1,12 @@
-﻿using Mirror;
+﻿
+using Mirror;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using UnityEngine.Networking;
 
 public class PlayerScoreQuesix : NetworkBehaviour
 {
@@ -13,10 +15,11 @@ public class PlayerScoreQuesix : NetworkBehaviour
     [SyncVar]
     public int id_team;
 
-
     [SyncVar]
     public int matchIndex;
 
+    [SyncVar]
+    public int clase_id;
 
     [SyncVar]
     public Color objectColor;
@@ -31,11 +34,14 @@ public class PlayerScoreQuesix : NetworkBehaviour
     private GUIStyle black;
 
     // Game Manager 
-    QuestionCard[] _preguntas = null;
+    private QuestionCard[] _preguntas = null;
     public QuestionCard[] Preguntas { get { return _preguntas; } }
+
+    public bool questions_loading = true;
 
     [SerializeField] GameEvents events = null;
     [SerializeField] UIManager uiManager = null;
+    [SerializeField] Image RatonIcon;
 
     [SerializeField] private List<AnswerID> pickedAnswers = new List<AnswerID>();
     public List<AnswerID> PickedAnswers
@@ -61,14 +67,12 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
     public List<GameObject> Cards;
 
-    public List<DropZone> dropZones;
+    public List<DropZone> dropZones =  new List<DropZone>();
 
     void OnEnable()
     {
         Debug.Log("OnEnable: PlayerScoreQuesix");
         uiManager = GameObject.Find("Managers").GetComponent<UIManager>();
-        LoadQuestionCards();
-
         white = new GUIStyle();
         white.normal.textColor = Color.white;
 
@@ -77,12 +81,11 @@ public class PlayerScoreQuesix : NetworkBehaviour
 
         black = new GUIStyle();
         black.normal.textColor = Color.black;
-
     }
 
     public override void OnStartClient()
     {
-
+        LoadQuestionCards();
         Transform ratonTransform = transform.GetChild(1).transform.Find("Raton");
         ratonTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_BaseColor", objectColor);
         ratonTransform.GetComponent<SkinnedMeshRenderer>().material.SetColor("_EmissionColor", emissionColor);
@@ -109,18 +112,18 @@ public class PlayerScoreQuesix : NetworkBehaviour
         Cards.Add(initialRightCard);
         initialRightCard.GetComponent<Draggable>().index = Cards.IndexOf(initialRightCard);
 
-        var Objects=  Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "PlaceHolder");
+        List<DropZone> dropZone = FindObjectsOfType<DropZone>().OrderBy(x => x.gameObject.name).ToList();
 
         int i = 0;
-        foreach (var item in Objects)
+        Debug.Log("Dropzone order");
+        foreach (DropZone dz in dropZone)
         {
-            DropZone dropZone = item.GetComponent<DropZone>();
-            dropZone.index = i;
-            dropZones.Add(dropZone);
+            Debug.Log("dropzone name = " + dz.gameObject.name);
+            dz.index = i;
+            dropZones.Add(dz);
             i += 1;
         }
     }
-
 
     public void AddScore(int reward, GameObject roboticMouse)
     {
@@ -249,16 +252,87 @@ public class PlayerScoreQuesix : NetworkBehaviour
         return 0;
     }
 
+    public string GetCorrectAnswer()
+    {
+        return Preguntas[currentQuestion].GetCorrectAnswerText();
+    }
+
     void LoadQuestionCards()
     {
-        Object[] objs = Resources.LoadAll("Cartas/Preguntas", typeof(QuestionCard));
-
-        _preguntas = new QuestionCard[objs.Length];
-        for (int i = 0; i < objs.Length; i++)
-        {
-            _preguntas[i] = (QuestionCard)objs[i];
-        }
-
-        _preguntas = _preguntas.Select(r => (r as QuestionCard)).Where(r => r != null).OrderBy(t => t.ID).ToArray<QuestionCard>();
+        questions_loading = true;
+        StartCoroutine(CreateQuestions(clase_id));
     }
+
+
+    public IEnumerator CreateQuestions(int clase_id)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("clase_id", clase_id);
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/student/getquestions.php", form))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+            }
+            else
+            {
+                string fulldata = webRequest.downloadHandler.text;
+                string[] stringQuestion = fulldata.Split(new string[] { "<br>" }, System.StringSplitOptions.RemoveEmptyEntries);
+                _preguntas = new QuestionCard[stringQuestion.Length];
+
+                for (int i = 0; i < stringQuestion.Length-1; i++)
+                {
+                    string[] data = stringQuestion[i].Split('\t');
+
+                    QuestionCard temp_question = new QuestionCard
+                    {
+                        Tema = data[0],
+                        ID = i,
+                        Pregunta = data[1],
+                        UseTimer = true,
+                        Timer = 120
+                    };
+
+                    WWWForm form2 = new WWWForm();
+                    form2.AddField("pregunta_id", data[2]);
+
+                    using (UnityWebRequest webRequest2 = UnityWebRequest.Post("http://127.0.0.1/quesix/student/getanswers.php", form2))
+                    {
+                        // Request and wait for the desired page.
+                        yield return webRequest2.SendWebRequest();
+                        if (webRequest2.isNetworkError)
+                        {
+                            Debug.Log("Error: " + webRequest2.error);
+                        }
+                        else
+                        {
+                            string fulldata2 = webRequest2.downloadHandler.text;
+                            string[] stringAnswers = fulldata2.Split(new string[] { "<br>" }, System.StringSplitOptions.RemoveEmptyEntries);
+
+                            Answer[] _answers = new Answer[4];
+                            for (int j = 0; j < stringAnswers.Length; j++)
+                            {
+                                string[] data_answer = stringAnswers[j].Split('\t');
+                                Answer temp_answer = new Answer();
+                                if(int.Parse(data_answer[0]) == 0) temp_answer.isCorrect = false;
+                                else temp_answer.isCorrect = true;
+                                temp_answer.Info = data_answer[1];
+                                _answers[j] = temp_answer;
+                            }
+                            temp_question.Answers = _answers;
+                            _preguntas[i] = temp_question;
+                        }
+                    }
+                }
+                _preguntas = _preguntas.Select(r => (r as QuestionCard)).Where(r => r != null).OrderBy(t => t.ID).ToArray<QuestionCard>();
+                questions_loading = false;
+            }
+        }
+    }
+
+
+
 }

@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0
-  clientAuthority: 1
+  clientAuthority: 0
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  moveSpeed: 2
+  moveSpeed: 5
   horizontal: 0
   vertical: 0
   turn: 0
@@ -196,11 +196,14 @@ MonoBehaviour:
   score: 0
   id_team: 0
   matchIndex: 0
+  clase_id: 0
   objectColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 0, b: 0, a: 0}
   equipo: []
+  questions_loading: 1
   events: {fileID: 11400000, guid: 43c1160ed6b600b4d8db67ff8e074f99, type: 2}
   uiManager: {fileID: 0}
+  RatonIcon: {fileID: 0}
   pickedAnswers: []
   finishedQuestions: 
   currentQuestion: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Avanzar
   m_EditorClassIdentifier: 
   titulo: Avanzar
-  arrow: {fileID: 3521901666158670301, guid: 06b7280e9229fc241957f91737c75c43, type: 3}
+  arrow: {fileID: 8888677931324667831, guid: 66e0f2f44b290124cbea8bf3bfebb54f, type: 3}
   id: 1

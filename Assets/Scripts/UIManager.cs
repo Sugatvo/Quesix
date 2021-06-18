@@ -17,6 +17,9 @@ public struct UIManagerParameters
     [SerializeField] Sprite correctGradient;
     public Sprite CorrectGradient { get { return correctGradient; } }
 
+    [SerializeField] Sprite halfGradient;
+    public Sprite HalfGradient { get { return halfGradient; } }
+
     [SerializeField] Sprite incorrectGradient;
     public Sprite IncorrectGradient { get { return incorrectGradient; } }
 }
@@ -26,12 +29,13 @@ public struct UIElements
 {
     [SerializeField] RectTransform answerContentArea;
     public RectTransform AnswerContentArea { get { return answerContentArea; } }
+
     [SerializeField] TextMeshProUGUI temaText;
     public TextMeshProUGUI TemaText { get { return temaText; } }
-    [SerializeField] Image contornoImage;
-    public Image ContornoImage { get { return contornoImage; } }
+
     [SerializeField] TextMeshProUGUI preguntaText;
     public TextMeshProUGUI PreguntaText { get { return preguntaText; } }
+
     [SerializeField] TextMeshProUGUI beneficioText;
     public TextMeshProUGUI BeneficioText { get { return beneficioText; } }
 
@@ -55,6 +59,14 @@ public struct UIElements
     [SerializeField] TextMeshProUGUI rewardIconText;
     public TextMeshProUGUI RewardIconText { get { return rewardIconText; } }
 
+    [SerializeField] CanvasGroup halfCorrectCanvasGroup;
+    public CanvasGroup HalfCorrectCanvasGroup { get { return halfCorrectCanvasGroup; } }
+
+    [SerializeField] TextMeshProUGUI correctAnswerText;
+    public TextMeshProUGUI CorrectAnswerText { get { return correctAnswerText; } }
+
+    [SerializeField] CanvasGroup incorrectCanvasGroup;
+    public CanvasGroup IncorrectCanvasGroup { get { return incorrectCanvasGroup; } }
 
     [Space]
     [SerializeField] CanvasGroup mainCanvasGroup;
@@ -65,7 +77,7 @@ public struct UIElements
 
 public class UIManager : MonoBehaviour
 {
-    public enum ResolutionScreenType { Correct, Incorrect, Finish};
+    public enum ResolutionScreenType { Correct, Incorrect, Half, Finish};
 
     [Header("References")]
     [SerializeField] GameEvents events = null;
@@ -91,20 +103,23 @@ public class UIManager : MonoBehaviour
     [SerializeField] CanvasGroup buttonsCanvasGroup;
     [SerializeField] CanvasGroup PilotoInfoCanvasGroup;
     [SerializeField] CanvasGroup CopilotoInfoCanvasGroup;
+    [SerializeField] CanvasGroup teamInfoCanvasGroup;
     [SerializeField] CanvasGroup handCanvasGroup;
     [SerializeField] CanvasGroup sequenceCanvasGroup;
     [SerializeField] CanvasGroup popUpRun;
     [SerializeField] CanvasGroup settingsCanvasGroup;
     [SerializeField] CanvasGroup globalTimerCanvasGroup;
     [SerializeField] CanvasGroup finishCanvasGroup;
+    [SerializeField] CanvasGroup marcoQuesoCanvasGroup;
+    [SerializeField] CanvasGroup marcoMovCanvasGroup;
+    [SerializeField] CanvasGroup popUpExitGame;
     [SerializeField] GameObject buttonDebug;
     [SerializeField] GameObject buttonRun;
+    [SerializeField] Animator finishAnimator;
 
     public bool isCheck = false;
 
     private bool isAllowTo = false;
-
-    private bool firstProgramming = false;
 
     List<AnswerData> currentAnswers = new List<AnswerData>();
     public List<AnswerData> CurrentAnswers { get { return currentAnswers; } }
@@ -113,6 +128,22 @@ public class UIManager : MonoBehaviour
     float offset = -25;
 
     private IEnumerator IE_DisplayTimedResolution = null;
+
+    private static UIManager _instance;
+    public static UIManager Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
 
     void OnEnable()
     {
@@ -130,20 +161,11 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         resStateParaHash = Animator.StringToHash("ScreenState");
-        if (TutorialManager.Instance.isTutorial)
-        {
-            firstProgramming = true;
-        }
-        else
-        {
-            firstProgramming = false;
-        }
     }
 
     void UpdateQuestionCardUI(QuestionCard card)
     {
         uIElements.TemaText.text = card.Tema;
-        // uIElements.ContornoImage.color = card.Contorno;
         uIElements.PreguntaText.text = card.Pregunta;
         uIElements.BeneficioText.text = "Obtienes " + card.AddCards.ToString() + " Digipasos";
         CreateAnswers(card);
@@ -153,17 +175,14 @@ public class UIManager : MonoBehaviour
     {
         EraseAnswers();
 
-        float offset = 0 - parameters.Margins;
+        float offset = 0.05f;
+        float sizeY = 0.2f;
         for (int i = 0; i < card.Answers.Length; i++)
         {
             AnswerData newAnswer = (AnswerData)Instantiate(answerPrefab, uIElements.AnswerContentArea);
             newAnswer.UpdateData(card.Answers[i].Info, i);
-
-            newAnswer.Rect.anchoredPosition = new Vector2(0, offset);
-
-            offset -= (newAnswer.Rect.sizeDelta.y + parameters.Margins);
-            uIElements.AnswerContentArea.sizeDelta = new Vector2(uIElements.AnswerContentArea.sizeDelta.x, offset*-1);
-
+            newAnswer.Rect.anchorMin = new Vector2(0f, sizeY * i + offset * i);
+            newAnswer.Rect.anchorMax = new Vector2(1f, sizeY * (i + 1) + offset * i);
             currentAnswers.Add(newAnswer);
         }
     }
@@ -177,11 +196,12 @@ public class UIManager : MonoBehaviour
         currentAnswers.Clear();
     }
 
-    void DisplayResolution(ResolutionScreenType type, int count)
+    void DisplayResolution(ResolutionScreenType type, int count, string text)
     {
-        UpdateResUI(type, count);
+        UpdateResUI(type, count, text);
         uIElements.ResolutionScreenAnimator.SetInteger(resStateParaHash, 2);
         uIElements.MainCanvasGroup.blocksRaycasts = false;
+        uIElements.MainCanvasGroup.alpha = 0f;
 
         if(type != ResolutionScreenType.Finish)
         {
@@ -199,27 +219,65 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);
         uIElements.ResolutionScreenAnimator.SetInteger(resStateParaHash, 1);
         uIElements.MainCanvasGroup.blocksRaycasts = true;
+        uIElements.MainCanvasGroup.alpha = 1f;
     }
 
-    void UpdateResUI(ResolutionScreenType type, int count)
+    void UpdateResUI(ResolutionScreenType type, int count, string text)
     {
         switch(type)
         {
             case ResolutionScreenType.Correct:
-                uIElements.ResolutionStateInfoText.text = "Respuesta \n Correcta";
-                uIElements.RewardIconCanvasGroup.alpha = 1f;
-                uIElements.RewardIconText.text = $"+{count}";
+                Debug.Log("Correct");
+                Debug.Log("type: " + type);
+                Debug.Log("count: " + count);
+                Debug.Log("text: " + text);
                 uIElements.ResolutionBG.sprite = parameters.CorrectGradient;
-                uIElements.RewardText.alpha = 1f;
+                uIElements.IncorrectCanvasGroup.alpha = 0f;
+                uIElements.HalfCorrectCanvasGroup.alpha = 0f;
+
+                uIElements.ResolutionStateInfoText.text = "Respuestas \n Correctas";
+                uIElements.RewardIconText.text = $"+{count}";
+                uIElements.RewardText.text = $"+ {count} Digipasos";
+                
+                uIElements.RewardIconCanvasGroup.alpha = 1f;
+                uIElements.RewardText.alpha = 1f; 
+                break;
+
+            case ResolutionScreenType.Half:
+                Debug.Log("HalfCorrect");
+                Debug.Log("type: " + type);
+                Debug.Log("count: " + count);
+                Debug.Log("text: " + text);
+                uIElements.ResolutionBG.sprite = parameters.HalfGradient;
+                uIElements.IncorrectCanvasGroup.alpha = 0f;
+
+                uIElements.ResolutionStateInfoText.text = "Respuestas \n Distintas";
+                uIElements.RewardIconText.text = $"+{count}";
                 uIElements.RewardText.text = $"+ {count} Digipasos";
 
+                uIElements.RewardIconCanvasGroup.alpha = 1f;
+                uIElements.RewardText.alpha = 1f;
 
+                uIElements.CorrectAnswerText.text = text;
+                uIElements.HalfCorrectCanvasGroup.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -350);
+                uIElements.HalfCorrectCanvasGroup.alpha = 1f;
                 break;
+
             case ResolutionScreenType.Incorrect:
+                Debug.Log("Incorrect");
+                Debug.Log("type: " + type);
+                Debug.Log("count: " + count);
+                Debug.Log("text: " + text);
+                uIElements.ResolutionBG.sprite = parameters.IncorrectGradient;
                 uIElements.RewardText.alpha = 0f;
                 uIElements.RewardIconCanvasGroup.alpha = 0f;
-                uIElements.ResolutionBG.sprite = parameters.IncorrectGradient;
-                uIElements.ResolutionStateInfoText.text = "Respuesta \n Incorrecta";
+
+                uIElements.ResolutionStateInfoText.text = "Respuestas \n Incorrectas";
+                uIElements.CorrectAnswerText.text = text;
+                uIElements.HalfCorrectCanvasGroup.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,-150);
+                
+                uIElements.HalfCorrectCanvasGroup.alpha = 1f;
+                uIElements.IncorrectCanvasGroup.alpha = 1f;
                 break;
         }
     }
@@ -244,7 +302,14 @@ public class UIManager : MonoBehaviour
         else
         {
             events.Ejecutar();
+            isCheck = false;
         }
+    }
+
+    public void TimeOutProgramming()
+    {
+        events.Ejecutar();
+        isCheck = false;
     }
 
     public void PopUpRunNo()
@@ -342,12 +407,6 @@ public class UIManager : MonoBehaviour
     {
         programmingCanvasGroup.alpha = 1.0f;
         programmingCanvasGroup.blocksRaycasts = true;
-
-        if (firstProgramming)
-        {
-            transform.GetComponent<TutorialManager>().p_Animator.SetBool("FirstProgramming", firstProgramming);
-            firstProgramming = false;
-        }
         buttonsCanvasGroup.alpha = 0.0f;
         buttonsCanvasGroup.blocksRaycasts = false;
     }
@@ -428,19 +487,7 @@ public class UIManager : MonoBehaviour
     }
     public void SetScoreText(string score)
     {
-        uIElements.ScoreText.text = score;
-    }
-
-    public void SetRol(bool pilot, bool copilot)
-    {
-        transform.GetComponent<TutorialManager>().m_Animator.SetBool("isPilot", pilot);
-        transform.GetComponent<TutorialManager>().m_Animator.SetBool("isCopilot", copilot);
-    }
-
-    public void SetRolProgramming(bool pilot, bool copilot)
-    {
-        transform.GetComponent<TutorialManager>().p_Animator.SetBool("isPilot", pilot);
-        transform.GetComponent<TutorialManager>().p_Animator.SetBool("isCopilot", copilot);
+        uIElements.ScoreText.text = score + "/2";
     }
 
     public void OnClickSettings()
@@ -474,6 +521,7 @@ public class UIManager : MonoBehaviour
 
         finishCanvasGroup.alpha = 1f;
         finishCanvasGroup.blocksRaycasts = true;
+        finishAnimator.SetBool("isFinished", true);
     }
 
     public void HideFinish()
@@ -486,5 +534,40 @@ public class UIManager : MonoBehaviour
     {
         events.GoBackToLobby();
     }
-       
+    
+    public void HideForTeacher()
+    {
+        Debug.Log("HideForTeacher()");
+        buttonsCanvasGroup.alpha = 0f;
+        buttonsCanvasGroup.blocksRaycasts = false;
+
+        marcoQuesoCanvasGroup.alpha = 0f;
+        marcoQuesoCanvasGroup.blocksRaycasts = false;
+
+        marcoMovCanvasGroup.alpha = 0f;
+        marcoMovCanvasGroup.blocksRaycasts = false;
+
+        teamInfoCanvasGroup.alpha = 0f;
+        teamInfoCanvasGroup.blocksRaycasts = false;
+
+    }
+
+
+    public void PopUpExitGameNo()
+    {
+        popUpExitGame.alpha = 0.0f;
+        popUpExitGame.blocksRaycasts = false;
+    }
+
+    public void PopUpExitGameYes()
+    {
+        Application.Quit();
+    }
+
+
+    public void ExitGame()
+    {
+        popUpExitGame.alpha = 1.0f;
+        popUpExitGame.blocksRaycasts = true;
+    }
 }

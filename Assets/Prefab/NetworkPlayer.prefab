@@ -80,5 +80,14 @@ MonoBehaviour:
   syncInterval: 0
   id_team: 0
   matchID: 
-  playerIndex: 0
-  gameScene: Assets/Scenes/test3D.unity
+  clase_id: 0
+  id_user: 
+  username: 
+  nombre: 
+  apellido: 
+  rol: 
+  id_admin: 
+  id_teacher: 
+  id_student: 
+  networkMatchChecker: {fileID: 0}
+  gameScene: Assets/Scenes/Quesix.unity

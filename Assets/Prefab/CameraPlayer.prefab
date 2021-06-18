@@ -1037,8 +1037,8 @@ MonoBehaviour:
   StateDrivenCamera: {fileID: 935559883}
   events: {fileID: 11400000, guid: 43c1160ed6b600b4d8db67ff8e074f99, type: 2}
   teamObject: {fileID: 0}
-  type: 0
-  isMoving: 1
+  rol: 
+  isMoving: 0
   m_animator: {fileID: 0}
 --- !u!114 &1056454365014403611
 MonoBehaviour:
@@ -1054,17 +1054,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  lobbyPlayer: {fileID: 0}
   teamObject: {fileID: 0}
   teammate: {fileID: 0}
+  matchID: 
   cardPrefab: {fileID: 1268712523725957868, guid: c6efa94951f4413449db8d4af70fbf4a,
     type: 3}
   handContentArea: {fileID: 0}
   sequence: {fileID: 0}
   cardCountText: {fileID: 0}
-  JugadorPiText: {fileID: 0}
-  JugadorCoText: {fileID: 0}
-  JugadorPiPoText: {fileID: 0}
-  JugadorCoPoText: {fileID: 0}
+  NombrePiText: {fileID: 0}
+  ApellidoPiText: {fileID: 0}
+  NombreCoText: {fileID: 0}
+  ApellidoCoText: {fileID: 0}
+  NombrePiProText: {fileID: 0}
+  ApellidoPiProText: {fileID: 0}
+  NombreCoProText: {fileID: 0}
+  ApellidoCoProText: {fileID: 0}
+  TeamNameText: {fileID: 0}
+  TeamNameProText: {fileID: 0}
+  RatonIcon: {fileID: 0}
+  RatonIconPro: {fileID: 0}
   leftCountText: {fileID: 0}
   fowardCountText: {fileID: 0}
   backCountText: {fileID: 0}
@@ -1091,8 +1101,10 @@ MonoBehaviour:
   backSpawner: {fileID: 0}
   rightSpawner: {fileID: 0}
   currentCardInMovement: {fileID: 0}
-  ownerID: -1
-  teammateID: -1
+  nombre_owner: 
+  apellido_owner: 
+  nombre_teammate: 
+  apellido_teammate: 
 --- !u!114 &1068236335205244452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,3 +1117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f8031c552018c4084c201fdc29ba54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  MaxTime: 0
+  CurrentTime: 0
+  isReady: 0

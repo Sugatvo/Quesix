@@ -172,7 +172,7 @@ TextureImporter:
     second: Containers@2_55
   - first:
       213: -6060697279842208578
-    second: Containers@2_56
+    second: Borde_blanco_1
   - first:
       213: -2369898531204289146
     second: Containers@2_57
@@ -233,6 +233,9 @@ TextureImporter:
   - first:
       213: -7098626596222240752
     second: Containers@2_76
+  - first:
+      213: 5259633651500223303
+    second: Containers@2_77
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1518,27 +1521,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Containers@2_56
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 2415
-        width: 560
-        height: 122
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb434d75fe314eba0800000000000000
-      internalID: -6060697279842208578
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Containers@2_57
       rect:
         serializedVersion: 2
@@ -1560,90 +1542,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Containers@2_58
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 2269
-        width: 560
-        height: 118
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65834a856d32e0870800000000000000
-      internalID: 8650891337742432342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Containers@2_59
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 2113
-        width: 572
-        height: 134
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 64bc2624842830be0800000000000000
-      internalID: -1512221803003327674
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Containers@2_60
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 1965
-        width: 560
-        height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32066d08473653020800000000000000
-      internalID: 2320870535008247843
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Containers@2_61
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 1847
-        width: 560
-        height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0931b4858c0039a0800000000000000
-      internalID: -6255486114821228275
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Containers@2_62
       rect:
         serializedVersion: 2
@@ -1660,27 +1558,6 @@ TextureImporter:
       bones: []
       spriteID: 1522b3eb2fd60b240800000000000000
       internalID: 4805461691745378897
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Containers@2_63
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 1723
-        width: 572
-        height: 102
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 19680f442b7999690800000000000000
-      internalID: -7594872504667044207
       vertices: []
       indices: 
       edges: []
@@ -1954,6 +1831,48 @@ TextureImporter:
       bones: []
       spriteID: 018780b88bc9c7d90800000000000000
       internalID: -7098626596222240752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_56
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 2317
+        width: 267
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 43, y: 40, z: 44, w: 48}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb434d75fe314eba0800000000000000
+      internalID: -6060697279842208578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Containers@2_58
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 2316
+        width: 274
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 88, y: 86, z: 98, w: 69}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65834a856d32e0870800000000000000
+      internalID: 8650891337742432342
       vertices: []
       indices: 
       edges: []

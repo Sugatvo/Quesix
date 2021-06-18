@@ -22,58 +22,58 @@ TextureImporter:
     second: Buttons@2_5
   - first:
       213: 4040468837437026442
-    second: Buttons@2_6
+    second: Primario_activo
   - first:
       213: -1670275305792867426
-    second: Buttons@2_7
+    second: Secundario_activo
   - first:
       213: -5738339998692163078
-    second: Buttons@2_8
+    second: Aceptar_activo
   - first:
       213: 6069693540457097621
-    second: Buttons@2_9
+    second: Peligro_activo
   - first:
       213: -6538437921460465482
-    second: Buttons@2_10
+    second: Primario_presionado
   - first:
       213: -3227651601904558671
-    second: Buttons@2_11
+    second: Secundario_presionado
   - first:
       213: 2391188797163562776
-    second: Buttons@2_12
+    second: Aceptar_presionado
   - first:
       213: -5295157950315187670
-    second: Buttons@2_13
+    second: Peligro_presionado
   - first:
       213: 93143102903389774
-    second: Buttons@2_14
+    second: Primario_focus
   - first:
       213: 4209958967544791793
-    second: Buttons@2_15
+    second: Secundario_focus
   - first:
       213: 7374149725818265942
-    second: Buttons@2_16
+    second: Aceptar_focus
   - first:
       213: -1306987876431078088
-    second: Buttons@2_17
+    second: Peligro_focus
   - first:
       213: -3371152914675229152
-    second: Buttons@2_18
+    second: Primario_hover
   - first:
       213: -5901030386742728487
-    second: Buttons@2_19
+    second: Secundario_hover
   - first:
       213: -2594822175290321426
-    second: Buttons@2_20
+    second: Aceptar_hover
   - first:
       213: 4126200612293831192
-    second: Buttons@2_21
+    second: Peligro_hover
   - first:
       213: -8156002854486360229
     second: Buttons@2_22
   - first:
       213: -488529970918632239
-    second: Buttons@2_23
+    second: Disabled
   - first:
       213: -8207155753682387437
     second: Buttons@2_24
@@ -324,7 +324,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_6
+      name: Primario_activo
       rect:
         serializedVersion: 2
         x: 78
@@ -345,7 +345,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_7
+      name: Secundario_activo
       rect:
         serializedVersion: 2
         x: 564
@@ -366,7 +366,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_8
+      name: Aceptar_activo
       rect:
         serializedVersion: 2
         x: 1048
@@ -387,7 +387,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_9
+      name: Peligro_activo
       rect:
         serializedVersion: 2
         x: 1534
@@ -408,7 +408,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_10
+      name: Primario_presionado
       rect:
         serializedVersion: 2
         x: 78
@@ -429,7 +429,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_11
+      name: Secundario_presionado
       rect:
         serializedVersion: 2
         x: 564
@@ -450,7 +450,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_12
+      name: Aceptar_presionado
       rect:
         serializedVersion: 2
         x: 1048
@@ -471,7 +471,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_13
+      name: Peligro_presionado
       rect:
         serializedVersion: 2
         x: 1534
@@ -492,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_14
+      name: Primario_focus
       rect:
         serializedVersion: 2
         x: 72
@@ -513,7 +513,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_15
+      name: Secundario_focus
       rect:
         serializedVersion: 2
         x: 557
@@ -534,7 +534,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_16
+      name: Aceptar_focus
       rect:
         serializedVersion: 2
         x: 1043
@@ -555,7 +555,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_17
+      name: Peligro_focus
       rect:
         serializedVersion: 2
         x: 1528
@@ -576,7 +576,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_18
+      name: Primario_hover
       rect:
         serializedVersion: 2
         x: 78
@@ -597,7 +597,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_19
+      name: Secundario_hover
       rect:
         serializedVersion: 2
         x: 564
@@ -618,7 +618,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_20
+      name: Aceptar_hover
       rect:
         serializedVersion: 2
         x: 1048
@@ -639,7 +639,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_21
+      name: Peligro_hover
       rect:
         serializedVersion: 2
         x: 1534
@@ -681,7 +681,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons@2_23
+      name: Disabled
       rect:
         serializedVersion: 2
         x: 563

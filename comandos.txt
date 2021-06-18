@@ -1,0 +1,11 @@
+sudo chmod +x *
+./Mirror_Linux_Server.x86_64
+
+mysql -u 'root' -p
+sA*#48?^z6(2KJgs
+use quesix;
+show tables;
+
+drop database quesix;
+create database quesix;
+mysql -u root -p --default-character-set=utf8 quesix < quesix.sql

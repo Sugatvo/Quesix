@@ -10,10 +10,6 @@ public class CursoData : MonoBehaviour
     [SerializeField] TextMeshProUGUI nombreCurso = null;
     [SerializeField] TextMeshProUGUI cantidadUsuarios = null;
 
-    [Header("References")]
-    [SerializeField] GameEvents events = null;
-
-
     private RectTransform _rect = null;
     public RectTransform Rect
     {
@@ -55,14 +51,13 @@ public class CursoData : MonoBehaviour
         StartCoroutine(GetStudents(id_curso));
     }
 
-
-
-    public IEnumerator GetUsers(string id_curso)
+    public IEnumerator GetUsers(string curso_id)
     {
+        Debug.Log("GetUsers()");
         WWWForm form = new WWWForm();
-        form.AddField("id_curso", id_curso);
+        form.AddField("id_curso", curso_id);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/admin/usersincourse.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/admin/usersincourse.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -75,18 +70,17 @@ public class CursoData : MonoBehaviour
                 Debug.Log("Received: " + webRequest.downloadHandler.text);
                 string fulldata = webRequest.downloadHandler.text;
                 usersClassroom = fulldata.Split(new string[] { "<br>" }, System.StringSplitOptions.None);
-
                 cantidadUsuarios.text = (usersClassroom.Length - 1).ToString() + " Usuarios";
             }
         }
     }
 
-    public IEnumerator GetStudents(string id_curso)
+    public IEnumerator GetStudents(string curso_id)
     {
         WWWForm form = new WWWForm();
-        form.AddField("id_curso", id_curso);
+        form.AddField("id_curso", curso_id);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/teacher/studentsincourse.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/teacher/studentsincourse.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -109,7 +103,7 @@ public class CursoData : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("id_curso", id_curso);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://localhost/quesix/admin/usersincourse.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1/quesix/admin/usersincourse.php", form))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -136,7 +130,13 @@ public class CursoData : MonoBehaviour
 
     public void OnClick()
     {
-        events.SelectCurso(usersClassroom, _cursoIndex);
+        if(TeacherManager.Instance != null && TeacherManager.Instance.isActiveAndEnabled) TeacherManager.Instance.SelectCurso(usersClassroom, _cursoIndex, int.Parse(id_curso), Nombre);
+        else if(AdminManager.Instance != null && AdminManager.Instance.isActiveAndEnabled) AdminManager.Instance.SelectCurso(usersClassroom, _cursoIndex, int.Parse(id_curso));
+        else
+        {
+            Debug.Log("Error al seleccionar un curso");
+        }
+
     }
 
 }

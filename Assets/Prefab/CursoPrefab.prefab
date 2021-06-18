@@ -60,7 +60,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombreCurso: {fileID: 3264500791885390261}
   cantidadUsuarios: {fileID: 2395378854338972646}
-  events: {fileID: 11400000, guid: 43c1160ed6b600b4d8db67ff8e074f99, type: 2}
   usersClassroom: []
 --- !u!1 &1742100700340948298
 GameObject:

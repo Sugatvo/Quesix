@@ -15,7 +15,7 @@ public class Autoconnect : MonoBehaviour
         {
             Debug.Log("=== Client connecting ===");
 
-            networkManager.networkAddress = "25.90.9.119";
+            networkManager.networkAddress = "127.0.0.1";
             networkManager.StartClient();
         }
         else
@@ -25,7 +25,7 @@ public class Autoconnect : MonoBehaviour
     }
     public void JoinLocal()
     {
-        networkManager.networkAddress = "25.90.9.119";
+        networkManager.networkAddress = "127.0.0.1";
         networkManager.StartClient();
     }
 }
